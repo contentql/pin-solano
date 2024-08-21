@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 
+import TagsCard from '@/components/common/tagsCard'
 import { AnimatedTooltip } from '@/payload/common/AnimatedTooltip'
 import { trpc } from '@/trpc/client'
 
@@ -161,9 +162,9 @@ export const BlogPostContent = ({
                   dangerouslySetInnerHTML={{ __html: sanitizeHtml }}
                 />
               </div>
-              {/* <div className='w-full md:w-[20%]'>
+              <div className='w-full md:w-[20%]'>
                 <TagsCard tags={tagsDetails as Tags[]} />
-              </div> */}
+              </div>
             </div>
           </div>
         </div>

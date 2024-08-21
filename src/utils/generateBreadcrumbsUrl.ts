@@ -21,31 +21,37 @@ import { singularize } from './singularize'
  * ```
  */
 export const generateBreadcrumbsUrl = (docs: any[], lastDoc: any): string => {
-  let prefix = ''
-  // You might want different prefixes for different collections.
-  switch (
-    lastDoc._collection
-    // Add cases as needed for different collections
-  ) {
-  }
+  // let prefix = ''
+  // // You might want different prefixes for different collections.
+  // switch (
+  //   lastDoc._collection
+  //   // Add cases as needed for different collections
+  // ) {
+  // }
 
   if (lastDoc?.isHome) {
     return '/'
   }
 
-  const parentsPath = lastDoc?.isDynamic
-    ? docs.reduce(
-        (url: string, doc: any) =>
-          doc?.id !== lastDoc?.id ? `${url}${doc.path ?? ''}` : url,
-        prefix,
-      )
+  // ! There no need of combining all parents path
+  // const parentsPath = lastDoc?.isDynamic
+  //   ? docs.reduce(
+  //       (url: string, doc: any) =>
+  //         doc?.id !== lastDoc?.id ? `${url}${doc.path ?? ''}` : url,
+  //       prefix,
+  //     )
+  //   : ''
+
+  // ! Just find its parent path if it has a parent
+  const parentPath = lastDoc?.parent
+    ? docs.find(doc => doc.id === lastDoc.parent).path
     : ''
 
   const slug = lastDoc?.isDynamic ? `[${lastDoc?.slug}]` : `${lastDoc?.slug}`
 
-  const singularizedPath = singularize(parentsPath)
+  const singularizedParentPath = singularize(parentPath)
 
-  const path = `${singularizedPath}/${slug}`
+  const path = `${singularizedParentPath}/${slug}`
 
   return path
 }
