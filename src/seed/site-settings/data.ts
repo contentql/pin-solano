@@ -41,11 +41,12 @@ export const siteSettingsData: siteSettingsDataType = {
   },
   footer: {
     logo_image: '',
+    copyright: '@2025',
     logo: 'ContentQL',
     menuItems: [
-      { page: { relationTo: 'pages', value: '' } },
-      { page: { relationTo: 'pages', value: '' } },
-      { page: { relationTo: 'pages', value: '' } },
+      { id: '', page: { relationTo: 'pages', value: '' } },
+      { id: '', page: { relationTo: 'pages', value: '' } },
+      { id: '', page: { relationTo: 'pages', value: '' } },
     ],
   },
 }
@@ -55,14 +56,14 @@ export const siteSettingsImageData: ImageType = {
     alt: 'header logo',
     filePath: path.join(
       process.cwd(),
-      '/public/images/seed/logo-pink-white.png',
+      '/public/images/seed/contentql-logo.webp',
     ),
   },
   footer: {
     alt: 'footer',
     filePath: path.join(
       process.cwd(),
-      '/public/images/seed/logo-pink-white.png',
+      '/public/images/seed/contentql-logo.webp',
     ),
   },
 }

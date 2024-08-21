@@ -1,48 +1,42 @@
 import { Blog, User } from '@payload-types'
-import Link from 'next/link'
-import { LiaBlogSolid } from 'react-icons/lia'
 
-import TabComponent, { TabContent } from '@/components/common/Tabs'
+import AuthorPostsView from '@/components/author'
+import { trpc } from '@/trpc/client'
 
-interface AuthorDetailsProps {
-  blogsData: Blog[]
-  author: User
+interface PageProps {
+  params: {
+    authorName: string
+  }
+  searchParams: {
+    tag: string
+  }
 }
 
-const AuthorDetails: React.FC<AuthorDetailsProps> = ({ blogsData, author }) => {
-  const tabs = [
-    {
-      title: 'Author Details',
-      id: 'author',
-      icon: <LiaBlogSolid size={24} />,
-      color: '#5d5dff',
-      content: TabContent,
-      data: author,
-    },
-    {
-      title: 'Blogs',
-      id: 'blogs',
-      icon: <LiaBlogSolid size={24} />,
-      color: '#5d5dff',
-      content: TabContent,
-      data: blogsData,
-    },
-  ]
-  return (
-    <div className='mx-auto max-h-screen min-h-screen max-w-7xl  gap-6 overflow-hidden px-2'>
-      <div className='mt-4 flex items-center justify-between'>
-        <p className='rounded-rounded-box border-2 border-base-content/10 bg-base-content/20 px-4 py-2'>
-          Get Started with src/app/(app)/(marketing)/author/[authorName]
-        </p>
-        <Link
-          href={`/authors`}
-          className='rounded-rounded-box border-2 border-base-content/10 bg-base-content/20 px-4 py-2'>
-          Back
-        </Link>
-      </div>
-      <TabComponent tabs={tabs} />
-    </div>
-  )
+const IndividualAuthorDetails = ({ params, searchParams }: PageProps) => {
+  try {
+    const { data: author } = trpc.author.getAuthorByName.useQuery({
+      authorName: params?.authorName,
+    })
+    const { data: authorTags } = trpc.author.getAllTagsByAuthorName.useQuery({
+      authorName: params?.authorName,
+    })
+    const tag = searchParams?.tag ? searchParams?.tag : authorTags?.at(0)?.slug
+
+    const { data: blogs } = trpc.author.getBlogsByAuthorNameAndTag.useQuery({
+      authorName: params?.authorName,
+      tagSlug: tag!,
+    })
+    return (
+      <AuthorPostsView
+        author={author as User}
+        blogsData={blogs?.blogs as Blog[]}
+        totalBlogs={blogs?.totalBlogs!}
+        authorTags={authorTags as any}
+      />
+    )
+  } catch (error) {
+    console.error('Error fetching blogs:', error)
+  }
 }
 
-export default AuthorDetails
+export default IndividualAuthorDetails

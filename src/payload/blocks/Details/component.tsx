@@ -2,10 +2,11 @@
 
 import { Params } from '../types'
 import { Blog, DetailsType } from '@payload-types'
+import { useSearchParams } from 'next/navigation'
 
 import { trpc } from '@/trpc/client'
 
-import AuthorDetails from './components/AuthorDetails'
+import IndividualAuthorDetails from './components/AuthorDetails'
 import BlogPost from './components/BlogPost'
 import TagDetails from './components/TagDetails'
 
@@ -14,6 +15,8 @@ interface DetailsProps extends DetailsType {
 }
 
 const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
+  const searchParams = useSearchParams()
+  console.log('search params', searchParams)
   switch (block?.collection_slug) {
     case 'blogs': {
       return <BlogPost blogSlug={params?.route.at(-1) as string} />
@@ -40,7 +43,10 @@ const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
       })
 
       return (
-        <AuthorDetails author={author as any} blogsData={authorBlogs as any} />
+        <IndividualAuthorDetails
+          searchParams={{ tag: searchParams.get('tag') || '' }}
+          params={{ authorName: params?.route?.at(-1) || '' }}
+        />
       )
     }
   }

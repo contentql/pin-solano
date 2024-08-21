@@ -8,6 +8,19 @@ export const blogsPageData: BlogsPageDataType = {
   _status: 'published',
   layout: [
     {
+      blockType: 'BlogHero',
+      title: 'Free Blogs Posting Page for startups',
+      description:
+        'ContentQL is a free Blog Posting page & marketing website template.',
+      button: 'Download Now',
+      blogs: [
+        { relationTo: 'blogs', value: '' },
+        { relationTo: 'blogs', value: '' },
+        { relationTo: 'blogs', value: '' },
+        { relationTo: 'blogs', value: '' },
+      ],
+    },
+    {
       blockType: 'List',
       title: 'Discover Blogs',
       collection_slug: 'blogs',
