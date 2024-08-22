@@ -3,6 +3,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { toast } from 'sonner'
+
+import { trpc } from '@/trpc/client'
 
 const CLIENT_ID = '1'
 
@@ -13,36 +16,22 @@ export function PageNotFound() {
   const pathname = usePathname()
   const router = useRouter()
 
-  const startSSE = () => {
-    const eventSource = new EventSource(`/api/sse/${CLIENT_ID}`)
-
-    eventSource.onmessage = event => {
-      const data = event.data && JSON.parse(event?.data)
-
-      if (data.started) {
-        return
-      }
-
-      if (data.success) {
-        eventSource.close()
-        return
-      }
-
-      setSeedingStatus(prev => [...prev, data.message])
-    }
-
-    eventSource.onerror = () => {
-      eventSource.close()
-    }
-
-    return () => {
-      eventSource.close()
-    }
-  }
+  const { mutate: seedDataMutation } = trpc.seed.runSeed.useMutation({
+    onSuccess: () => {
+      toast.success('seed data completed!', {
+        onAutoClose: () =>
+          toast.info('Incase data is not showing then reload the page'),
+      })
+      router.push('/')
+    },
+    onError: () => {
+      return toast.error('seed data failed.')
+    },
+  })
 
   const seedData = () => {
     setLoading(true)
-    startSSE()
+    seedDataMutation()
   }
 
   return (
@@ -316,7 +305,7 @@ export function PageNotFound() {
             <>
               <div className='absolute left-0 top-0 w-full'>
                 <div className='h-1.5 w-full overflow-hidden bg-pink-100'>
-                  <div className='origin-left-right animate-progress h-full w-full bg-[#45a6e9]'></div>
+                  <div className='h-full w-full origin-left-right animate-progress bg-[#45a6e9]'></div>
                 </div>
               </div>
               <motion.div
