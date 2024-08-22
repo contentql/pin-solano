@@ -36,11 +36,11 @@ export const BlogPostContent = ({ blog }: { blog: Blog }) => {
     date.getMonth() + 1
   }/${date.getFullYear()}`
 
-  const readingTime = require('reading-time')
-  const blogReadTime = readingTime(dataToUse?.content || '')
-
-  const html = slateToHtml(blog?.content!, payloadSlateToHtmlConfig)
+  const html = slateToHtml(dataToUse?.content, payloadSlateToHtmlConfig)
   const sanitizeHtml = DOMPurify.sanitize(html)
+
+  const readingTime = require('reading-time')
+  const blogReadTime = readingTime(sanitizeHtml || '')
 
   function formatDate(isoDateString: string) {
     const date = new Date(isoDateString)

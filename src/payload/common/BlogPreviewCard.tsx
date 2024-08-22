@@ -1,8 +1,13 @@
 import { Blog, Media } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 
-const BlogPreviewCard = ({ blog }: { blog: Blog }) => {
+interface BlogPreviewCard {
+  blog: Blog
+}
+
+const BlogPreviewCard: React.FC<BlogPreviewCard> = ({ blog }) => {
   return (
     <Link href={`/blog/${blog?.slug}`} className='col-span-1 row-span-1 '>
       <div className='group relative h-full w-full text-white  transition-all duration-500 hover:scale-105 '>

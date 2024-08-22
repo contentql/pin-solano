@@ -2,16 +2,18 @@
 
 import { Blog } from '@payload-types'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 
 import { useResponsive } from '@/hooks/useResponsive'
 
 import BlogThreeDCard from './BlogThreeDCard'
 
-export const HorizontalScrollCarousel = ({
-  blogsData,
-}: {
+interface HorizontalScrollCarousel {
   blogsData: Blog[]
+}
+
+export const HorizontalScrollCarousel: React.FC<HorizontalScrollCarousel> = ({
+  blogsData,
 }) => {
   const { isMobile, isTablet } = useResponsive()
   const targetRef = useRef(null)

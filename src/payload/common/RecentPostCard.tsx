@@ -5,7 +5,11 @@ import Link from 'next/link'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
-const RecentPostCard = ({ blog }: { blog: Blog }) => {
+interface RecentPostCardProps {
+  blog: Blog
+}
+
+const RecentPostCard: React.FC<RecentPostCardProps> = ({ blog }) => {
   const readingTime = require('reading-time')
 
   return (

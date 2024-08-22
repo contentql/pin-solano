@@ -17,14 +17,14 @@ const SPRING_OPTIONS = {
   damping: 50,
 }
 
-export const SwipeCarousel = ({
-  blogsData,
-}: {
+interface SwipeCarouselProps {
   blogsData: {
     relationTo: 'blogs'
     value: string | Blog
   }[]
-}) => {
+}
+
+export const SwipeCarousel: React.FC<SwipeCarouselProps> = ({ blogsData }) => {
   const [imgIndex, setImgIndex] = useState(0)
 
   const dragX = useMotionValue(0)

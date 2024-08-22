@@ -9,7 +9,11 @@ interface TagsDetails extends Tag {
   count: number
 }
 
-const ReviewCard = ({ tag }: { tag: TagsDetails }) => {
+interface ReviewCard {
+  tag: TagsDetails
+}
+
+const ReviewCard: React.FC<ReviewCard> = ({ tag }) => {
   const router = useRouter()
   return (
     <figure

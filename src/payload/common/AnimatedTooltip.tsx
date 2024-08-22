@@ -3,11 +3,9 @@
 import { User } from '@payload-types'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-export const AnimatedTooltip = ({
-  items,
-}: {
+interface AnimatedTooltipProps {
   items:
     | {
         relationTo: 'users'
@@ -15,7 +13,9 @@ export const AnimatedTooltip = ({
       }[]
     | null
     | undefined
-}) => {
+}
+
+export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({ items }) => {
   const [hoveredIndex, setHoveredIndex] = useState<string | null>(null)
   const springConfig = { stiffness: 100, damping: 5 }
   const x = useMotionValue(0) // going to set this value on mouse move

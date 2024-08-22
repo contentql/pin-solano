@@ -17,14 +17,14 @@ interface DetailsProps extends DetailsType {
 
 const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
   const searchParams = useSearchParams()
-  console.log('search params', searchParams)
   switch (block?.collection_slug) {
     case 'blogs': {
-      const { data: blog } = trpc.blog.getBlogBySlug.useQuery({
-        slug: params?.route.at(-1) as string,
-      })
+      const { data: blog, isPending: isBlogPending } =
+        trpc.blog.getBlogBySlug.useQuery({
+          slug: params?.route.at(-1) as string,
+        })
       const { data: blogsData } = trpc.blog.getAllBlogs.useQuery()
-      return blog ? (
+      return !!blog || isBlogPending ? (
         <BlogPost blog={blog as Blog} blogsData={blogsData as Blog[]} />
       ) : (
         <NotFound />

@@ -10,12 +10,14 @@ import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
-const AnimatedBlogCard = ({
-  blogData,
-  index,
-}: {
+interface AnimatedBlogCardProp {
   blogData: Blog
   index: number
+}
+
+const AnimatedBlogCard: React.FC<AnimatedBlogCardProp> = ({
+  blogData,
+  index,
 }) => {
   const readingTime = require('reading-time')
 

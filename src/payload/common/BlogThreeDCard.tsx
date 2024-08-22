@@ -16,14 +16,25 @@ const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
 >(undefined)
 
-export const CardContainer = ({
-  children,
-  className,
-  containerClassName,
-}: {
+interface BlogThreeDCardProp {
+  item: Blog
+}
+
+interface CardContainerProps {
   children?: React.ReactNode
   className?: string
   containerClassName?: string
+}
+
+interface CardBodyProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export const CardContainer: React.FC<CardContainerProps> = ({
+  children,
+  className,
+  containerClassName,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isMouseEntered, setIsMouseEntered] = useState(false)
@@ -73,12 +84,9 @@ export const CardContainer = ({
   )
 }
 
-export const CardBody = ({
+export const CardBody: React.FC<CardContainerProps> = ({
   children,
   className,
-}: {
-  children: React.ReactNode
-  className?: string
 }) => {
   return (
     <div
@@ -157,7 +165,7 @@ export const useMouseEnter = () => {
   return context
 }
 
-const BlogThreeDCard = ({ item }: { item: Blog }) => {
+const BlogThreeDCard: React.FC<BlogThreeDCardProp> = ({ item }) => {
   return (
     <CardContainer className='inter-var'>
       <CardBody className='group/card relative h-auto w-full min-w-[25rem]  rounded-xl border border-black/[0.1] bg-gray-50 p-6 dark:border-white/[0.2] dark:bg-transparent dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] '>
