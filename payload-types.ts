@@ -336,12 +336,6 @@ export interface TopPicksTypes {
 export interface TagsType {
   title: string;
   sub_title: string;
-  tags?:
-    | {
-        relationTo: 'tags';
-        value: string | Tag;
-      }[]
-    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'HomeTags';

@@ -10,7 +10,7 @@ interface PageProps {
   }
 }
 
-const AuthorTagDetails = ({ params }: PageProps) => {
+const AuthorTagDetails: React.FC<PageProps> = ({ params }: PageProps) => {
   const { data: tagData } = trpc.tag.getTagBySlug.useQuery({
     slug: params?.tagSlug,
   })

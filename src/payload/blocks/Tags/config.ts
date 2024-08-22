@@ -20,13 +20,6 @@ export const HomeTagsConfig: Block = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'tags',
-      type: 'relationship',
-      relationTo: ['tags'],
-      label: 'Tags',
-      hasMany: true,
-    },
   ],
 }
 export default HomeTagsConfig

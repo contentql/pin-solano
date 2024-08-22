@@ -5,13 +5,14 @@ import BlogPostCard, {
 } from '../PopularBlogs/components/BlogPostCard'
 import { Blog, Media, TopPicksTypes } from '@payload-types'
 import Link from 'next/link'
+import React from 'react'
 
 import { useResponsive } from '@/hooks/useResponsive'
 import AnimatedBlogCard from '@/payload/common/AnimatedBlogCard'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
-const TopPicks = (TopPicks: TopPicksTypes) => {
+const TopPicks: React.FC<TopPicksTypes> = TopPicks => {
   const { isMobile } = useResponsive()
   const readingTime = require('reading-time')
   return (

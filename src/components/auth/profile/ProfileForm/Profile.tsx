@@ -3,7 +3,7 @@
 import { User } from '@payload-types'
 import { useState } from 'react'
 import { IoMdRefresh } from 'react-icons/io'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 import { trpc } from '@/trpc/client'
 import { listOfIcons } from '@/utils/getSocialMediaIcon'
@@ -33,14 +33,15 @@ const Profile = ({ initialUser }: { initialUser: User | undefined }) => {
           return oldUser
         })
       },
-      onSuccess: async () => {
+      onSuccess: () => {
+        console.log('profile updated')
         toast.success('Avatar updated successfully!')
       },
-      onError: async () => {
+      onError: () => {
         trpcUtils.user.invalidate()
         toast.error('Avatar failed to update!')
       },
-      onSettled: async () => {
+      onSettled: () => {
         setIsSpinning(false)
       },
     })

@@ -9,7 +9,7 @@ import { slateHtml } from '@/utils/slateToHtml'
 import BlogPostCard, { DirectionAwareHover } from './components/BlogPostCard'
 import PopularBlogCard from './components/PopularBlogCard'
 
-const PopularBlogs = (popularBlogs: PopularBlogsTypes) => {
+const PopularBlogs: React.FC<PopularBlogsTypes> = popularBlogs => {
   const { isMobile } = useResponsive()
   const readingTime = require('reading-time')
 

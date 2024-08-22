@@ -1,6 +1,7 @@
 import { User } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 
 import { AnimatedTagCard } from './AnimatedTagCard'
 
@@ -8,7 +9,9 @@ interface AuthorsListProps extends User {
   totalDocs: number
 }
 
-const AuthorsList = ({ authors }: { authors: AuthorsListProps[] }) => {
+const AuthorsList: React.FC<{ authors: AuthorsListProps[] }> = ({
+  authors,
+}) => {
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 bg-base-100 py-20'>
       {authors?.map((author, index) => (

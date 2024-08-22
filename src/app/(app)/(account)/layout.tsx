@@ -2,6 +2,8 @@ import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { headers } from 'next/headers'
 
+import Footer from '@/payload/blocks/Footer/Footer'
+import Navbar from '@/payload/blocks/Header'
 import { getCurrentUser } from '@/utils/getCurrentUser'
 
 interface LayoutProps {
@@ -21,9 +23,9 @@ const AccountLayout: React.FC<LayoutProps> = async ({ children }) => {
 
   return (
     <div className='flex min-h-screen flex-col'>
-      {/* Navbar */}
+      <Navbar initData={initData} />
       <div className='flex-grow'>{children}</div>
-      {/* Footer */}
+      <Footer initData={initData} />
     </div>
   )
 }

@@ -63,11 +63,7 @@ const seed = async (): Promise<SiteSetting> => {
         }),
       },
     }
-    console.log(
-      'formatted',
-      formattedSiteSettingsData,
-      formattedSiteSettingsData?.header?.menuItems,
-    )
+
     const result = await payload.updateGlobal({
       data: formattedSiteSettingsData,
       slug: 'site-settings',

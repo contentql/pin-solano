@@ -11,7 +11,7 @@ import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
-const BlogListItems = ({ blogsData }: { blogsData: Blog[] }) => {
+const BlogListItems: React.FC<{ blogsData: Blog[] }> = ({ blogsData }) => {
   const readingTime = require('reading-time')
 
   return (

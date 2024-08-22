@@ -16,18 +16,7 @@ import { trpc } from '@/trpc/client'
 interface Tags extends Tag {
   count: number
 }
-export const BlogPostContent = ({
-  slug,
-  data,
-}: {
-  slug: string
-  data: Blog
-}) => {
-  const { data: blog } = trpc.blog.getBlogBySlug.useQuery(
-    { slug },
-    { initialData: data },
-  )
-
+export const BlogPostContent = ({ blog }: { blog: Blog }) => {
   // Fetch blog data for live preview
   const { data: livePreviewData } = useLivePreview<Blog | undefined>({
     initialData: undefined,
@@ -77,9 +66,9 @@ export const BlogPostContent = ({
 
   return (
     <div>
-      <div className='relative mx-auto mt-32 flex w-full justify-center antialiased'>
+      <div className='relative mx-auto mt-32 flex w-full justify-center text-white antialiased'>
         <div key={`content-0`} className=''>
-          <div className='prose prose-sm mx-auto max-w-full text-sm dark:prose-invert'>
+          <div className=' mx-auto max-w-full text-sm '>
             <div className='mx-auto max-w-[71rem]'>
               <div className='text-center text-gray-500'>
                 <span className='mr-1 text-2xl '>&#8226;</span>{' '}
@@ -109,61 +98,45 @@ export const BlogPostContent = ({
               </div>
             </div>
 
-            <div className='mt-10 flex items-center justify-between'>
-              <div className='flex items-center justify-center space-x-2'>
-                {/* {(blog?.author?.value as User)?.imageUrl ? (
-                  <img
-                    className='rounded-full duration-500 ease-in hover:scale-95'
-                    width={60}
-                    height={60}
-                    src={(blog?.author?.value as User)?.imageUrl as string}
-                    alt='Rounded avatar'></i>
-                ) : (
-                  <div className='h-14 w-14 rounded-full bg-gray-200 dark:bg-white'></div>
-                )} */}
-                <div className='mb-10 flex w-full flex-row items-center justify-center'>
-                  <AnimatedTooltip items={dataToUse?.author as any} />
+            <div className='mx-auto w-4/6'>
+              {' '}
+              <div className='mt-10  flex  items-center justify-between'>
+                <div className='flex items-center justify-center space-x-2'>
+                  <div className='mb-10 flex w-full flex-row items-center justify-center'>
+                    <AnimatedTooltip items={dataToUse?.author as any} />
+                  </div>
                 </div>
-
-                {/* <div>
-                  <p className='text-lg font-semibold'>
-                    {(blog?.author?.value as User)?.name}
-                  </p>
-                  {/* <p className='text-md md:-mt-4'>
-                    {formatDate(blog?.createdAt as string)}
-                  </p> */}
-                {/* </div> */}
+                <p className='text-md '>
+                  {formatDate(blog?.createdAt as string)}
+                </p>
+                {/* <div>{blogReadTime?.text}</div> */}
               </div>
-              <p className='text-md '>
-                {formatDate(blog?.createdAt as string)}
-              </p>
-              {/* <div>{blogReadTime?.text}</div> */}
-            </div>
-            <div className='mx-auto flex justify-end gap-4 border-b-[1px] border-black dark:border-white'>
-              {dataToUse?.tags?.map((tag, index) => (
-                <motion.p
-                  key={index}
-                  className='cursor-pointer rounded-md border-2 border-gray-500  px-4 py-1 hover:border-gray-100 '
-                  variants={fadeInAnimationVariants}
-                  initial='initial'
-                  whileInView='animate'
-                  viewport={{
-                    once: true,
-                  }}
-                  custom={index}>
-                  {(tag?.value as Tag)?.title}
-                </motion.p>
-              ))}
-            </div>
-            <div className='mx-auto flex w-[60%] flex-col justify-between md:flex-row'>
-              <div className='w-full text-xl leading-7 md:w-[90%]'>
-                <div
-                  className='prose !max-w-none md:prose-xl'
-                  dangerouslySetInnerHTML={{ __html: sanitizeHtml }}
-                />
+              <div className='mx-auto mb-4 flex justify-end gap-4 border-b-[1px] border-black dark:border-white'>
+                {dataToUse?.tags?.map((tag, index) => (
+                  <motion.p
+                    key={index}
+                    className='cursor-pointer rounded-md border-2 border-gray-500  px-4 py-1 hover:border-gray-100 '
+                    variants={fadeInAnimationVariants}
+                    initial='initial'
+                    whileInView='animate'
+                    viewport={{
+                      once: true,
+                    }}
+                    custom={index}>
+                    {(tag?.value as Tag)?.title}
+                  </motion.p>
+                ))}
               </div>
-              <div className='w-full md:w-[20%]'>
-                <TagsCard tags={tagsDetails as Tags[]} />
+              <div className='mx-auto flex w-11/12 flex-col justify-between md:flex-row'>
+                <div className='mt-14 w-full text-xl leading-7 '>
+                  <div
+                    className='prose !max-w-none text-justify text-[#d1d5db] md:prose-xl'
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml }}
+                  />
+                </div>
+                <div className='ml-6 w-full md:w-[20%]'>
+                  <TagsCard tags={tagsDetails as Tags[]} />
+                </div>
               </div>
             </div>
           </div>

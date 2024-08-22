@@ -172,13 +172,13 @@ const BlogThreeDCard = ({ item }: { item: Blog }) => {
         </CardItem>
         <CardItem
           translateZ='50'
-          className='line-clamp-1 text-xl font-bold text-neutral-600 dark:text-white'>
+          className='line-clamp-1 text-xl font-bold text-white dark:text-white'>
           {item?.title}
         </CardItem>
         <CardItem
           as='p'
           translateZ='60'
-          className='mt-2 line-clamp-3 w-full text-sm text-neutral-500 dark:text-neutral-300'>
+          className='dark:text-neutral-300 mt-2 line-clamp-3 w-full text-sm text-[#d4d4d4]'>
           {item?.sub_title}
         </CardItem>
       </CardBody>

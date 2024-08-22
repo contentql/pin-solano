@@ -12,7 +12,10 @@ interface PageProps {
   }
 }
 
-const IndividualAuthorDetails = ({ params, searchParams }: PageProps) => {
+const IndividualAuthorDetails: React.FC<PageProps> = ({
+  params,
+  searchParams,
+}: PageProps) => {
   try {
     const { data: author } = trpc.author.getAuthorByName.useQuery({
       authorName: params?.authorName,

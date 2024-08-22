@@ -6,18 +6,20 @@ import React, { useState } from 'react'
 
 import { cn } from '@/utils/cn'
 
-export const AnimatedTagCard = ({
-  children,
-  title,
-  href,
-  className,
-  containerClassName,
-}: {
+interface AnimatedTagCardPropType {
   children: React.ReactNode
   title?: string
   href?: string
   className?: string
   containerClassName?: string
+}
+
+export const AnimatedTagCard: React.FC<AnimatedTagCardPropType> = ({
+  children,
+  title,
+  href,
+  className,
+  containerClassName,
 }) => {
   const router = useRouter()
   const [transform, setTransform] = useState(

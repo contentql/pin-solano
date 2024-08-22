@@ -2,7 +2,7 @@
 
 import type { User } from '@payload-types'
 import { useState } from 'react'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { trpc } from '@/trpc/client'

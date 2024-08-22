@@ -25,12 +25,12 @@ interface ListProps extends DetailsType {
 const List: React.FC<ListProps> = ({ params, ...block }) => {
   switch (block?.collection_slug) {
     case 'blogs': {
-      if (params?.route?.includes('tag')) {
-        const { data: blogs } = trpc.tag.getBlogs.useQuery({
-          tagSlug: params.route?.at(-1) as string,
-        })
-        return <BlogsList blogs={blogs?.blogsData as Blog[]} />
-      }
+      // if (params?.route?.includes('tag')) {
+      //   const { data: blogs } = trpc.tag.getBlogs.useQuery({
+      //     tagSlug: params.route?.at(-1) as string,
+      //   })
+      //   return <BlogsList blogs={blogs?.blogsData as Blog[]} />
+      // }
       const { data: blogs } = trpc.blog.getAllBlogs.useQuery()
       return <BlogsList blogs={blogs as Blog[]} />
     }

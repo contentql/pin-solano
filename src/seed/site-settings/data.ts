@@ -41,12 +41,12 @@ export const siteSettingsData: siteSettingsDataType = {
   },
   footer: {
     logo_image: '',
-    copyright: '@2025',
+    copyright: '@2025 All rights reserved',
     logo: 'ContentQL',
     menuItems: [
-      { id: '', page: { relationTo: 'pages', value: '' } },
-      { id: '', page: { relationTo: 'pages', value: '' } },
-      { id: '', page: { relationTo: 'pages', value: '' } },
+      { page: { relationTo: 'pages', value: '' } },
+      { page: { relationTo: 'pages', value: '' } },
+      { page: { relationTo: 'pages', value: '' } },
     ],
   },
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import type { User } from '@payload-types'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -42,7 +42,7 @@ const ProfileForm = ({ user }: { user: User }) => {
       },
     })
 
-  const handleUserUpdateForm = (e: any) => {
+  const handleUserUpdateForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const sanitizedData = Object.fromEntries(
       Object.entries(formData).filter(([key, value]) => Boolean(value)),

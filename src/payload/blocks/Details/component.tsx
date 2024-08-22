@@ -4,6 +4,7 @@ import { Params } from '../types'
 import { Blog, DetailsType } from '@payload-types'
 import { useSearchParams } from 'next/navigation'
 
+import NotFound from '@/app/(app)/not-found'
 import { trpc } from '@/trpc/client'
 
 import IndividualAuthorDetails from './components/AuthorDetails'
@@ -19,7 +20,15 @@ const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
   console.log('search params', searchParams)
   switch (block?.collection_slug) {
     case 'blogs': {
-      return <BlogPost blogSlug={params?.route.at(-1) as string} />
+      const { data: blog } = trpc.blog.getBlogBySlug.useQuery({
+        slug: params?.route.at(-1) as string,
+      })
+      const { data: blogsData } = trpc.blog.getAllBlogs.useQuery()
+      return blog ? (
+        <BlogPost blog={blog as Blog} blogsData={blogsData as Blog[]} />
+      ) : (
+        <NotFound />
+      )
     }
 
     case 'tags': {

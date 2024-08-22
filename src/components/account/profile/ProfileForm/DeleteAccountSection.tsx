@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 import { trpc } from '@/trpc/client'
@@ -29,7 +29,7 @@ export default function DeleteAccountSection() {
     },
   })
 
-  const handleDeleteUser = async (e: any) => {
+  const handleDeleteUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     deleteUserMutation()

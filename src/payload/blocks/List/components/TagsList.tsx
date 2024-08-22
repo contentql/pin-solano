@@ -1,13 +1,14 @@
 import { Media, Tag } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 
 import { AnimatedTagCard } from './AnimatedTagCard'
 
 interface TagsListProps extends Tag {
   count: number
 }
-const TagsList = ({ tags }: { tags: TagsListProps[] }) => {
+const TagsList: React.FC<{ tags: TagsListProps[] }> = ({ tags }) => {
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 bg-base-100 py-20'>
       {tags?.map((tag, index) => (
