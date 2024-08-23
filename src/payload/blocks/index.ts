@@ -5,10 +5,10 @@ import { BlogHero, BlogHeroConfig } from './BlogHero'
 import { Details, DetailsConfig } from './Details'
 import { Hero, HeroConfig } from './Hero'
 import { HomeHero, HomeHeroConfig } from './HomeHero'
+import { HomeTags, HomeTagsConfig } from './HomeTags'
 import { LatestBlogs, LatestBlogsConfig } from './LatestBlogs'
 import { List, ListConfig } from './List'
 import { PopularBlogs, PopularBlogsConfig } from './PopularBlogs'
-import { HomeTags, HomeTagsConfig } from './Tags'
 import { TopPicks, TopPicksConfig } from './TopPicks'
 
 // Exporting an object that maps block names (as keys) to their corresponding JSX components (as values)

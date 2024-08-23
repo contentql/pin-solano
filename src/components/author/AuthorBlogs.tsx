@@ -6,9 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { FaAngleRight } from 'react-icons/fa6'
 
-import { AnimatedButton } from '@/components/common/AnimatedButton'
 import { useResponsive } from '@/hooks/useResponsive'
 import BlogPostCard, {
   DirectionAwareHover,
@@ -81,7 +79,7 @@ export default function AuthorBlogs({
         </div>
         <Blogs blogsData={blogsData as Blog[]} />
       </div>
-      <div
+      {/* <div
         className='mt-10  flex items-center justify-center'
         onClick={() => {
           router.push(`${pathName}/${filter?.tag}`)
@@ -117,7 +115,7 @@ export default function AuthorBlogs({
             </span>
           }
         />
-      </div>
+      </div> */}
     </section>
   )
 }

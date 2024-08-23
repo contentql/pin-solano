@@ -102,28 +102,28 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
       blockType: 'TopPicks',
     },
 
-    // {
-    //   title: 'Tags',
-    //   sub_title: 'Bridging Content with Concise Labels',
-    //   tags: [
-    //     {
-    //       relationTo: 'tags',
-    //       value: '',
-    //     },
-    //     {
-    //       relationTo: 'tags',
-    //       value: '',
-    //     },
-    //     {
-    //       relationTo: 'tags',
-    //       value: '',
-    //     },
-    //     {
-    //       relationTo: 'tags',
-    //       value: '',
-    //     },
-    //   ],
-    //   blockType: 'HomeTags',
-    // },
+    {
+      title: 'Tags',
+      sub_title: 'Bridging Content with Concise Labels',
+      tags: [
+        {
+          relationTo: 'tags',
+          value: '',
+        },
+        {
+          relationTo: 'tags',
+          value: '',
+        },
+        {
+          relationTo: 'tags',
+          value: '',
+        },
+        {
+          relationTo: 'tags',
+          value: '',
+        },
+      ],
+      blockType: 'HomeTags',
+    },
   ],
 }

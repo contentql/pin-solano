@@ -8,7 +8,6 @@ interface BlogsListProps {
   blogs: Blog[]
 }
 const BlogsList: React.FC<BlogsListProps> = ({ blogs }) => {
-  console.log('blogs', blogs)
   return (
     <div className='bg-base-100'>
       <section className='container overflow-hidden  px-2 py-20 md:px-10 lg:px-20'>

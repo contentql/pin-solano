@@ -11,6 +11,7 @@ import { seedBlogsPage } from '@/seed/blogs-page'
 import { seedHomePage } from '@/seed/home-page'
 import { seedSiteSetting } from '@/seed/site-settings'
 import { seedTagDetailsPage } from '@/seed/tag-details-page'
+import { seedTagPage } from '@/seed/tag-tagName-page'
 import { seedTags } from '@/seed/tags'
 import { seedTagsPage } from '@/seed/tags-page'
 import { publicProcedure, router } from '@/trpc'
@@ -27,9 +28,9 @@ export const seedRouter = router({
       await seedAuthors() // Then seed authors
       console.log('completed authors seed')
       await seedTagsPage()
-
       await seedTagDetailsPage()
       await seedTags() // Seed tags first
+      await seedTagPage()
 
       console.log('completed tags seed')
       await seedAuthorsPage()

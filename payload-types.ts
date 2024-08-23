@@ -194,6 +194,7 @@ export interface Page {
         | TagsType
       )[]
     | null;
+  slugMode?: ('generate' | 'custom') | null;
   slug?: string | null;
   pathMode?: ('generate' | 'custom') | null;
   path?: string | null;
@@ -336,6 +337,12 @@ export interface TopPicksTypes {
 export interface TagsType {
   title: string;
   sub_title: string;
+  tags?:
+    | {
+        relationTo: 'tags';
+        value: string | Tag;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'HomeTags';

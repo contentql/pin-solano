@@ -13,7 +13,7 @@ const Footer = ({ initData }: { initData: SiteSetting }) => {
   return (
     <footer className='bg-white p-4 dark:bg-[#1e2846] md:px-6 md:py-4'>
       <div className='sm:flex sm:items-center sm:justify-between'>
-        <a href='#' target='_blank' className='mb-4 flex items-center sm:mb-0'>
+        <a href='/' target='_blank' className='mb-4 flex items-center sm:mb-0'>
           <Image
             src={(data?.footer?.logo_image as Media)?.url || ''}
             className='mr-4 h-7 w-auto'

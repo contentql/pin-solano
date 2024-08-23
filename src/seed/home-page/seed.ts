@@ -52,6 +52,14 @@ const seed = async (): Promise<Page> => {
               value: allBlogs?.at(0)?.id || '',
             })),
           }
+        } else if (block?.blockType === 'HomeTags') {
+          return {
+            ...block,
+            tags: block?.tags?.map((tag, idx) => ({
+              relationTo: 'tags',
+              value: allTags?.at(0)?.id || '',
+            })),
+          }
         }
         return block
       }),

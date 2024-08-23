@@ -7,7 +7,7 @@ const format = (val: string): string =>
     .replace(/[^\w-]+/g, '')
     .toLowerCase()
 
-const formatSlug =
+export const formatSlug =
   (fallback: string): FieldHook =>
   ({ operation, value, originalDoc, data }) => {
     if (data?.isHome) return ''
@@ -40,9 +40,12 @@ const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
       required: false, // Need to be false so that we can use beforeValidate hook to set slug.
       admin: {
         position: 'sidebar',
-        description: 'keep slug empty if you want this page as homepage',
+        description: 'Auto generated or custom',
         condition: data => {
           return !data?.isHome && !data?.isDynamic
+        },
+        components: {
+          Field: '/src/payload/fields/CustomSlugField.tsx',
         },
       },
       hooks: {
@@ -52,5 +55,35 @@ const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
     overrides,
   )
 }
+
+const slugModeField = (overrides?: Partial<Field>): Field =>
+  deepMerge<Field, Partial<Field>>(
+    {
+      name: 'slugMode',
+      label: 'Slug Mode',
+      type: 'radio',
+      options: [
+        {
+          label: 'Generate',
+          value: 'generate',
+        },
+        {
+          label: 'Custom',
+          value: 'custom',
+        },
+      ],
+      defaultValue: 'generate',
+      admin: {
+        position: 'sidebar',
+        layout: 'horizontal',
+        condition: data => {
+          return !data?.isHome && !data?.isDynamic
+        },
+      },
+    },
+    overrides || {},
+  )
+
+export { slugField, slugModeField }
 
 export default slugField

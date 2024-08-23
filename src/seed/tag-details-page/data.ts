@@ -9,6 +9,7 @@ export const tagDetailsPageData: TagDetailsPageDataType = {
   title: 'Tag Details',
   isHome: false,
   _status: 'published',
+
   layout: [
     {
       blockType: 'Details',

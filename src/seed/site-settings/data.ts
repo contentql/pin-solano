@@ -24,8 +24,8 @@ export const siteSettingsData: siteSettingsDataType = {
   header: {
     primary_button_text: 'sign-in',
     primary_button_path: '/sign-in',
-    secondary_button_path: 'sign-up',
-    secondary_button_text: '/sign-up',
+    secondary_button_text: 'sign-up',
+    secondary_button_path: '/sign-up',
     logo_image: '',
     menuItems: [
       {
