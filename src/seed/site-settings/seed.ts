@@ -65,7 +65,7 @@ const seed = async (): Promise<SiteSetting> => {
     }
 
     const result = await payload.updateGlobal({
-      data: formattedSiteSettingsData,
+      data: formattedSiteSettingsData as SiteSetting,
       slug: 'site-settings',
     })
 
