@@ -645,22 +645,22 @@ export const blogsImagesData: BlogImageType[] = [
   },
   {
     alt: 'Blog 2',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/blog-2.jpg'),
   },
   {
     alt: 'Blog 3',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/blog-3.jpg'),
   },
   {
     alt: 'Blog 4',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/blog-4.jpg'),
   },
   {
     alt: 'Blog 5',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/blog-5.jpg'),
   },
   {
     alt: 'Blog 6',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/blog-6.jpg'),
   },
 ]

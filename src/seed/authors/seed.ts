@@ -15,6 +15,7 @@ const seed = async (): Promise<(string | User)[]> => {
         imageUrl: `${env.PAYLOAD_URL}${authorImageData?.at(idx)?.filePath}`,
       }
     })
+    // console.log('author', formattedAuthorsData)
     const results = await Promise.allSettled(
       formattedAuthorsData.map(authorData =>
         payload.create({

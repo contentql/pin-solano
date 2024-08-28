@@ -19,13 +19,12 @@ export function PageNotFound() {
   const { mutate: seedDataMutation } = trpc.seed.runSeed.useMutation({
     onSuccess: () => {
       toast.success('seed data completed!', {
-        onAutoClose: () =>
-          toast.info('Incase data is not showing then reload the page'),
+        onAutoClose: () => window.location.reload(),
       })
-      router.push('/')
+      window.location.reload()
     },
     onError: () => {
-      return toast.error('seed data failed.')
+      toast.error('seed data failed.')
     },
   })
 

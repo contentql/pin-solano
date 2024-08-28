@@ -41,23 +41,30 @@ export const tagsData: TagDataType[] = [
 export const tagsImagesData: TagImageType[] = [
   {
     alt: 'Tag 1',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
-  },
-  {
-    alt: 'Tag 2',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/tag-ai.png'),
   },
   {
     alt: 'Tag 3',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/tag-ai.png'),
   },
   {
+    alt: 'Tag 2',
+    filePath: path.join(
+      process.cwd(),
+      '/public/images/seed/tag-Entrepreneurship.webp',
+    ),
+  },
+
+  {
     alt: 'Tag 4',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(
+      process.cwd(),
+      '/public/images/seed/tag-projectmanagement.webp',
+    ),
   },
   {
     alt: 'Tag 5',
-    filePath: path.join(process.cwd(), '/public/images/seed/blog-1.jpg'),
+    filePath: path.join(process.cwd(), '/public/images/seed/tag-ai.png'),
   },
   {
     alt: 'Tag 6',

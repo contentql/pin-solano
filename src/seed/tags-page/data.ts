@@ -28,5 +28,8 @@ export const tagsPageData: TagsPageDataType = {
 }
 export const tagImageData: TagImageType = {
   alt: 'Tags Image',
-  filePath: path.join(process.cwd(), '/public/images/seed/blog-2.jpg'),
+  filePath: path.join(
+    process.cwd(),
+    '/public/images/seed/tag-projectmanagement.webp',
+  ),
 }

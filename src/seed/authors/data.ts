@@ -62,30 +62,30 @@ export const authorsData: AuthorDataType[] = [
 export const authorImageData: AuthorImageType[] = [
   {
     alt: 'Authors Image',
-    filePath: '/public/images/seed/blogAuthor-21.jpg',
+    filePath: '/images/seed/blogAuthor-1.jpg',
   },
   {
     alt: 'Authors Image',
-    filePath: '/public/images/seed/blogAuthor-2.jpg',
+    filePath: '/images/seed/blogAuthor-2.jpg',
   },
   {
     alt: 'Authors Image',
-    filePath: '/public/images/seed/blogAuthor-23.jpg',
+    filePath: '/images/seed/blogAuthor-3.jpg',
   },
   {
     alt: 'Authors Image',
-    filePath: '/public/images/seed/blogAuthor-4.jpg',
+    filePath: '/images/seed/blogAuthor-4.jpg',
   },
   {
     alt: 'Authors Image',
-    filePath: '/public/images/seed/blogAuthor-5.jpg',
+    filePath: '/images/seed/blogAuthor-5.jpg',
   },
   {
     alt: 'Authors Image',
-    filePath: '/public/images/seed/blogAuthor-6.jpg',
+    filePath: '/images/seed/blogAuthor-6.jpg',
   },
   {
     alt: 'Authors Image',
-    filePath: '/public/images/seed/blogAuthor-7.jpg',
+    filePath: '/images/seed/blogAuthor-7.jpg',
   },
 ]

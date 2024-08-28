@@ -24,7 +24,7 @@ const AuthorsList: React.FC<{ authors: AuthorsListProps[] }> = ({
                 alt='tag'
                 loading='lazy'
                 width={100}
-                height={100}
+                height={160}
               />
               <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
                 {author?.name}
