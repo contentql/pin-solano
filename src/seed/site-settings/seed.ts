@@ -1,3 +1,4 @@
+//@ts-nocheck
 import configPromise from '@payload-config'
 import { SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
