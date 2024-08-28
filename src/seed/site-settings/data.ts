@@ -1,10 +1,7 @@
 import path from 'path'
 import { SiteSetting } from 'payload-types'
 
-export type siteSettingsDataType = Omit<
-  SiteSetting,
-  'id' | 'createdAt' | 'updatedAt'
->
+export type siteSettingsDataType = Omit<SiteSetting, 'id'>
 
 export type ImageType = {
   header: {
