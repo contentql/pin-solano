@@ -3,20 +3,23 @@ import configPromise from '@payload-config'
 import { User } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 
-import { authorsData } from './data'
+import { authorImageData, authorsData } from './data'
 
 const payload = await getPayloadHMR({ config: configPromise })
 
 const seed = async (): Promise<(string | User)[]> => {
   try {
+    const formattedAuthorsData = authorsData.map((author, idx) => {
+      return {
+        ...author,
+        imageUrl: `${env.PAYLOAD_URL}${authorImageData?.at(idx)?.filePath}`,
+      }
+    })
     const results = await Promise.allSettled(
-      authorsData.map(authorData =>
+      formattedAuthorsData.map(authorData =>
         payload.create({
           collection: 'users',
-          data: {
-            ...authorData,
-            imageUrl: `${env.PAYLOAD_URL}/images/seed/blogAuthor-2.jpg`,
-          },
+          data: authorData,
 
           locale: undefined,
           fallbackLocale: undefined,

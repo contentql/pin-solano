@@ -1,4 +1,3 @@
-import path from 'path'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
 export type AuthorDataType = RequiredDataFromCollectionSlug<'users'>
@@ -60,7 +59,33 @@ export const authorsData: AuthorDataType[] = [
   },
 ]
 
-export const authorImageData: AuthorImageType = {
-  alt: 'Authors Image',
-  filePath: path.join(process.cwd(), '/public/images/seed/blogAuthor-2.jpg'),
-}
+export const authorImageData: AuthorImageType[] = [
+  {
+    alt: 'Authors Image',
+    filePath: '/public/images/seed/blogAuthor-21.jpg',
+  },
+  {
+    alt: 'Authors Image',
+    filePath: '/public/images/seed/blogAuthor-2.jpg',
+  },
+  {
+    alt: 'Authors Image',
+    filePath: '/public/images/seed/blogAuthor-23.jpg',
+  },
+  {
+    alt: 'Authors Image',
+    filePath: '/public/images/seed/blogAuthor-4.jpg',
+  },
+  {
+    alt: 'Authors Image',
+    filePath: '/public/images/seed/blogAuthor-5.jpg',
+  },
+  {
+    alt: 'Authors Image',
+    filePath: '/public/images/seed/blogAuthor-6.jpg',
+  },
+  {
+    alt: 'Authors Image',
+    filePath: '/public/images/seed/blogAuthor-7.jpg',
+  },
+]
