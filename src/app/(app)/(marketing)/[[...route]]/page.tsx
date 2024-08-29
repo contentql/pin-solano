@@ -1,6 +1,7 @@
 import { Page as PageType } from '@payload-types'
 import { notFound } from 'next/navigation'
 
+import WelcomePage from '@/components/WelcomePage'
 import RenderBlocks from '@/payload/blocks/RenderBlocks'
 import { serverClient } from '@/trpc/serverClient'
 
@@ -16,7 +17,10 @@ const Page = async ({ params }: { params: { route: string[] } }) => {
     return (
       <RenderBlocks pageInitialData={pageData as PageType} params={params} />
     )
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.message === 'Pages not found') {
+      return <WelcomePage />
+    }
     console.error('Error: Page not found')
     notFound()
   }

@@ -18,6 +18,7 @@ import { Tags } from '@/payload/collections/Tags'
 import { Users } from '@/payload/collections/Users'
 import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
 import { siteSettings } from '@/payload/globals/SiteSettings'
+import { scheduleDocPublish } from '@/plugins/schedule-doc-publish'
 import { generateBreadcrumbsUrl } from '@/utils/generateBreadcrumbsUrl'
 import {
   generateDescription,
@@ -105,6 +106,11 @@ export default buildConfig({
       generateDescription,
       generateImage,
       generateURL,
+    }),
+    scheduleDocPublish({
+      enabled: true,
+      collections: ['blogs'],
+      position: 'sidebar',
     }),
   ],
 

@@ -168,6 +168,7 @@ export interface Blog {
     description?: string | null;
     image?: string | Media | null;
   };
+  publishOn?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;

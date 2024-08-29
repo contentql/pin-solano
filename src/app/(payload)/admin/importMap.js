@@ -48,9 +48,10 @@ import { MetaTitleComponent as MetaTitleComponent_46 } from '@payloadcms/plugin-
 import { MetaDescriptionComponent as MetaDescriptionComponent_47 } from '@payloadcms/plugin-seo/client'
 import { MetaImageComponent as MetaImageComponent_48 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_49 } from '@payloadcms/plugin-seo/client'
-import { default as default_50 } from 'src/payload/fields/CustomPathField.tsx'
-import { default as default_51 } from 'src/payload/style/icons/Icon.tsx'
-import { default as default_52 } from 'src/payload/style/icons/Logo.tsx'
+import { default as default_50 } from 'src/plugins/schedule-doc-publish/fields/PublishOn/components/CustomPublishOnField.tsx'
+import { default as default_51 } from 'src/payload/fields/CustomPathField.tsx'
+import { default as default_52 } from 'src/payload/style/icons/Icon.tsx'
+import { default as default_53 } from 'src/payload/style/icons/Logo.tsx'
 
 export const importMap = {
   "/src/payload/fields/CustomSlugField.tsx#default": default_0,
@@ -103,7 +104,8 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_47,
   "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_48,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_49,
-  "/src/payload/fields/CustomPathField.tsx#default": default_50,
-  "/src/payload/style/icons/Icon.tsx#default": default_51,
-  "/src/payload/style/icons/Logo.tsx#default": default_52
+  "/src/plugins/schedule-doc-publish/fields/PublishOn/components/CustomPublishOnField.tsx#default": default_50,
+  "/src/payload/fields/CustomPathField.tsx#default": default_51,
+  "/src/payload/style/icons/Icon.tsx#default": default_52,
+  "/src/payload/style/icons/Logo.tsx#default": default_53
 }
