@@ -193,6 +193,9 @@ importers:
       '@types/node':
         specifier: ^20.14.9
         version: 20.16.1
+      '@types/node-schedule':
+        specifier: ^2.1.7
+        version: 2.1.7
       '@types/react':
         specifier: npm:types-react@19.0.0-rc.0
         version: types-react@19.0.0-rc.0
@@ -1601,6 +1604,9 @@ packages:
 
   '@types/minimatch@5.1.2':
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
+
+  '@types/node-schedule@2.1.7':
+    resolution: {integrity: sha512-G7Z3R9H7r3TowoH6D2pkzUHPhcJrDF4Jz1JOQ80AX0K2DWTHoN9VC94XzFAPNMdbW9TBzMZ3LjpFi7RYdbxtXA==}
 
   '@types/node@20.16.1':
     resolution: {integrity: sha512-zJDo7wEadFtSyNz5QITDfRcrhqDvQI1xQNQ0VoizPjM/dVAODqqIUWbJPkvsxmTI0MYRGRikcdjMPhOssnPejQ==}
@@ -6635,6 +6641,10 @@ snapshots:
   '@types/lodash@4.17.7': {}
 
   '@types/minimatch@5.1.2': {}
+
+  '@types/node-schedule@2.1.7':
+    dependencies:
+      '@types/node': 20.16.1
 
   '@types/node@20.16.1':
     dependencies:
