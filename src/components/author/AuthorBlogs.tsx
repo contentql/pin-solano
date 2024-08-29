@@ -1,5 +1,7 @@
 'use client'
 
+import BlogCardSkelton from '../skelton/BlogCardSkelton'
+import { Skeleton } from '../skelton/Skelton'
 import { Blog, Media } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
@@ -12,6 +14,7 @@ import BlogPostCard, {
   DirectionAwareHover,
 } from '@/payload/blocks/PopularBlogs/components/BlogPostCard'
 import AnimatedBlogCard from '@/payload/common/AnimatedBlogCard'
+import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
@@ -19,10 +22,14 @@ export default function AuthorBlogs({
   blogsData,
   authorTags,
   totalBlogs,
+  isBlogsLoading,
+  isAuthorTagsLoading,
 }: {
   blogsData: Blog[]
   totalBlogs: number
   authorTags: any
+  isBlogsLoading: boolean
+  isAuthorTagsLoading: boolean
 }) {
   const searchParams = useSearchParams()
   const pathName = usePathname()
@@ -48,25 +55,42 @@ export default function AuthorBlogs({
     <section className='container px-2 py-20 md:px-20' id='blog'>
       <div className='flex flex-col items-center justify-center  gap-y-8 pb-10 text-white'>
         <div className='flex flex-row items-center gap-x-4'>
-          <Image
-            src={(authorTags?.at(filter?.index).image as Media)?.url || ''}
-            alt='tag'
-            className='h-20 w-20 rounded-full'
-            width={50}
-            height={50}
-          />
-          <div className='gap-x-2'>
-            <p className='text-2xl font-bold'>
-              {authorTags?.at(filter?.index)?.title}
-            </p>
-            <p>
-              A collection of {blogsData?.length}{' '}
-              {blogsData?.length === 1 ? 'Post' : 'Posts'}
-            </p>
+          {isAuthorTagsLoading ? (
+            <Skeleton className='h-20 w-20 rounded-full' />
+          ) : (
+            <Image
+              src={(authorTags?.at(filter?.index).image as Media)?.url || ''}
+              alt='tag'
+              className='h-20 w-20 rounded-full'
+              width={50}
+              height={50}
+            />
+          )}
+          <div
+            className={cn('gap-x-2', isAuthorTagsLoading ? 'space-y-1' : '')}>
+            {isAuthorTagsLoading ? (
+              <Skeleton className='h-6 w-32' />
+            ) : (
+              <p className='text-2xl font-bold'>
+                {authorTags?.at(filter?.index)?.title}
+              </p>
+            )}
+            {isAuthorTagsLoading ? (
+              <Skeleton className='h-3 w-40' />
+            ) : (
+              <p>
+                A collection of {blogsData?.length}{' '}
+                {blogsData?.length === 1 ? 'Post' : 'Posts'}
+              </p>
+            )}
           </div>
         </div>
         <div className='line-clamp-2 max-w-2xl text-gray-400'>
-          {authorTags?.at(filter?.index)?.description}
+          {isAuthorTagsLoading ? (
+            <Skeleton className='h-3 w-40' />
+          ) : (
+            authorTags?.at(filter?.index)?.description
+          )}
         </div>
       </div>
       <div className='flex flex-col justify-center gap-x-4 gap-y-10 lg:flex-row'>
@@ -77,7 +101,11 @@ export default function AuthorBlogs({
             filter={filter}
           />
         </div>
-        <Blogs blogsData={blogsData as Blog[]} />
+        {isBlogsLoading ? (
+          <BlogCardSkelton />
+        ) : (
+          <Blogs blogsData={blogsData as Blog[]} />
+        )}
       </div>
       {/* <div
         className='mt-10  flex items-center justify-center'

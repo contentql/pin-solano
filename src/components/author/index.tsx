@@ -8,19 +8,30 @@ function AuthorPostsView({
   authorTags,
   totalBlogs,
   author,
+  isAuthorLoading,
+  isBlogsLoading,
+  isAuthorTagsLoading,
 }: {
   blogsData: Blog[]
   totalBlogs: number
   authorTags: any
   author: User
+  isAuthorLoading: boolean
+  isBlogsLoading: boolean
+  isAuthorTagsLoading: boolean
 }) {
   return (
     <>
-      <AuthorDetails author={author as User} />
+      <AuthorDetails
+        isAuthorLoading={isAuthorLoading}
+        author={author as User}
+      />
       <AuthorBlogs
         blogsData={blogsData}
         totalBlogs={totalBlogs}
         authorTags={authorTags as any}
+        isAuthorTagsLoading={isAuthorTagsLoading}
+        isBlogsLoading={isBlogsLoading}
       />
     </>
   )

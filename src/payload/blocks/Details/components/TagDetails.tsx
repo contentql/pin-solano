@@ -3,6 +3,8 @@ import BlogListItem from '../../List/components/BlogListItem'
 import { Blog, Media } from '@payload-types'
 import Image from 'next/image'
 
+import BlogCardSkelton from '@/components/skelton/BlogCardSkelton'
+
 interface TagDetailsProps {
   tagDetails: any
   blogs: Blog[]
@@ -22,6 +24,7 @@ const TagDetails: React.FC<TagDetailsProps> = ({
         description={tagDetails?.description}
         image={(tagDetails?.tagImage as Media)?.url as string}
       />
+      {isBlogsPending && <BlogCardSkelton />}
       {blogs?.length > 0 || isBlogsPending ? (
         <div className='mx-auto min-h-screen max-w-7xl px-2'>
           <BlogListItem blogsData={blogs as Blog[]} />

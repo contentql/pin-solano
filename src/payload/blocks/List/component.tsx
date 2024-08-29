@@ -4,6 +4,8 @@ import { Params } from '../types'
 import { Blog, DetailsType, Tag, User } from '@payload-types'
 import React from 'react'
 
+import BlogCardSkelton from '@/components/skelton/BlogCardSkelton'
+import TagCardSkelton from '@/components/skelton/TagCardSkelton'
 import { trpc } from '@/trpc/client'
 
 import AuthorsList from './components/AuthorsList'
@@ -31,19 +33,34 @@ const List: React.FC<ListProps> = ({ params, ...block }) => {
       //   })
       //   return <BlogsList blogs={blogs?.blogsData as Blog[]} />
       // }
-      const { data: blogs } = trpc.blog.getAllBlogs.useQuery()
-      return <BlogsList blogs={blogs as Blog[]} />
+      const { data: blogs, isLoading: isBlogsPending } =
+        trpc.blog.getAllBlogs.useQuery()
+      return isBlogsPending ? (
+        <BlogCardSkelton />
+      ) : (
+        <BlogsList blogs={blogs as Blog[]} />
+      )
     }
 
     case 'tags': {
-      const { data: tags } = trpc.tag.getAllTags.useQuery()
-      return <TagsList tags={tags as TagsListProps[]} />
+      const { data: tags, isLoading: isTagsLoading } =
+        trpc.tag.getAllTags.useQuery()
+      return isTagsLoading ? (
+        <TagCardSkelton />
+      ) : (
+        <TagsList tags={tags as TagsListProps[]} />
+      )
     }
 
     case 'users': {
-      const { data: authors } = trpc.author.getAllAuthorsWithCount.useQuery()
+      const { data: authors, isLoading: isAuthorLoading } =
+        trpc.author.getAllAuthorsWithCount.useQuery()
 
-      return <AuthorsList authors={authors as AuthorsListProps[]} />
+      return isAuthorLoading ? (
+        <TagCardSkelton />
+      ) : (
+        <AuthorsList authors={authors as AuthorsListProps[]} />
+      )
     }
   }
 }
