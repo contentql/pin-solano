@@ -5,6 +5,7 @@ import { Blog, DetailsType } from '@payload-types'
 import { useSearchParams } from 'next/navigation'
 
 import NotFound from '@/app/(app)/not-found'
+import BlogDetailSkeleton from '@/components/skelton/BlogDetailSkeleton'
 import { trpc } from '@/trpc/client'
 
 import IndividualAuthorDetails from './components/AuthorDetails'
@@ -24,7 +25,9 @@ const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
           slug: params?.route.at(-1) as string,
         })
       const { data: blogsData } = trpc.blog.getAllBlogs.useQuery()
-      return !!blog || isBlogPending ? (
+      return isBlogPending ? (
+        <BlogDetailSkeleton />
+      ) : !!blog ? (
         <BlogPost blog={blog as Blog} blogsData={blogsData as Blog[]} />
       ) : (
         <NotFound />
