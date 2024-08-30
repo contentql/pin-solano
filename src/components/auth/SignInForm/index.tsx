@@ -184,7 +184,7 @@ const SignInForm = () => {
             </div>
             <p className='text-sm text-gray-700 dark:text-gray-300'>
               Forgot your password?{' '}
-              <Link className='underline' href='/reset-password'>
+              <Link className='underline' href='/forgot-password'>
                 Reset it.
               </Link>
             </p>
