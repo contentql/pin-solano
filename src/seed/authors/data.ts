@@ -50,13 +50,6 @@ export const authorsData: AuthorDataType[] = [
     role: 'author',
     imageUrl: '',
   },
-  {
-    name: 'Admin',
-    email: 'admin@contentql.com',
-    password: 'Welcome@123',
-    role: 'admin',
-    imageUrl: '',
-  },
 ]
 
 export const authorImageData: AuthorImageType[] = [
@@ -83,9 +76,5 @@ export const authorImageData: AuthorImageType[] = [
   {
     alt: 'Authors Image',
     filePath: '/images/seed/blogAuthor-6.jpg',
-  },
-  {
-    alt: 'Authors Image',
-    filePath: '/images/seed/blogAuthor-7.jpg',
   },
 ]
