@@ -1,5 +1,4 @@
 import { User } from '@payload-types'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -18,13 +17,14 @@ const AuthorsList: React.FC<{ authors: AuthorsListProps[] }> = ({
         <Link href={`/author/${author?.name}`} key={index}>
           <AnimatedTagCard title={author?.name!} href={author?.name!}>
             <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
-              <Image
-                className='w-18 h-18 mb-16 rounded-full'
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className='mb-16 h-24 w-24 rounded-full'
                 src={author?.imageUrl!}
                 alt='tag'
                 loading='lazy'
-                width={100}
-                height={160}
+                // width={100}
+                // height={160}
               />
               <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
                 {author?.name}

@@ -38,7 +38,8 @@ const RecentPostCard: React.FC<RecentPostCardProps> = ({ blog }) => {
       <div className='flex flex-wrap space-x-5 '>
         {blog?.author?.map((author, index) => (
           <div className='group flex items-center space-x-2' key={index}>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               className='h-5 w-5 rounded-full'
               src={(author?.value as User)?.imageUrl || ''}
               alt='user'

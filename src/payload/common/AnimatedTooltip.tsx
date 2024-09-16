@@ -2,7 +2,6 @@
 
 import { User } from '@payload-types'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import Image from 'next/image'
 import React, { useState } from 'react'
 
 interface AnimatedTooltipProps {
@@ -70,7 +69,8 @@ export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({ items }) => {
               <div className='text-xs text-white'>{item?.value?.email}</div>
             </motion.div>
           )}
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             onMouseMove={handleMouseMove}
             height={100}
             width={100}
