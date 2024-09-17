@@ -17,7 +17,6 @@ const WelcomePage = () => {
         setShowLoadingModal(true)
       },
       onSuccess: () => {
-        // ! router.refresh() is not working as expected.
         window.location.reload()
       },
     })
@@ -37,29 +36,30 @@ const WelcomePage = () => {
 
   return (
     <div className='dark'>
-      <Container className='flex min-h-screen max-w-full  flex-col items-center justify-center gap-14 bg-[#26304e] px-10'>
-        <div className='flex flex-col gap-y-3'>
-          <div className='mx-auto  w-2/3 bg-gradient-to-r from-white to-[#4f46e5] bg-clip-text text-center text-5xl font-medium text-transparent'>
-            <span className='text-xl'>✦</span> All set!{' '}
-            <span className='text-xl'>✦</span>
-          </div>
-          <div className='mx-auto w-2/3 text-center text-xl text-orange-50'>
-            Begin personalizing your theme to create a unique and engaging
-            experience.
-          </div>
+      <Container className='relative flex min-h-screen max-w-full flex-col items-center justify-center gap-10 bg-[#26304e] px-10'>
+        <div className='absolute left-[50%] top-[24%] h-[20%] w-[20%] -translate-x-1/2 rounded-full bg-indigo-600 blur-[110px]'></div>
+        <div className='flex flex-col items-center gap-5 text-center'>
+          <h1 className='bg-gradient-to-r from-white to-[#4f46e5] bg-clip-text text-5xl font-medium text-transparent'>
+            Welcome to Solano!{' '}
+          </h1>
+          <p className='w-2/3 text-xl text-orange-50'>
+            Your blog is ready to shine. Start by creating your first post or
+            exploring tags, users, and more.
+          </p>
         </div>
-        <div className='mx-auto flex w-full flex-col items-center justify-center gap-8 text-orange-50 md:w-2/3 md:flex-row'>
-          <div className='flex h-fit w-full flex-col justify-between rounded-md bg-[#0f162b] px-8 py-4 md:h-72 md:w-2/3 lg:h-56'>
-            <div>
-              Get a head start by loading demo content into your theme.{' '}
-              <strong>Click the button below to see a sample setup.</strong>
-            </div>
+
+        {/* Demo Content Section */}
+        <div className='flex w-full flex-col items-center md:w-2/3 lg:w-1/2'>
+          <div className='flex flex-col justify-between rounded-md bg-[#0f162b] p-8 text-orange-50'>
+            <p>
+              Want to see how your blog could look with sample content?{' '}
+              <strong>Click below to load demo posts, tags, and users.</strong>
+            </p>
             <button
-              className='z-50 mt-6 rounded-md bg-[#4f46e5] px-4 py-2 text-center text-orange-50 duration-150 hover:scale-105'
+              className='mt-6 rounded-md bg-[#4f46e5] px-4 py-2 text-orange-50 duration-150 hover:scale-105'
               disabled={isSeedLoading}
-              type='button'
               onClick={handleLoadDemoClick}>
-              {isSeedLoading ? `data loading...` : `Load Demo data`}
+              {isSeedLoading ? 'Loading data...' : 'Load Demo Content'}
             </button>
           </div>
         </div>
@@ -69,10 +69,10 @@ const WelcomePage = () => {
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
           <div className='flex flex-col items-center justify-center rounded-lg bg-white p-6 shadow-xl'>
             <h2 className='mb-4 text-lg font-semibold text-gray-700'>
-              Are you sure you want to load demo data?
+              Confirm Demo Data Load
             </h2>
             <p className='mb-6 text-sm text-gray-500'>
-              It would take around a minute.
+              Loading demo posts and tags might take about a minute.
             </p>
             <div className='flex gap-4'>
               <button
@@ -95,11 +95,11 @@ const WelcomePage = () => {
           <div className='flex flex-col items-center justify-center rounded-lg bg-white p-6 shadow-xl'>
             <div className='loader mb-4 h-12 w-12 rounded-full border-4 border-t-4 border-gray-200 ease-linear'></div>
             <h2 className='mb-2 text-lg font-semibold text-gray-700'>
-              Loading Demo Data
+              Loading Demo Content
             </h2>
             <p className='text-sm text-gray-500'>
-              After that you&apos;ll be redirected to homepage. Please do not
-              exit this page.
+              Once loaded, you&apos;ll be redirected to the blog. Please do not
+              close the page.
             </p>
           </div>
         </div>
