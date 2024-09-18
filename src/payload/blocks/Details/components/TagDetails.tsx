@@ -1,6 +1,6 @@
 import { Hero } from '../../Hero'
 import BlogListItem from '../../List/components/BlogListItem'
-import { Blog, Media } from '@payload-types'
+import { Blog } from '@payload-types'
 import Image from 'next/image'
 
 import BlogCardSkelton from '@/components/skelton/BlogCardSkelton'
@@ -22,7 +22,7 @@ const TagDetails: React.FC<TagDetailsProps> = ({
         blockType='Hero'
         title={tagDetails?.title}
         description={tagDetails?.description}
-        image={(tagDetails?.tagImage as Media)?.url as string}
+        image={tagDetails?.tagImage}
       />
       {isBlogsPending && <BlogCardSkelton />}
       {blogs?.length > 0 || isBlogsPending ? (
