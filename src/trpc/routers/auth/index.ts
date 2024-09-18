@@ -22,7 +22,7 @@ export const authRouter = router({
   signUp: publicProcedure
     .input(SignUpSchema)
     .mutation(async ({ input, ctx }) => {
-      const { firstName, lastName, email, password } = input
+      const { firstName, lastName, email, password, imageUrl } = input
       const name = `${firstName} ${lastName}`
 
       try {
@@ -66,6 +66,7 @@ export const authRouter = router({
             name,
             email,
             password,
+            imageUrl,
           },
           locale: undefined,
           fallbackLocale: undefined,
