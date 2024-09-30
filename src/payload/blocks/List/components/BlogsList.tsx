@@ -1,8 +1,9 @@
+import BlogPostCard, {
+  DirectionAwareHover,
+} from '../../PopularBlogs/components/BlogPostCard'
 import { Blog, Media } from '@payload-types'
 
 import { formatDate } from '@/utils/dateFormatter'
-
-import { BlogPostCard, DirectionAwareHover } from './BlogListItem'
 
 interface BlogsListProps {
   blogs: Blog[]
@@ -19,7 +20,7 @@ const BlogsList: React.FC<BlogsListProps> = ({ blogs }) => {
                 blog={blog as Blog}
                 blogImg={
                   <DirectionAwareHover
-                    imageUrl={(blog?.blog_image as Media)?.url || ''}>
+                    imageUrl={(blog?.blogImage as Media)?.url || ''}>
                     {/* <p className='text-md font-semibold'>
                     {readingTime(blog?.description_html)?.text}
                   </p> */}
@@ -28,7 +29,7 @@ const BlogsList: React.FC<BlogsListProps> = ({ blogs }) => {
                     </p>
                   </DirectionAwareHover>
                 }
-                className={`${blog?.select_blog_size === '2' ? 'md:col-span-2' : 'md:col-span-1'} group min-h-[100px]`}
+                className={`${blog?.selectBlogSize === '2' ? 'md:col-span-2' : 'md:col-span-1'} group min-h-[100px]`}
               />
             )
           })}

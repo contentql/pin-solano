@@ -73,7 +73,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
     <div className='profile-dropdown relative inline-block text-left'>
       <div onClick={handleImageClick}>
         <Image
-          src={user?.imageUrl as string}
+          src={user?.image!}
           alt='Profile'
           width={40}
           height={40}
@@ -110,7 +110,7 @@ const ProfileDropdown = ({ user }: { user: User }) => {
                 </Link>
               </div>
 
-              {user?.role === 'admin' && (
+              {user?.role?.includes('admin') && (
                 <div
                   className='flex rounded-md px-2 py-2 text-left font-semibold text-white hover:bg-[#e779c11a]'
                   onClick={() => {

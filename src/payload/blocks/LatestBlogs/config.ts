@@ -15,7 +15,7 @@ export const LatestBlogsConfig: Block = {
       required: true,
     },
     {
-      name: 'latest_blogs',
+      name: 'latestBlogs',
       type: 'relationship',
       relationTo: ['blogs'],
       label: 'Latest Blogs',

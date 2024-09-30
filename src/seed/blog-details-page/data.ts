@@ -14,7 +14,7 @@ export const blogDetailsPageData: BlogDetailsPageDataType = {
   layout: [
     {
       blockType: 'Details',
-      collection_slug: 'blogs',
+      collectionSlug: 'blogs',
     },
   ],
 }

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 
-import { AnimatedTooltip } from '@/payload/common/AnimatedTooltip'
+import { AnimatedTooltip } from '@/components/common/AnimatedTooltip'
 import { cn } from '@/utils/cn'
 import { getTagColors } from '@/utils/getColor'
 
@@ -21,7 +21,7 @@ const BlogPostCard = ({
   blogImg?: React.ReactNode
   icon?: React.ReactNode
 }) => {
-  const { slug, title, sub_title } = blog
+  const { slug, title, description } = blog
   return (
     <div
       className={cn(
@@ -58,7 +58,7 @@ const BlogPostCard = ({
           <Link
             href={`/blog/${blog?.slug}`}
             className='text-neutral-600 dark:text-neutral-300 line-clamp-3 font-sans text-sm font-normal'>
-            {sub_title}
+            {description}
           </Link>
         </div>
       </div>

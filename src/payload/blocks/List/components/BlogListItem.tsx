@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 
-import { AnimatedTooltip } from '@/payload/common/AnimatedTooltip'
+import { AnimatedTooltip } from '@/components/common/AnimatedTooltip'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
@@ -24,7 +24,7 @@ const BlogListItems: React.FC<{ blogsData: Blog[] }> = ({ blogsData }) => {
               blog={blog}
               blogImg={
                 <DirectionAwareHover
-                  imageUrl={(blog?.blog_image as Media)?.url || ''}>
+                  imageUrl={(blog?.blogImage as Media)?.url || ''}>
                   <p className='text-md font-semibold'>
                     {readingTime(slateHtml(blog?.content))?.text}
                   </p>
@@ -33,7 +33,7 @@ const BlogListItems: React.FC<{ blogsData: Blog[] }> = ({ blogsData }) => {
                   </p>
                 </DirectionAwareHover>
               }
-              className={`${blog?.select_blog_size === '2' ? 'md:col-span-2' : 'md:col-span-1'} group min-h-[100px]`}
+              className={`${blog?.selectBlogSize === '2' ? 'md:col-span-2' : 'md:col-span-1'} group min-h-[100px]`}
             />
           )
         })}
@@ -55,7 +55,7 @@ export const BlogPostCard = ({
   blogImg?: React.ReactNode
   icon?: React.ReactNode
 }) => {
-  const { slug, title, sub_title } = blog
+  const { slug, title, description } = blog
   return (
     <div
       className={cn(
@@ -92,7 +92,7 @@ export const BlogPostCard = ({
           <Link
             href={`/blog/${blog?.slug}`}
             className='text-neutral-600 dark:text-neutral-300 line-clamp-3 font-sans text-sm font-normal'>
-            {sub_title}
+            {description}
           </Link>
         </div>
       </div>

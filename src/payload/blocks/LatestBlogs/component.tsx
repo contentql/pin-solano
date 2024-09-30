@@ -3,18 +3,19 @@
 import BlogPostCard, {
   DirectionAwareHover,
 } from '../PopularBlogs/components/BlogPostCard'
+import BlogPreviewCard from '../common/components/BlogPreviewCard'
+import RecentPostCard from '../common/components/RecentPostCard'
+import { useResponsive } from '../common/hooks/useResponsive'
 import { Blog, LatestBlogsTypes, Media } from '@payload-types'
 import Link from 'next/link'
+import React from 'react'
 import Slider from 'react-slick'
 
 // import 'slick-carousel/slick/slick.css'
-import { useResponsive } from '@/hooks/useResponsive'
-import BlogPreviewCard from '@/payload/common/BlogPreviewCard'
-import RecentPostCard from '@/payload/common/RecentPostCard'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
-function LatestBlogs(latestBlogs: LatestBlogsTypes) {
+const LatestBlogs: React.FC<LatestBlogsTypes> = ({ ...block }) => {
   const readingTime = require('reading-time')
   const { isMobile } = useResponsive()
   const settings = {
@@ -28,20 +29,19 @@ function LatestBlogs(latestBlogs: LatestBlogsTypes) {
   }
   return (
     <section className='container px-2 py-20 text-white md:px-20'>
-      <h1 className='pb-4 text-3xl font-bold'>{latestBlogs?.title}</h1>
+      <h1 className='pb-4 text-3xl font-bold'>{block?.title}</h1>
       <div className='grid grid-cols-1 gap-x-4 gap-y-4  md:grid-cols-2  lg:grid-cols-4'>
         <div className='col-span-1 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-2'>
           <Slider {...settings}>
             {isMobile
-              ? latestBlogs?.latest_blogs?.map((blog, index) => (
+              ? block?.latestBlogs?.map((blog, index) => (
                   <BlogPostCard
                     key={index}
                     blog={blog?.value as Blog}
                     blogImg={
                       <DirectionAwareHover
                         imageUrl={
-                          ((blog?.value as Blog)?.blog_image as Media)?.url ||
-                          ''
+                          ((blog?.value as Blog)?.blogImage as Media)?.url || ''
                         }>
                         <p className='text-md font-semibold'>
                           {
@@ -58,14 +58,14 @@ function LatestBlogs(latestBlogs: LatestBlogsTypes) {
                     className='col-span-1 row-span-1'
                   />
                 ))
-              : latestBlogs?.latest_blogs?.map((blog, index) => (
+              : block?.latestBlogs?.map((blog, index) => (
                   <RecentPostCard key={index} blog={blog?.value as Blog} />
                 ))}
           </Slider>
         </div>
 
         {isMobile
-          ? latestBlogs?.latest_blogs?.slice(0, 4).map((blog, index) => (
+          ? block?.latestBlogs?.slice(0, 4).map((blog, index) => (
               <Link key={index} href={`/blog/${(blog?.value as Blog)?.slug}`}>
                 <BlogPostCard
                   key={index}
@@ -73,7 +73,7 @@ function LatestBlogs(latestBlogs: LatestBlogsTypes) {
                   blogImg={
                     <DirectionAwareHover
                       imageUrl={
-                        ((blog?.value as Blog)?.blog_image as Media)?.url || ''
+                        ((blog?.value as Blog)?.blogImage as Media)?.url || ''
                       }>
                       <p className='text-md font-semibold'>
                         {
@@ -90,7 +90,7 @@ function LatestBlogs(latestBlogs: LatestBlogsTypes) {
                 />
               </Link>
             ))
-          : latestBlogs?.latest_blogs
+          : block?.latestBlogs
               ?.slice(0, 4)
               ?.map((blog, index) => (
                 <BlogPreviewCard key={index} blog={blog?.value as Blog} />

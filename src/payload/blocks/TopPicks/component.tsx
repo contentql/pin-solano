@@ -3,33 +3,33 @@
 import BlogPostCard, {
   DirectionAwareHover,
 } from '../PopularBlogs/components/BlogPostCard'
+import AnimatedBlogCard from '../common/components/AnimatedBlogCard'
+import { useResponsive } from '../common/hooks/useResponsive'
 import { Blog, Media, TopPicksTypes } from '@payload-types'
 import Link from 'next/link'
 import React from 'react'
 
-import { useResponsive } from '@/hooks/useResponsive'
-import AnimatedBlogCard from '@/payload/common/AnimatedBlogCard'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
-const TopPicks: React.FC<TopPicksTypes> = TopPicks => {
+const TopPicks: React.FC<TopPicksTypes> = ({ ...block }) => {
   const { isMobile } = useResponsive()
   const readingTime = require('reading-time')
   return (
     <section className='container px-2 py-20 text-white md:px-20'>
       <h1 className='pb-4 text-4xl font-semibold leading-9 text-gray-50'>
-        {TopPicks?.title}
+        {block?.title}
       </h1>
       {isMobile ? (
         <div className='grid w-full grid-cols-1 gap-y-8 '>
-          {TopPicks?.top_picks?.map((blog, index) => (
+          {block?.topPicks?.map((blog, index) => (
             <BlogPostCard
               key={index}
               blog={blog?.value as Blog}
               blogImg={
                 <DirectionAwareHover
                   imageUrl={
-                    ((blog?.value as Blog)?.blog_image as Media)?.url || ''
+                    ((blog?.value as Blog)?.blogImage as Media)?.url || ''
                   }>
                   <p className='text-md font-semibold'>
                     {
@@ -48,10 +48,10 @@ const TopPicks: React.FC<TopPicksTypes> = TopPicks => {
         </div>
       ) : (
         <div className='grid w-full grid-cols-1  gap-y-8 md:grid-cols-2 md:gap-8  lg:grid-cols-3'>
-          {TopPicks?.top_picks?.map((blog, index) => (
+          {block?.topPicks?.map((blog, index) => (
             <div
               key={index}
-              className={`${(blog?.value as Blog)?.select_blog_size === '2' ? 'col-span-2' : 'col-span-1'}`}>
+              className={`${(blog?.value as Blog)?.selectBlogSize === '2' ? 'col-span-2' : 'col-span-1'}`}>
               <Link href={`/blog/${(blog?.value as Blog)?.slug}`}>
                 <AnimatedBlogCard
                   blogData={blog?.value as Blog}

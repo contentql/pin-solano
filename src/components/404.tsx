@@ -311,7 +311,7 @@ export function PageNotFound() {
             <>
               <div className='absolute left-0 top-0 w-full'>
                 <div className='h-1.5 w-full overflow-hidden bg-pink-100'>
-                  <div className='h-full w-full origin-left-right animate-progress bg-[#45a6e9]'></div>
+                  <div className='origin-left-right animate-progress h-full w-full bg-[#45a6e9]'></div>
                 </div>
               </div>
               <motion.div

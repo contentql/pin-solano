@@ -15,13 +15,13 @@ export const PopularBlogsConfig: Block = {
       required: true,
     },
     {
-      name: 'sub_title',
+      name: 'subTitle',
       type: 'textarea',
       label: 'Sub Title',
       required: true,
     },
     {
-      name: 'popular_blogs',
+      name: 'popularBlogs',
       type: 'relationship',
       relationTo: ['blogs'],
       label: 'Popular Blogs',

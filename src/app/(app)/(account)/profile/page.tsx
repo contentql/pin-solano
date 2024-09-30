@@ -1,16 +1,15 @@
-import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { User } from '@payload-types'
+import { NextPage } from 'next'
 
-import ProfileView from '@/components/auth/profile'
-import { getCurrentUser } from '@/utils/getCurrentUser'
+import { ProfileView } from '@/components/account/profile'
+import withAuth from '@/utils/withAuth'
 
-const ProfilePage = async () => {
-  const headersList = headers()
-  const user = await getCurrentUser(headersList)
+interface PageProps {
+  user: User
+}
 
-  if (!user) return redirect('/sign-in')
-
+const ProfilePage: NextPage<PageProps> = async ({ user }) => {
   return <ProfileView initialUser={user} />
 }
 
-export default ProfilePage
+export default withAuth(ProfilePage)

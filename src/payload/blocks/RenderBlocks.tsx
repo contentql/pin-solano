@@ -31,7 +31,6 @@ const RenderBlocks: React.FC<RenderBlocksProps> = ({
   const { data: livePreviewData } = useLivePreview<Page | undefined>({
     initialData: undefined,
     serverURL: env.NEXT_PUBLIC_PUBLIC_URL,
-    depth: 2,
   })
 
   // Determine which data to use based on whether live preview data is available

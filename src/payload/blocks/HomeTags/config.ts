@@ -2,7 +2,7 @@ import { Block } from 'payload'
 
 export const HomeTagsConfig: Block = {
   slug: 'HomeTags',
-  interfaceName: 'TagsType',
+  interfaceName: 'HomeTagsType',
   labels: {
     singular: 'Tags Block',
     plural: 'Tags Blocks',
@@ -15,7 +15,7 @@ export const HomeTagsConfig: Block = {
       required: true,
     },
     {
-      name: 'sub_title',
+      name: 'subTitle',
       label: 'Sub Title',
       type: 'text',
       required: true,

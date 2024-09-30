@@ -1,4 +1,3 @@
-//@ts-nocheck
 import configPromise from '@payload-config'
 import { SiteSetting } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
@@ -11,54 +10,75 @@ const payload = await getPayloadHMR({ config: configPromise })
 
 const seed = async (): Promise<SiteSetting> => {
   try {
-    const headerLogoImageResult = await payload.create({
+    const logoImageResult = await payload.create({
       collection: 'media',
       data: {
-        alt: siteSettingsImageData?.header.alt,
+        alt: siteSettingsImageData?.alt,
       },
-      filePath: siteSettingsImageData?.header.filePath,
+      filePath: siteSettingsImageData?.filePath,
     })
 
-    const footerLogoImageResult = await payload.create({
-      collection: 'media',
-      data: {
-        alt: siteSettingsImageData?.footer.alt,
-      },
-      filePath: siteSettingsImageData?.footer.filePath,
-    })
     const { docs: pages } = await payload.find({
       collection: 'pages',
+      where: {
+        slug: {
+          in: ['blogs', 'authors', 'tags'],
+        },
+      },
     })
 
-    const filteredPages = pages.filter(
-      page =>
-        page.slug === 'blogs' ||
-        page.slug === 'authors' ||
-        page.slug === 'tags',
-    )
+    console.log('Pages: ', pages)
 
     const formattedSiteSettingsData: SiteSettingType = {
       ...siteSettingsData,
-      header: {
-        ...siteSettingsData?.header,
-        logo_image: headerLogoImageResult?.id,
-        menuItems: filteredPages?.map(page => {
+      general: {
+        ...siteSettingsData.general,
+        faviconUrl: logoImageResult?.id,
+        ogImageUrl: logoImageResult?.id,
+      },
+      navbar: {
+        ...siteSettingsData.navbar,
+        logo: {
+          ...siteSettingsData.navbar.logo,
+          imageUrl: logoImageResult?.id,
+        },
+        menuLinks: siteSettingsData.navbar.menuLinks?.map((page, index) => {
+          const currentPage = pages?.at(index)
+
           return {
-            page: {
-              relationTo: 'pages',
-              value: page?.id,
+            ...page,
+            menuLink: {
+              ...page.menuLink,
+              label: currentPage?.title || '',
+              page: currentPage
+                ? {
+                    relationTo: 'pages',
+                    value: currentPage.id,
+                  }
+                : undefined,
             },
           }
         }),
       },
       footer: {
-        ...siteSettingsData?.footer,
-        logo_image: footerLogoImageResult?.id,
-        menuItems: filteredPages?.map(page => {
+        ...siteSettingsData.footer,
+        logo: {
+          ...siteSettingsData.footer.logo,
+          imageUrl: logoImageResult?.id,
+        },
+        footerLinks: siteSettingsData.footer.footerLinks?.map((page, index) => {
+          const currentPage = pages?.at(index)
           return {
-            page: {
-              relationTo: 'pages',
-              value: page?.id,
+            ...page,
+            menuLink: {
+              ...page.menuLink,
+              label: currentPage?.title || '',
+              page: currentPage
+                ? {
+                    relationTo: 'pages',
+                    value: currentPage.id,
+                  }
+                : undefined,
             },
           }
         }),
@@ -66,7 +86,7 @@ const seed = async (): Promise<SiteSetting> => {
     }
 
     const result = await payload.updateGlobal({
-      data: formattedSiteSettingsData as SiteSettingType,
+      data: formattedSiteSettingsData,
       slug: 'site-settings',
     })
 

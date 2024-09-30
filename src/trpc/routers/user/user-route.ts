@@ -28,7 +28,7 @@ export const userRouter = router({
           collection: COLLECTION_SLUG_USER,
           id: user.id,
           data: {
-            imageUrl: imageUrl,
+            image: imageUrl,
           },
         })
 

@@ -1,5 +1,7 @@
 'use client'
 
+import { AnimatedTooltip } from '../../common/components/AnimatedTooltip'
+import TagsCard from '../../common/components/tagsCard'
 import { env } from '@env'
 import { Blog, Media, Tag } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
@@ -9,8 +11,6 @@ import DOMPurify from 'isomorphic-dompurify'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 
-import TagsCard from '@/components/common/tagsCard'
-import { AnimatedTooltip } from '@/payload/common/AnimatedTooltip'
 import { trpc } from '@/trpc/client'
 
 interface Tags extends Tag {
@@ -82,10 +82,10 @@ export const BlogPostContent = ({ blog }: { blog: Blog }) => {
                 <span>{dataToUse?.title}</span>
               </h2>
 
-              {dataToUse?.blog_image && (
+              {dataToUse?.blogImage && (
                 <Image
-                  src={(dataToUse?.blog_image as Media)?.url || ''}
-                  alt={(dataToUse?.blog_image as Media)?.alt || ''}
+                  src={(dataToUse?.blogImage as Media)?.url || ''}
+                  alt={(dataToUse?.blogImage as Media)?.alt || ''}
                   height='1000'
                   width='1030'
                   className='mx-auto mb-10 rounded-lg'
@@ -93,7 +93,7 @@ export const BlogPostContent = ({ blog }: { blog: Blog }) => {
               )}
               <div className='scroll-reveal'>
                 <p>
-                  <span>{dataToUse?.sub_title}</span>
+                  <span>{dataToUse?.description}</span>
                 </p>
               </div>
             </div>

@@ -60,7 +60,7 @@ export const authorRouter = router({
 
         const blogsRelatedWithAuthor = blogs.filter(blog =>
           blog.author?.find(
-            blogAuthor => (blogAuthor.value as User).name === authorName,
+            blogAuthor => (blogAuthor.value as User).username === authorName,
           ),
         )
 
@@ -84,7 +84,7 @@ export const authorRouter = router({
           collection: 'users',
           draft: false,
           where: {
-            name: {
+            username: {
               equals: authorName,
             },
           },
@@ -109,7 +109,7 @@ export const authorRouter = router({
           collection: 'users',
           draft: false,
           where: {
-            name: {
+            username: {
               equals: authorName,
             },
           },
@@ -128,11 +128,11 @@ export const authorRouter = router({
             title: (tag?.value as Tag)?.title,
             description: (tag?.value as Tag)?.description,
             slug: (tag?.value as Tag)?.slug,
-            image: (tag?.value as Tag)?.tagImage,
+            tagImage: (tag?.value as Tag)?.tagImage,
           })),
         )
         const getUniqueKey = (tag: any) =>
-          `${tag.title}-${tag.slug}-${tag.image}-${tag.description}`
+          `${tag.title}-${tag.slug}-${tag.tagImage}-${tag.description}`
 
         const uniqueTemp =
           temp &&
@@ -159,7 +159,7 @@ export const authorRouter = router({
           collection: 'users',
           draft: false,
           where: {
-            name: {
+            username: {
               equals: authorName,
             },
           },

@@ -1,19 +1,18 @@
-import { SidebarView } from '../common/Sidebar'
-import { User } from '@payload-types'
+'use client'
 
-import ProfileForm from './ProfileForm'
+import { trpc } from '@/trpc/client'
 
-interface Props {
-  user: User
-}
+import LeftSideMenu from './LeftSideMenu'
+import RightSideContent from './RightSideMenu'
 
-const ProfileView: React.FC<Props> = ({ user }) => {
+const ProfileView = ({ initialUser }: { initialUser: any }) => {
+  const { data: user } = trpc.user.getUser.useQuery(undefined, {
+    initialData: initialUser,
+  })
   return (
-    <div className='flex w-full flex-col gap-5 bg-base-100  px-3 md:flex-row md:px-16 lg:px-28'>
-      <SidebarView user={user} />
-      <main className='min-h-screen w-full py-1'>
-        <ProfileForm user={user} />
-      </main>
+    <div className='flex w-full flex-col gap-5 bg-transparent px-3 py-20 md:flex-row md:px-16 lg:px-28'>
+      <LeftSideMenu />
+      <RightSideContent user={user} />
     </div>
   )
 }

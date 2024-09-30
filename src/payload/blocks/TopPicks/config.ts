@@ -15,7 +15,7 @@ export const TopPicksConfig: Block = {
       required: true,
     },
     {
-      name: 'top_picks',
+      name: 'topPicks',
       type: 'relationship',
       relationTo: ['blogs'],
       label: 'Top Picked Blogs',

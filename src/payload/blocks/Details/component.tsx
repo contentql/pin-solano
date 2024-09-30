@@ -18,7 +18,7 @@ interface DetailsProps extends DetailsType {
 
 const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
   const searchParams = useSearchParams()
-  switch (block?.collection_slug) {
+  switch (block?.collectionSlug) {
     case 'blogs': {
       const { data: blog, isPending: isBlogPending } =
         trpc.blog.getBlogBySlug.useQuery({

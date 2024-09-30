@@ -1,133 +1,92 @@
-// import { payloadCloud } from '@payloadcms/plugin-cloud'
+import { collectionSlug, cqlConfig } from '@contentql/core'
 import { env } from '@env'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { resendAdapter } from '@payloadcms/email-resend'
-import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
-import { seoPlugin } from '@payloadcms/plugin-seo'
-import { slateEditor } from '@payloadcms/richtext-slate'
-import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
-import { buildConfig } from 'payload'
-import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
-import { Blogs } from '@/payload/collections/Blogs'
-import { Media } from '@/payload/collections/Media'
-import { Pages } from '@/payload/collections/Pages'
-import { Tags } from '@/payload/collections/Tags'
-import { Users } from '@/payload/collections/Users'
-import { COLLECTION_SLUG_PAGE } from '@/payload/collections/constants'
-import { siteSettings } from '@/payload/globals/SiteSettings'
-import { scheduleDocPublish } from '@/plugins/schedule-doc-publish'
-import { generateBreadcrumbsUrl } from '@/utils/generateBreadcrumbsUrl'
-import {
-  generateDescription,
-  generateImage,
-  generateTitle,
-  generateURL,
-} from '@/utils/seo'
+import { blocks } from '@/payload/blocks/index'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-export default buildConfig({
+export default cqlConfig({
   admin: {
-    user: Users.slug,
-    meta: {
-      titleSuffix: '- ContentQL',
-      // favicon: '/images/favicon.ico',
-      // defaultOGImage: '/images/favicon.ico',
-    },
     components: {
       graphics: {
         Logo: '/src/payload/style/icons/Logo.tsx',
         Icon: '/src/payload/style/icons/Icon.tsx',
       },
     },
-    livePreview: {
-      url: ({ data, collectionConfig, locale }) => {
-        const baseUrl = env.PAYLOAD_URL
-
-        return `${baseUrl}/${data.path}${locale ? `?locale=${locale.code}` : ''}`
-      },
-
-      collections: ['pages', 'blogs'],
-
-      breakpoints: [
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-        {
-          label: 'Tablet',
-          name: 'tablet',
-          width: 768,
-          height: 1024,
-        },
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 900,
-        },
-      ],
-    },
   },
   cors: [env.PAYLOAD_URL],
   csrf: [env.PAYLOAD_URL],
-  collections: [Users, Media, Tags, Blogs, Pages],
-  globals: [siteSettings],
-  plugins: [
-    nestedDocsPlugin({
-      collections: [COLLECTION_SLUG_PAGE],
-      generateURL: generateBreadcrumbsUrl,
-    }),
-    s3Storage({
-      collections: {
-        ['media']: true,
-      },
-      bucket: env.S3_BUCKET,
-      config: {
-        endpoint: env.S3_ENDPOINT,
-        credentials: {
-          accessKeyId: env.S3_ACCESS_KEY_ID,
-          secretAccessKey: env.S3_SECRET_ACCESS_KEY,
-        },
-        region: env.S3_REGION,
-      },
-    }),
-    seoPlugin({
-      collections: ['blogs'],
-      uploadsCollection: 'media',
-      tabbedUI: true,
-      generateTitle,
-      generateDescription,
-      generateImage,
-      generateURL,
-    }),
-    scheduleDocPublish({
-      enabled: true,
-      collections: ['blogs'],
-      position: 'sidebar',
-    }),
-  ],
 
-  email: resendAdapter({
-    defaultFromAddress: env.RESEND_SENDER_EMAIL,
-    defaultFromName: env.RESEND_SENDER_NAME,
-    apiKey: env.RESEND_API_KEY,
-  }),
-
-  sharp,
-  editor: slateEditor({}),
+  baseURL: env.PAYLOAD_URL,
 
   secret: env.PAYLOAD_SECRET,
-  db: mongooseAdapter({
-    url: env.DATABASE_URI,
-  }),
+  dbURL: env.DATABASE_URI,
+
+  s3: {
+    accessKeyId: env.S3_ACCESS_KEY_ID,
+    bucket: env.S3_BUCKET,
+    endpoint: env.S3_ENDPOINT,
+    region: env.S3_REGION,
+    secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+  },
+
+  resend: {
+    apiKey: env.RESEND_API_KEY,
+    defaultFromAddress: env.RESEND_SENDER_EMAIL,
+    defaultFromName: env.RESEND_SENDER_NAME,
+  },
+
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+
+  blocks,
+  collections: [
+    {
+      slug: collectionSlug.blogs,
+      fields: [
+        {
+          name: 'selectBlogSize',
+          type: 'select',
+          admin: {
+            isClearable: true,
+            isSortable: true, // use mouse to drag and drop different values, and sort them according to your choice
+          },
+          defaultValue: '1',
+          options: [
+            {
+              label: 'One',
+              value: '1',
+            },
+            {
+              label: 'Two',
+              value: '2',
+            },
+            // {
+            //   label: 'Three',
+            //   value: '3',
+            // },
+          ],
+        },
+      ],
+    },
+    {
+      slug: collectionSlug.users,
+      fields: [
+        {
+          name: 'bio',
+          label: 'Bio',
+          type: 'text',
+        },
+        {
+          name: 'image',
+          label: 'Image',
+          type: 'text',
+        },
+      ],
+    },
+  ],
 })
