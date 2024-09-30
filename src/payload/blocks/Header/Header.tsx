@@ -21,14 +21,12 @@ export const MenuItem = ({
   setActive,
   active,
   item,
-  path,
   index,
   children,
 }: {
   setActive: (item: string) => void
   active: string | null
   item: string
-  path: string
   index: number
   children?: React.ReactNode
 }) => {
@@ -42,11 +40,11 @@ export const MenuItem = ({
       }}
       onMouseLeave={() => setHoveredIndex(null)}
       className='relative '>
-      <motion.p
+      <motion.div
         transition={{ duration: 0.3 }}
         className='cursor-pointer p-[10px] text-black hover:opacity-[0.9] dark:text-white'>
-        <Link href={path}>{item}</Link>
-      </motion.p>
+        <div>{item}</div>
+      </motion.div>
       <AnimatePresence>
         {hoveredIndex === index && (
           <motion.span
@@ -139,23 +137,16 @@ export const ProductItem = ({
 
 export const HoveredLink = ({
   href,
-  icon,
   title,
-  description,
+  target,
   index,
 }: {
   href: string
-  icon: HiIconKeys
   title: string
-  description: string
+  target: boolean
   index: number
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const IconComponent = HiIcons[icon] as any
-  if (!IconComponent) {
-    console.error(`Icon ${icon} does not exist in react-icons/hi2`)
-    return null
-  }
 
   return (
     <Link
@@ -180,24 +171,24 @@ export const HoveredLink = ({
           />
         )}
       </AnimatePresence>
-      <IconComponent size={'40px'} style={{ color: 'purple' }} />
-      <div className='pl-4'>
-        <h4 className='text-xl font-bold  text-black dark:text-white'>
-          {title}
-        </h4>
-        <p className='text-neutral-700 dark:text-neutral-300 line-clamp-2 max-w-[14rem] text-sm'>
-          {description}
-        </p>
-      </div>
+
+      <Link
+        target={`${target ? '_blank' : '_self'}`}
+        href={href}
+        className='text-xl font-bold  text-black dark:text-white'>
+        {title}
+      </Link>
     </Link>
   )
 }
 
 export const SingleLink = ({
+  target,
   index,
   item,
   path,
 }: {
+  target: boolean
   index: number
   item: string
   path: string
@@ -205,6 +196,7 @@ export const SingleLink = ({
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
     <Link
+      target={`${target ? '_blank' : '_self'}`}
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
       className='relative cursor-pointer px-5 py-2 text-black hover:opacity-[0.9] dark:text-white'

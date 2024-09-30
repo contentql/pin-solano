@@ -1,4 +1,4 @@
-const ServerError = () => {
+const ServerError: React.FC = () => {
   return (
     <section className='flex min-h-screen items-center justify-center bg-white dark:bg-gray-900'>
       <div className='mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16'>

@@ -12,7 +12,7 @@ const seed = async (): Promise<(string | User)[]> => {
     const formattedAuthorsData = authorsData.map((author, idx) => {
       return {
         ...author,
-        imageUrl: `${env.PAYLOAD_URL}${authorImageData?.at(idx)?.filePath}`,
+        image: `${env.PAYLOAD_URL}${authorImageData?.at(idx)?.filePath}`,
       }
     })
     // console.log('author', formattedAuthorsData)

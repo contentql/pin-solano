@@ -42,10 +42,11 @@ export const generateBreadcrumbsUrl = (docs: any[], lastDoc: any): string => {
   //     )
   //   : ''
 
+  const parentDoc = docs.find(doc => doc.id === lastDoc.parent)
+
   // ! Just find its parent path if it has a parent
-  const parentPath = lastDoc?.parent
-    ? docs.find(doc => doc.id === lastDoc.parent).path
-    : ''
+  const parentPath =
+    lastDoc?.parent && parentDoc?.path !== '/' ? parentDoc.path : ''
 
   const slug = lastDoc?.isDynamic ? `[${lastDoc?.slug}]` : `${lastDoc?.slug}`
 

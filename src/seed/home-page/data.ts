@@ -8,9 +8,9 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
     {
       headline: 'Bring Your',
       subHeadline: 'Dream into Reality',
-      sub_title:
+      subTitle:
         'We increase revenue and maintain sustainable growth of your business through powerful website of next js',
-      tag_title: 'Popular Tags',
+      tagTitle: 'Popular Tags',
       buttons: [
         {
           button: 'Book a Meeting',
@@ -27,9 +27,9 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
     },
     {
       title: 'Popular Blogs',
-      sub_title:
+      subTitle:
         'Discover the most influential blogs across various categories like technology, lifestyle, travel, food, fashion, and personal finance. ',
-      popular_blogs: [
+      popularBlogs: [
         {
           relationTo: 'blogs',
           value: '',
@@ -59,7 +59,7 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
     },
     {
       title: 'Latest Blogs',
-      latest_blogs: [
+      latestBlogs: [
         {
           relationTo: 'blogs',
           value: '',
@@ -85,7 +85,7 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
     },
     {
       title: 'Top Picks',
-      top_picks: [
+      topPicks: [
         {
           relationTo: 'blogs',
           value: '',
@@ -104,7 +104,7 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
 
     {
       title: 'Tags',
-      sub_title: 'Bridging Content with Concise Labels',
+      subTitle: 'Bridging Content with Concise Labels',
       tags: [
         {
           relationTo: 'tags',

@@ -15,7 +15,7 @@ export const individualTagPageData: RequiredDataFromCollectionSlug<'pages'> = {
   layout: [
     {
       blockType: 'Details',
-      collection_slug: 'tags',
+      collectionSlug: 'tags',
     },
   ],
 }

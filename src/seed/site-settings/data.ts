@@ -4,63 +4,102 @@ import { SiteSetting } from 'payload-types'
 export type siteSettingsDataType = Omit<SiteSetting, 'id'>
 
 export type ImageType = {
-  header: {
-    alt: string
-    filePath: string
-  }
-  footer: {
-    alt: string
-    filePath: string
-  }
+  alt: string
+  filePath: string
 }
 
 export const siteSettingsData: siteSettingsDataType = {
-  appName: 'Solano Theme',
-  appDescription: 'Theme created by contentQL team.',
-
-  header: {
-    primary_button_text: 'sign-in',
-    primary_button_path: '/sign-in',
-    secondary_button_text: 'sign-up',
-    secondary_button_path: '/sign-up',
-    logo_image: '',
-    menuItems: [
+  general: {
+    title: 'Solano',
+    description: 'Theme created by contentQL team.',
+    faviconUrl: '',
+    ogImageUrl: '',
+  },
+  navbar: {
+    logo: {
+      imageUrl: '',
+    },
+    menuLinks: [
       {
-        page: { relationTo: 'pages', value: '' },
+        group: false,
+        menuLink: {
+          type: 'reference',
+          label: '',
+          page: {
+            relationTo: 'pages',
+            value: '',
+          },
+        },
       },
       {
-        page: { relationTo: 'pages', value: '' },
+        group: false,
+        menuLink: {
+          type: 'reference',
+          label: '',
+          page: {
+            relationTo: 'pages',
+            value: '',
+          },
+        },
       },
       {
-        page: { relationTo: 'pages', value: '' },
+        group: false,
+        menuLink: {
+          type: 'reference',
+          label: '',
+          page: {
+            relationTo: 'pages',
+            value: '',
+          },
+        },
       },
     ],
   },
   footer: {
-    logo_image: '',
-    copyright: '@2025 All rights reserved',
-    logo: 'ContentQL',
-    menuItems: [
-      { page: { relationTo: 'pages', value: '' } },
-      { page: { relationTo: 'pages', value: '' } },
-      { page: { relationTo: 'pages', value: '' } },
+    logo: {
+      imageUrl: '',
+    },
+    footerLinks: [
+      {
+        group: false,
+        menuLink: {
+          type: 'reference',
+          label: '',
+          page: {
+            relationTo: 'pages',
+            value: '',
+          },
+        },
+      },
+      {
+        group: false,
+        menuLink: {
+          type: 'reference',
+          label: '',
+          page: {
+            relationTo: 'pages',
+            value: '',
+          },
+        },
+      },
+      {
+        group: false,
+        menuLink: {
+          type: 'reference',
+          label: '',
+          page: {
+            relationTo: 'pages',
+            value: '',
+          },
+        },
+      },
     ],
+    socialLinks: [],
+    copyright: '@2025 All rights reserved',
   },
 }
 
 export const siteSettingsImageData: ImageType = {
-  header: {
-    alt: 'header logo',
-    filePath: path.join(
-      process.cwd(),
-      '/public/images/seed/contentql-logo.webp',
-    ),
-  },
-  footer: {
-    alt: 'footer',
-    filePath: path.join(
-      process.cwd(),
-      '/public/images/seed/contentql-logo.webp',
-    ),
-  },
+  alt: 'logo',
+  filePath: path.join(process.cwd(), '/public/favicon.ico'),
 }

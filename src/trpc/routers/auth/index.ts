@@ -23,7 +23,7 @@ export const authRouter = router({
     .input(SignUpSchema)
     .mutation(async ({ input, ctx }) => {
       const { firstName, lastName, email, password, imageUrl } = input
-      const name = `${firstName} ${lastName}`
+      const username = `${firstName} ${lastName}`
 
       try {
         // Check if email already exists
@@ -47,8 +47,8 @@ export const authRouter = router({
         const nameExists = await payload.find({
           collection: 'users',
           where: {
-            name: {
-              equals: name,
+            username: {
+              equals: username,
             },
           },
         })
@@ -56,17 +56,25 @@ export const authRouter = router({
         if (nameExists.totalDocs > 0) {
           throw new TRPCError({
             code: 'CONFLICT',
-            message: `${name} already exists`,
+            message: `${username} already exists`,
           })
         }
+
+        //Check users count
+        const usersCount = await payload.count({
+          collection: 'users',
+        })
+        const userRole = usersCount?.totalDocs === 0 ? 'admin' : 'user'
 
         const result = await payload.create({
           collection: 'users',
           data: {
-            name,
+            displayName: username,
+            username,
             email,
             password,
-            imageUrl,
+            image: imageUrl,
+            role: [userRole],
           },
           locale: undefined,
           fallbackLocale: undefined,
@@ -171,8 +179,8 @@ export const authRouter = router({
 
         const user = users.at(0)
 
-        if (env.RESEND_SENDER_EMAIL && user?.name) {
-          await sendResetPasswordEmail(email, user?.name, token)
+        if (env.RESEND_SENDER_EMAIL && user?.username) {
+          await sendResetPasswordEmail(email, user?.username, token)
         }
 
         return { success: true, token }

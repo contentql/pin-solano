@@ -1,7 +1,6 @@
 import { BlogPostContent } from '../../List/components/BlogPostContent'
+import { HorizontalScrollCarousel } from '../../common/components/HorizontalScrollCarousel'
 import { Blog } from '@payload-types'
-
-import { HorizontalScrollCarousel } from '@/payload/common/HorizontalScrollCarousel'
 
 interface BlogPostDetailsProp {
   blog: Blog

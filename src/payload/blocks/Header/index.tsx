@@ -1,5 +1,6 @@
 'use client'
 
+import useReadingProgress from '../common/hooks/useReadingProgress'
 import { Media, Page, SiteSetting, User } from '@payload-types'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,20 +8,17 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
-import useReadingProgress from '@/hooks/useReadingProgress'
 import { trpc } from '@/trpc/client'
 import { cn } from '@/utils/cn'
 
 import { HoveredLink, Menu, MenuItem, SingleLink } from './Header'
 import ProfileDropdown from './dropdown'
 
-type Header = keyof SiteSetting['header']
-
 export function Navbar({ initData }: { initData: SiteSetting }) {
   const { data: user } = trpc.user.getUser.useQuery()
   const { data = initData } = trpc.siteSettings.getSiteSettings.useQuery()
 
-  if (!data?.header?.menuItems?.length) return null
+  if (!data?.navbar?.menuLinks?.length) return null
 
   return (
     <div className='relative flex w-full items-center justify-center'>
@@ -102,10 +100,9 @@ function NavbarMenu({
         <div>
           <Link href={'/'}>
             <Image
-              src={(data?.header?.logo_image as Media)?.url || ''}
-              className='h-12 w-12'
-              width={80}
-              height={40}
+              src={(data?.navbar?.logo?.imageUrl as Media)?.url || ''}
+              width={data?.navbar?.logo?.width || 48}
+              height={data?.navbar?.logo?.height || 48}
               alt='Logo'
             />
           </Link>
@@ -118,49 +115,58 @@ function NavbarMenu({
                 backgroundColor: linksColor,
                 transition: 'all 1s',
               }}>
-              {data?.header?.menuItems?.map((menuItem, index) => {
-                if (menuItem?.subMenuItems?.length! <= 0) {
-                  return (
-                    <SingleLink
-                      index={index}
-                      key={index}
-                      path={(menuItem?.page?.value as Page)?.path || ''}
-                      item={(menuItem?.page?.value as Page)?.title || ''}
-                    />
-                  )
-                }
-                if (menuItem?.subMenuItems?.length! > 0) {
-                  return (
-                    <MenuItem
-                      key={index}
-                      index={index}
-                      setActive={setActive}
-                      active={active}
-                      item={(menuItem?.page?.value as Page)?.title as string}
-                      path={(menuItem?.page?.value as Page)?.path || ''}>
-                      <div className='flex flex-col text-sm'>
-                        {menuItem?.subMenuItems?.map(
-                          (submenuItem, subIndex) => {
-                            return (
-                              <HoveredLink
-                                key={index}
-                                href={
-                                  (submenuItem?.page?.value as Page)?.path || ''
-                                }
-                                index={subIndex}
-                                title={
-                                  (submenuItem?.page?.value as Page)?.slug!
-                                }
-                                icon={submenuItem?.icon || 'HiFolderMinus'}
-                                description={submenuItem?.description!}
-                              />
-                            )
-                          },
-                        )}
-                      </div>
-                    </MenuItem>
-                  )
-                }
+              {data?.navbar?.menuLinks?.map((menuItem, index) => {
+                return menuItem?.group ? (
+                  <MenuItem
+                    key={index}
+                    index={index}
+                    setActive={setActive}
+                    active={active}
+                    item={menuItem?.menuLinkGroup?.groupTitle!}>
+                    <div className='flex flex-col text-sm'>
+                      {menuItem?.menuLinkGroup?.groupLinks?.map(
+                        (submenuItem, subIndex) =>
+                          submenuItem?.type === 'reference' ? (
+                            <HoveredLink
+                              target={submenuItem?.newTab!}
+                              key={subIndex}
+                              href={
+                                (submenuItem?.page?.value as Page)?.path || '/'
+                              }
+                              index={subIndex}
+                              title={submenuItem?.label}
+                            />
+                          ) : (
+                            <HoveredLink
+                              target={submenuItem?.newTab!}
+                              key={subIndex}
+                              href={submenuItem?.url || '/'}
+                              index={subIndex}
+                              title={submenuItem?.label}
+                            />
+                          ),
+                      )}
+                    </div>
+                  </MenuItem>
+                ) : menuItem?.menuLink?.type === 'reference' ? (
+                  <SingleLink
+                    target={menuItem?.menuLink?.newTab!}
+                    index={index}
+                    key={index}
+                    path={
+                      (menuItem?.menuLink?.page?.value as Page)?.path || '/'
+                    }
+                    item={menuItem?.menuLink?.label || ''}
+                  />
+                ) : (
+                  <SingleLink
+                    target={menuItem?.menuLink?.newTab!}
+                    index={index}
+                    key={index}
+                    path={menuItem?.menuLink?.url || '/'}
+                    item={menuItem?.menuLink?.label || ''}
+                  />
+                )
               })}
             </div>
           </Menu>
@@ -172,13 +178,13 @@ function NavbarMenu({
             <>
               <a
                 className='hidden cursor-pointer items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex'
-                href={data?.header?.primary_button_path!}>
-                {data?.header?.primary_button_text}
+                href='/sign-in'>
+                Sign-In
               </a>
               <a
                 className='inline-flex cursor-pointer items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold capitalize text-white shadow-sm transition-all duration-300 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-                href={data?.header?.secondary_button_path!}>
-                {data?.header?.secondary_button_text}
+                href='/sign-up'>
+                Sign-Up
               </a>
             </>
           )}
@@ -216,14 +222,14 @@ function NavbarMenu({
         }}
         id='navbar-multi-level'>
         <ul className=' flex flex-col bg-gray-50 p-4 font-medium dark:bg-[#1e2846] md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900 rtl:space-x-reverse'>
-          {data?.header?.menuItems?.map((menuItem, index) => {
-            return menuItem?.subMenuItems?.length! >= 1 ? (
+          {data?.navbar?.menuLinks?.map((menuItem, index) => {
+            return menuItem?.group ? (
               <li key={index}>
                 <button
                   id='dropdownNavbarLink'
                   onClick={() => toggleDropdown(index)}
                   className='flex w-full items-center justify-between px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:focus:text-white md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'>
-                  {(menuItem?.page?.value as Page)?.title}{' '}
+                  {menuItem?.menuLinkGroup?.groupTitle}
                   {dropdownOpen === index ? (
                     <IoIosArrowUp />
                   ) : (
@@ -236,65 +242,52 @@ function NavbarMenu({
                   <ul
                     className='text-md w-full py-2 text-gray-700 dark:text-gray-200'
                     aria-labelledby='dropdownLargeButton'>
-                    {menuItem?.subMenuItems?.map((subMenu, subIndex) => {
-                      return subMenu?.subMenuItems?.length! >= 1 ? (
-                        <li key={subIndex} aria-labelledby='dropdownNavbarLink'>
-                          <button
-                            id='doubleDropdownButton'
-                            onClick={() => toggleDoubleDropdown(subIndex)}
-                            type='button'
-                            className='flex w-full items-center justify-between px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
-                            {(subMenu?.page?.value as Page)?.title}
-                            {doubleDropdownOpen === subIndex ? (
-                              <IoIosArrowUp />
-                            ) : (
-                              <IoIosArrowDown />
-                            )}
-                          </button>
-                          <div
-                            className={`z-10 ${doubleDropdownOpen === subIndex ? 'block' : 'hidden'} w-full divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700`}
-                            id='doubleDropdown'>
-                            <ul
-                              className='text-md py-2 text-gray-700 dark:text-gray-200'
-                              aria-labelledby='doubleDropdownButton'>
-                              {subMenu?.subMenuItems?.map(
-                                (nestedMenu, nestedIndex) => (
-                                  <li key={nestedIndex}>
-                                    <a
-                                      href={
-                                        (nestedMenu?.page?.value as Page)
-                                          ?.path || '#'
-                                      }
-                                      className='block px-4 py-2 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white'>
-                                      {(nestedMenu?.page?.value as Page)
-                                        ?.title || '#'}
-                                    </a>
-                                  </li>
-                                ),
-                              )}
-                            </ul>
-                          </div>
-                        </li>
-                      ) : (
-                        <li key={subIndex}>
-                          <a
-                            href={(subMenu?.page?.value as Page)?.path || '#'}
-                            className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
-                            {(subMenu?.page?.value as Page)?.title}
-                          </a>
-                        </li>
-                      )
-                    })}
+                    {menuItem?.menuLinkGroup?.groupLinks?.map(
+                      (groupLink, subIndex) => {
+                        return groupLink?.type === 'reference' ? (
+                          <li key={subIndex}>
+                            <a
+                              target={`${groupLink?.newTab ? '_blank' : '_self'}`}
+                              href={
+                                (groupLink?.page?.value as Page)?.path || '/'
+                              }
+                              className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
+                              {groupLink?.label}
+                            </a>
+                          </li>
+                        ) : (
+                          <li key={subIndex}>
+                            <a
+                              target={`${groupLink?.newTab ? '_blank' : '_self'}`}
+                              href={groupLink?.url || '/'}
+                              className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'>
+                              {groupLink?.label}
+                            </a>
+                          </li>
+                        )
+                      },
+                    )}
                   </ul>
                 </div>
+              </li>
+            ) : menuItem?.menuLink?.type === 'reference' ? (
+              <li key={index}>
+                <a
+                  target={`${menuItem?.menuLink?.newTab ? '_blank' : '_self'}`}
+                  href={(menuItem?.menuLink?.page?.value as Page)?.path || '/'}
+                  className='block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'
+                  aria-current='page'>
+                  {menuItem?.menuLink?.label}
+                </a>
               </li>
             ) : (
               <li key={index}>
                 <a
-                  href={(menuItem?.page?.value as Page)?.path || '#'}
+                  target={`${menuItem?.menuLink?.newTab ? '_blank' : '_self'}`}
+                  href={menuItem?.menuLink?.url || '/'}
                   className='block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'
                   aria-current='page'>
-                  {(menuItem?.page?.value as Page)?.title}
+                  {menuItem?.menuLink?.label}
                 </a>
               </li>
             )

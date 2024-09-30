@@ -1,6 +1,6 @@
+import AuthorPostsView from '../../common/components/AuthorPostView'
 import { Blog, User } from '@payload-types'
 
-import AuthorPostsView from '@/components/author'
 import { trpc } from '@/trpc/client'
 
 interface PageProps {

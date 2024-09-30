@@ -31,7 +31,7 @@ const seed = async (): Promise<Page> => {
         } else if (block?.blockType === 'PopularBlogs') {
           return {
             ...block,
-            popular_blogs: block?.popular_blogs?.map((popularBlog, idx) => ({
+            popularBlogs: block?.popularBlogs?.map((popularBlog, idx) => ({
               relationTo: 'blogs',
               value: allBlogs?.at(0)?.id || '',
             })),
@@ -39,7 +39,7 @@ const seed = async (): Promise<Page> => {
         } else if (block?.blockType === 'LatestBlogs') {
           return {
             ...block,
-            latest_blogs: block?.latest_blogs?.map((latestBlog, idx) => ({
+            latestBlogs: block?.latestBlogs?.map((latestBlog, idx) => ({
               relationTo: 'blogs',
               value: allBlogs?.at(0)?.id || '',
             })),
@@ -47,7 +47,7 @@ const seed = async (): Promise<Page> => {
         } else if (block?.blockType === 'TopPicks') {
           return {
             ...block,
-            top_picks: block?.top_picks?.map((topPick, idx) => ({
+            topPicks: block?.topPicks?.map((topPick, idx) => ({
               relationTo: 'blogs',
               value: allBlogs?.at(0)?.id || '',
             })),

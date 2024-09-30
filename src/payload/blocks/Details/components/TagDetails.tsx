@@ -1,5 +1,5 @@
 import { Hero } from '../../Hero'
-import BlogListItem from '../../List/components/BlogListItem'
+import BlogListItems from '../../List/components/BlogListItem'
 import { Blog } from '@payload-types'
 import Image from 'next/image'
 
@@ -27,10 +27,10 @@ const TagDetails: React.FC<TagDetailsProps> = ({
       {isBlogsPending && <BlogCardSkelton />}
       {blogs?.length > 0 || isBlogsPending ? (
         <div className='mx-auto min-h-screen max-w-7xl px-2'>
-          <BlogListItem blogsData={blogs as Blog[]} />
+          <BlogListItems blogsData={blogs as Blog[]} />
         </div>
       ) : (
-        <div className='mt-10 flex min-h-fit flex-col items-center justify-center'>
+        <div className='my-10 flex min-h-fit flex-col items-center justify-center'>
           {' '}
           <Image
             width={200}

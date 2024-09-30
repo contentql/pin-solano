@@ -23,7 +23,7 @@ export const blogsPageData: BlogsPageDataType = {
     {
       blockType: 'List',
       title: 'Discover Blogs',
-      collection_slug: 'blogs',
+      collectionSlug: 'blogs',
     },
   ],
 }

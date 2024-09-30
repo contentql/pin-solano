@@ -5,13 +5,13 @@ const DetailsConfig: Block = {
   // imageURL: '',
   interfaceName: 'DetailsType',
   labels: {
-    singular: 'Details Block',
-    plural: 'Details Blocks',
+    singular: 'Dynamic Content Block',
+    plural: 'Dynamic Content Blocks',
   },
   fields: [
     {
       type: 'select',
-      name: 'collection_slug',
+      name: 'collectionSlug',
       label: 'Collection Slug',
       options: [
         {

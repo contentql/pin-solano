@@ -12,27 +12,20 @@ import AuthorsList from './components/AuthorsList'
 import BlogsList from './components/BlogsList'
 import TagsList from './components/TagsList'
 
-interface TagsListProps extends Tag {
-  count: number
-}
-
-interface AuthorsListProps extends User {
-  totalDocs: number
-}
-
 interface ListProps extends DetailsType {
   params: Params
 }
 
+interface TagsListProps extends Tag {
+  count: number
+}
+interface AuthorsListProps extends User {
+  totalDocs: number
+}
+
 const List: React.FC<ListProps> = ({ params, ...block }) => {
-  switch (block?.collection_slug) {
+  switch (block?.collectionSlug) {
     case 'blogs': {
-      // if (params?.route?.includes('tag')) {
-      //   const { data: blogs } = trpc.tag.getBlogs.useQuery({
-      //     tagSlug: params.route?.at(-1) as string,
-      //   })
-      //   return <BlogsList blogs={blogs?.blogsData as Blog[]} />
-      // }
       const { data: blogs, isLoading: isBlogsPending } =
         trpc.blog.getAllBlogs.useQuery()
       return isBlogsPending ? (

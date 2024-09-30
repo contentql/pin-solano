@@ -4,6 +4,7 @@
 import { BlogHero, BlogHeroConfig } from './BlogHero'
 import { Details, DetailsConfig } from './Details'
 import { Hero, HeroConfig } from './Hero'
+import { Home, HomeConfig } from './Home'
 import { HomeHero, HomeHeroConfig } from './HomeHero'
 import { HomeTags, HomeTagsConfig } from './HomeTags'
 import { LatestBlogs, LatestBlogsConfig } from './LatestBlogs'
@@ -14,27 +15,29 @@ import { TopPicks, TopPicksConfig } from './TopPicks'
 // Exporting an object that maps block names (as keys) to their corresponding JSX components (as values)
 // This object allows dynamic rendering of components based on the block names
 export const blocksJSX = {
-  HomeHero,
+  Home,
   Details,
   List,
-  Hero,
-  BlogHero,
+  HomeHero,
   PopularBlogs,
   LatestBlogs,
   TopPicks,
   HomeTags,
+  BlogHero,
+  Hero,
 }
 
 // Exporting an array that consolidates all block configurations
 // This array is useful for registering or iterating over all blocks and their configurations in one place
 export const blocks = [
-  HomeHeroConfig,
+  HomeConfig,
   DetailsConfig,
   ListConfig,
-  HeroConfig,
-  BlogHeroConfig,
+  HomeHeroConfig,
   PopularBlogsConfig,
   LatestBlogsConfig,
   TopPicksConfig,
   HomeTagsConfig,
+  BlogHeroConfig,
+  HeroConfig,
 ]

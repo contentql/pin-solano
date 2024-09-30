@@ -3,10 +3,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { httpBatchLink } from '@trpc/client'
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
+import { KBarProvider } from 'kbar'
 import React, { useState } from 'react'
 
 import { trpc } from '@/trpc/client'
+import { PageLoader } from '@/utils/pageProgressBar'
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({}))
@@ -19,17 +20,12 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       ],
     }),
   )
+
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        <ProgressBar
-          height='4px'
-          color='#4f46e5'
-          options={{ showSpinner: false }}
-          shallowRouting
-          startPosition={0.5}
-        />
-        {children}
+        <PageLoader />
+        <KBarProvider>{children}</KBarProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </trpc.Provider>

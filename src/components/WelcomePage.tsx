@@ -3,8 +3,9 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import Container from '@/payload/common/Container'
 import { trpc } from '@/trpc/client'
+
+import Container from './common/Container'
 
 const WelcomePage = () => {
   const router = useRouter()

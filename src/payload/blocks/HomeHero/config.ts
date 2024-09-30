@@ -21,7 +21,7 @@ const HomeHeroConfig: Block = {
       required: true,
     },
     {
-      name: 'sub_title',
+      name: 'subTitle',
       type: 'text',
       label: 'Sub Title',
       required: true,
@@ -47,7 +47,7 @@ const HomeHeroConfig: Block = {
       ],
     },
     {
-      name: 'tag_title',
+      name: 'tagTitle',
       type: 'text',
       label: 'Tags Title',
     },

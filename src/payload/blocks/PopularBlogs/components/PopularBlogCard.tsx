@@ -21,7 +21,7 @@ const PopularBlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
       <div
         className='transition-all duration-300 ease-in-out group-hover:blur-sm group-hover:filter'
         style={{
-          backgroundImage: `url(${(blog?.blog_image as Media)?.url})`,
+          backgroundImage: `url(${(blog?.blogImage as Media)?.url})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -40,7 +40,9 @@ const PopularBlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
         <h3 className='text-neutral-700 dark:text-neutral-300 line-clamp-1 text-xl font-semibold'>
           {blog?.title}
         </h3>
-        <p className='line-clamp-1 max-w-lg text-gray-400'>{blog?.sub_title}</p>
+        <p className='line-clamp-1 max-w-lg text-gray-400'>
+          {blog?.description}
+        </p>
       </div>
 
       <div

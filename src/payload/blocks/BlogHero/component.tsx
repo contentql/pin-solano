@@ -1,9 +1,9 @@
 'use client'
 
+import { SwipeCarousel } from '../common/components/SwipeCarousel'
+import { TagsMarquee } from '../common/components/TagsMarquee'
 import { Blog, BlogsHeroType, Tag } from '@payload-types'
 
-import { SwipeCarousel } from '@/payload/common/SwipeCarousel'
-import { TagsMarquee } from '@/payload/common/TagsMarquee'
 import { trpc } from '@/trpc/client'
 
 interface TagsDetails extends Tag {
@@ -12,7 +12,6 @@ interface TagsDetails extends Tag {
 
 export const BlogHero: React.FC<BlogsHeroType> = blogData => {
   const { data: tags } = trpc?.tag?.getAllTags.useQuery()
-  const { data: blogs } = trpc?.blog?.getAllBlogs.useQuery()
   return (
     <>
       <div className='bg-[#26304e] px-2 pb-20 pt-32 md:px-10 lg:px-20'>

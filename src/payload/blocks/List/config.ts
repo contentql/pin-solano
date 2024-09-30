@@ -3,7 +3,7 @@ import { Block } from 'payload'
 const ListConfig: Block = {
   slug: 'List',
   // imageURL: '',
-  interfaceName: 'List_type',
+  interfaceName: 'ListType',
   labels: {
     singular: 'List Block',
     plural: 'List Blocks',
@@ -16,7 +16,7 @@ const ListConfig: Block = {
     },
     {
       type: 'select',
-      name: 'collection_slug',
+      name: 'collectionSlug',
       label: 'Collection Slug',
       options: [
         {

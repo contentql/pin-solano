@@ -22,7 +22,7 @@ export const tagsPageData: TagsPageDataType = {
     {
       blockType: 'List',
       title: 'Discover Tags',
-      collection_slug: 'tags',
+      collectionSlug: 'tags',
     },
   ],
 }

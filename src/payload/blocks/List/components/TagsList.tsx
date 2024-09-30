@@ -1,8 +1,7 @@
+import { AnimatedTagCard } from '../../common/components/AnimatedTagCard'
 import { Media, Tag } from '@payload-types'
 import Link from 'next/link'
 import React from 'react'
-
-import { AnimatedTagCard } from './AnimatedTagCard'
 
 interface TagsListProps extends Tag {
   count: number

@@ -7,9 +7,9 @@ const Temp: React.FC = () => {
 }
 
 export const listOfIcons = {
-  Facebook: <FaFacebookF size={24} />,
-  Whatsapp: <FaWhatsapp size={24} />,
-  Twitter: <FaXTwitter size={24} />,
-  LinkedIn: <FaLinkedinIn size={24} />,
-  Instagram: <FaInstagram size={24} />,
+  facebook: <FaFacebookF size={24} />,
+  whatsapp: <FaWhatsapp size={24} />,
+  twitter: <FaXTwitter size={24} />,
+  linkedin: <FaLinkedinIn size={24} />,
+  instagram: <FaInstagram size={24} />,
 }
