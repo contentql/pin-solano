@@ -7,14 +7,14 @@ name: Docker Build and Publish Workflow
 
 on:
   workflow_dispatch:
-    schedule:
-      - cron: '19 16 * * *'
-    push:
-      branches: ['main']
-      # Publish semver tags as releases.
-      tags: ['v*.*.*']
-    pull_request:
-      branches: ['main']
+  schedule:
+    - cron: '19 16 * * *'
+  push:
+    branches: ['main']
+    # Publish semver tags as releases.
+    tags: ['v*.*.*']
+  pull_request:
+    branches: ['main']
 
 env:
   # Use docker.io for Docker Hub if empty
