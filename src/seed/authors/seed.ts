@@ -1,4 +1,3 @@
-import { env } from '@env'
 import configPromise from '@payload-config'
 import { User } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
@@ -12,7 +11,7 @@ const seed = async (): Promise<(string | User)[]> => {
     const formattedAuthorsData = authorsData.map((author, idx) => {
       return {
         ...author,
-        image: `${env.PAYLOAD_URL}${authorImageData?.at(idx)?.filePath}`,
+        image: authorImageData?.at(idx)?.filePath,
       }
     })
     // console.log('author', formattedAuthorsData)
