@@ -1,8 +1,8 @@
 'use client'
 
 import { Media, User } from '@payload-types'
-import Image from 'next/image'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { Skeleton } from '@/components/skelton/Skelton'
 import { listOfIcons } from '@/utils/getSocialMediaIcon'
 
@@ -18,13 +18,12 @@ function AuthorDetails({
       {isAuthorLoading ? (
         <Skeleton className='h-28 w-28 rounded-full' />
       ) : (
-        <Image
-          alt=''
-          height={96}
-          width={96}
-          className='mb-4 h-24 w-24 flex-shrink-0 self-center rounded-full bg-cover bg-center '
-          src={(author?.imageUrl as Media)?.url || author?.image!}
-        />
+        <Avatar className='mb-4 h-24 w-24 flex-shrink-0 self-center bg-cover bg-center '>
+          <AvatarImage
+            src={(author?.imageUrl as Media)?.url || author?.image!}
+          />
+          <AvatarFallback />
+        </Avatar>
       )}
       {isAuthorLoading ? (
         <Skeleton className='h-10 w-48' />

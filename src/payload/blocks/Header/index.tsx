@@ -2,12 +2,12 @@
 
 import useReadingProgress from '../common/hooks/useReadingProgress'
 import { Media, Page, SiteSetting, User } from '@payload-types'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { trpc } from '@/trpc/client'
 import { cn } from '@/utils/cn'
 
@@ -99,12 +99,14 @@ function NavbarMenu({
         className='fixed z-50 flex w-full items-center justify-between border-gray-200 bg-black px-2 dark:bg-gray-900 md:px-16'>
         <div>
           <Link href={'/'}>
-            <Image
-              src={(data?.navbar?.logo?.imageUrl as Media)?.url || ''}
-              width={data?.navbar?.logo?.width || 48}
-              height={data?.navbar?.logo?.height || 48}
-              alt='Logo'
-            />
+            <Avatar
+              className={`h-${data?.navbar?.logo?.height! / 4 || 12} w-${data?.navbar?.logo?.width! / 4 || 12}`}>
+              <AvatarImage
+                alt='Logo'
+                src={(data?.navbar?.logo?.imageUrl as Media)?.url || ''}
+              />
+              <AvatarFallback />
+            </Avatar>
           </Link>
         </div>
         <div className='hidden md:block'>

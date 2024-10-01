@@ -2,11 +2,11 @@
 
 import { Blog, Tag } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 
 import { AnimatedTooltip } from '@/components/common/AnimatedTooltip'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { cn } from '@/utils/cn'
 import { getTagColors } from '@/utils/getColor'
 
@@ -152,16 +152,14 @@ export const DirectionAwareHover = ({
               duration: 0.2,
               ease: 'easeOut',
             }}>
-            <Image
-              alt='image'
+            <Avatar
               className={cn(
-                'h-full w-full scale-[1.15] object-cover',
+                'h-full w-full scale-[1.15] rounded-none object-cover',
                 imageClassName,
-              )}
-              width={100}
-              height={100}
-              src={imageUrl}
-            />
+              )}>
+              <AvatarImage src={imageUrl} alt='image' />
+              <AvatarFallback />
+            </Avatar>
           </motion.div>
           <motion.div
             variants={textVariants}

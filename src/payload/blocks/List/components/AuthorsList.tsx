@@ -3,6 +3,8 @@ import { Media, User } from '@payload-types'
 import Link from 'next/link'
 import React from 'react'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
+
 interface AuthorsListProps extends User {
   totalDocs: number
 }
@@ -18,15 +20,13 @@ const AuthorsList: React.FC<{ authors: AuthorsListProps[] }> = ({
             title={author?.displayName!}
             href={author?.displayName!}>
             <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className='mb-16 h-24 w-24 rounded-full'
-                src={(author?.imageUrl as Media)?.url || author?.image!}
-                alt='tag'
-                loading='lazy'
-                // width={100}
-                // height={160}
-              />
+              <Avatar className='mb-16 h-24 w-24'>
+                <AvatarImage
+                  src={(author?.imageUrl as Media)?.url || author?.image!}
+                  alt='tag'
+                />
+                <AvatarFallback />
+              </Avatar>
               <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
                 {author?.displayName}
               </h3>

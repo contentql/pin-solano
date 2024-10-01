@@ -1,6 +1,8 @@
 import { HomeHeroType, Media, Tag } from '@payload-types'
 import Link from 'next/link'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
+
 const HomeHero: React.FC<HomeHeroType> = ({ ...block }) => {
   return (
     <section className='relative flex h-auto w-full flex-col items-center justify-center pt-20 lg:pt-40'>
@@ -39,14 +41,13 @@ const HomeHero: React.FC<HomeHeroType> = ({ ...block }) => {
             href={`/tag/${(tag?.value as Tag)?.slug}`}
             key={idx}
             className='flex h-auto w-auto items-center justify-center gap-4 text-sm font-bold text-white md:text-xl lg:text-2xl'>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={((tag?.value as Tag)?.tagImage as Media)?.url || ''}
-              alt='brand log'
-              // width={50}
-              // height={50}
-              className='h-12 w-12 rounded-full'
-            />
+            <Avatar className='h-12 w-12'>
+              <AvatarImage
+                src={((tag?.value as Tag)?.tagImage as Media)?.url || ''}
+                alt='brand log'
+              />
+              <AvatarFallback />
+            </Avatar>
 
             {(tag?.value as Tag)?.title}
           </Link>

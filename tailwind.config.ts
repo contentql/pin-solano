@@ -49,6 +49,8 @@ const config: Config = {
         success: '#87cf3a',
         warning: '#e1d460',
         error: '#ff6b6b',
+
+        loading: '#e779c11a',
       },
       borderRadius: {
         'rounded-box': '1rem',

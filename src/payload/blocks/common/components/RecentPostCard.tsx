@@ -1,7 +1,7 @@
 import { Blog, Media, User } from '@payload-types'
-import Image from 'next/image'
 import Link from 'next/link'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { formatDate } from '@/utils/dateFormatter'
 import { slateHtml } from '@/utils/slateToHtml'
 
@@ -24,13 +24,10 @@ const RecentPostCard: React.FC<RecentPostCardProps> = ({ blog }) => {
       <h2 className='line-clamp-1 text-3xl font-bold transition-all duration-300 hover:underline'>
         {blog?.title}
       </h2>
-      <Image
-        className='mx-auto h-[20rem] w-full rounded-2xl'
-        src={(blog?.blogImage as Media)?.url || ''}
-        width={400}
-        height={400}
-        alt='blog'
-      />
+      <Avatar className='mx-auto h-[20rem] w-full rounded-2xl'>
+        <AvatarImage alt='blog' src={(blog?.blogImage as Media)?.url || ''} />
+        <AvatarFallback />
+      </Avatar>
       <p className='line-clamp-3 text-lg font-normal text-gray-300'>
         {blog?.description}
       </p>
@@ -38,17 +35,16 @@ const RecentPostCard: React.FC<RecentPostCardProps> = ({ blog }) => {
       <div className='flex flex-wrap space-x-5 '>
         {blog?.author?.map((author, index) => (
           <div className='group flex items-center space-x-2' key={index}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className='h-5 w-5 rounded-full'
-              src={
-                ((author?.value as User)?.imageUrl as Media)?.url ||
-                (author?.value as User)?.image!
-              }
-              alt='user'
-              width={50}
-              height={50}
-            />
+            <Avatar className='h-5 w-5'>
+              <AvatarImage
+                src={
+                  ((author?.value as User)?.imageUrl as Media)?.url ||
+                  (author?.value as User)?.image!
+                }
+                alt='user'
+              />
+              <AvatarFallback />
+            </Avatar>
             <p>{(author?.value as User)?.displayName}</p>
           </div>
         ))}

@@ -5,6 +5,8 @@ import { HomeTagsType, Media, Tag } from '@payload-types'
 import Link from 'next/link'
 import React from 'react'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
+
 const HomeTags: React.FC<HomeTagsType> = ({ ...block }) => {
   return (
     <section className='container px-2 py-20 text-white md:px-20'>
@@ -26,14 +28,13 @@ const HomeTags: React.FC<HomeTagsType> = ({ ...block }) => {
                 title={(tag?.value as Tag)?.title}
                 href={(tag?.value as Tag)?.slug!}>
                 <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className='mb-16 h-24 w-24 rounded-full'
-                    src={((tag?.value as Tag)?.tagImage as Media)?.url || ''}
-                    alt='tag'
-                    // width={100}
-                    // height={100}
-                  />
+                  <Avatar className='mb-16 h-24 w-24'>
+                    <AvatarImage
+                      src={((tag?.value as Tag)?.tagImage as Media)?.url || ''}
+                      alt='tag'
+                    />
+                    <AvatarFallback />
+                  </Avatar>
                   <h3 className='!m-0 max-w-xs !pb-2 text-base  font-bold text-slate-100'>
                     {(tag?.value as Tag)?.title}
                   </h3>

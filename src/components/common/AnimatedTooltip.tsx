@@ -4,6 +4,8 @@ import { Media, User } from '@payload-types'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import React, { useState } from 'react'
 
+import { Avatar, AvatarFallback, AvatarImage } from './Avatar'
+
 interface AnimatedTooltipProps {
   items:
     | {
@@ -69,18 +71,17 @@ export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({ items }) => {
               <div className='text-xs text-white'>{item?.value?.email}</div>
             </motion.div>
           )}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            onMouseMove={handleMouseMove}
-            height={100}
-            width={100}
-            src={
-              (item?.value?.imageUrl as Media)?.url ||
-              (item?.value?.image as string)
-            }
-            alt={item?.value?.displayName!}
-            className='relative !m-0 h-10 w-10 rounded-full object-cover object-top !p-0 transition  duration-500 group-hover:z-30 group-hover:scale-105'
-          />
+          <Avatar className='relative !m-0 h-10 w-10 object-cover object-top !p-0 transition  duration-500 group-hover:z-30 group-hover:scale-105'>
+            <AvatarImage
+              onMouseMove={handleMouseMove}
+              src={
+                (item?.value?.imageUrl as Media)?.url ||
+                (item?.value?.image as string)
+              }
+              alt={item?.value?.displayName!}
+            />
+            <AvatarFallback />
+          </Avatar>
         </div>
       ))}
     </>

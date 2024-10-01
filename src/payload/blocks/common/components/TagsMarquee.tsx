@@ -1,8 +1,8 @@
 import { Media, Tag } from '@payload-types'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { cn } from '@/utils/cn'
 
 interface TagsDetails extends Tag {
@@ -28,13 +28,10 @@ const ReviewCard: React.FC<ReviewCard> = ({ tag }) => {
       <Link href={`/tag/${tag?.slug}`}>
         <div className='flex flex-row items-center justify-between'>
           <div className='flex flex-row items-center gap-2 pb-2'>
-            <Image
-              className='rounded-full'
-              width='32'
-              height='32'
-              alt=''
-              src={(tag?.tagImage as Media)?.url || ''}
-            />
+            <Avatar className='h-8 w-8'>
+              <AvatarImage src={(tag?.tagImage as Media)?.url || ''} />
+              <AvatarFallback />
+            </Avatar>
             <figcaption className='text-md font-medium dark:text-white'>
               {tag?.title}
             </figcaption>

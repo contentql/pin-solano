@@ -4,11 +4,11 @@ import AnimatedBlogCard from '../../common/components/AnimatedBlogCard'
 import { useResponsive } from '../../common/hooks/useResponsive'
 import { Blog, Media } from '@payload-types'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import BlogCardSkelton from '@/components/skelton/BlogCardSkelton'
 import { Skeleton } from '@/components/skelton/Skelton'
 import BlogPostCard, {
@@ -58,15 +58,24 @@ export default function AuthorBlogs({
           {isAuthorTagsLoading ? (
             <Skeleton className='h-20 w-20 rounded-full' />
           ) : (
-            <Image
-              src={
-                (authorTags?.at(filter?.index)?.tagImage as Media)?.url || ''
-              }
-              alt='tag'
-              className='h-20 w-20 rounded-full'
-              width={50}
-              height={50}
-            />
+            // <Image
+            //   src={
+            //     (authorTags?.at(filter?.index)?.tagImage as Media)?.url || ''
+            //   }
+            //   alt='tag'
+            //   className='h-20 w-20 rounded-full'
+            //   width={50}
+            //   height={50}
+            // />
+            <Avatar className='h-20 w-20'>
+              <AvatarImage
+                src={
+                  (authorTags?.at(filter?.index)?.tagImage as Media)?.url || ''
+                }
+                alt='tag'
+              />
+              <AvatarFallback />
+            </Avatar>
           )}
           <div
             className={cn('gap-x-2', isAuthorTagsLoading ? 'space-y-1' : '')}>
@@ -192,13 +201,13 @@ const Tags = ({
                 handleSearchByTitle(tag?.slug, index)
               }}
               className='relative inline-flex cursor-pointer items-center gap-x-4 rounded-full px-4 py-2'>
-              <Image
-                width={20}
-                height={20}
-                src={(tag?.tagImage as Media)?.url || ''}
-                alt='tag'
-                className='h-8 w-8 rounded-full'
-              />
+              <Avatar className='h-8 w-8'>
+                <AvatarImage
+                  src={(tag?.tagImage as Media)?.url || ''}
+                  alt='tag'
+                />
+                <AvatarFallback />
+              </Avatar>
               <p>{tag?.title}</p>
               <AnimatePresence>
                 {tag?.slug === filter?.tag && (
