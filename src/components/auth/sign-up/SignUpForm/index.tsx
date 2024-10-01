@@ -2,8 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FaRegCheckCircle } from 'react-icons/fa'
 import { z } from 'zod'
 
 import { trpc } from '@/trpc/client'
@@ -13,7 +14,8 @@ import { signUpFormSchema } from './validator'
 export type SignUpFormData = z.infer<typeof signUpFormSchema>
 
 const SignUpForm = () => {
-  const router = useRouter()
+  const [isEmailSent, setIsEmailSent] = useState(false)
+  const [emailSentTo, setEmailSentTo] = useState<string>('')
 
   const form = useForm<SignUpFormData>({
     resolver: zodResolver(signUpFormSchema),
@@ -40,9 +42,11 @@ const SignUpForm = () => {
     error: signUpError,
     isSuccess: isSignUpSuccess,
   } = trpc.auth.signUp.useMutation({
-    onSuccess: () => {
+    onSuccess: data => {
       reset()
-      router.push('/profile')
+      setIsEmailSent(true)
+      setEmailSentTo(data.email)
+      // router.push('/profile')
     },
   })
 
@@ -57,35 +61,54 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className='flex min-h-screen'>
-      <div className='hidden flex-1 items-center justify-center bg-transparent text-black lg:flex'>
-        <Image
-          alt='img'
-          src='/images/signup-page-illustration.svg'
-          width={50}
-          height={50}
-          className='md:h-96 md:w-96'
-        />
-      </div>
-      <div className='flex w-full items-center justify-center bg-[#26304e] lg:w-1/2'>
-        <div className='w-full max-w-md p-6'>
-          {isSignUpError ? (
-            <p style={{ color: 'red', textAlign: 'center' }}>
-              {signUpError?.message}
-            </p>
-          ) : null}
-          {isSignUpSuccess ? (
-            <p style={{ color: 'green', textAlign: 'center' }}>
-              Account created! Redirecting...
-            </p>
-          ) : null}
-          <h1 className='mb-6 text-center text-3xl font-semibold text-white'>
-            Sign Up
-          </h1>
-          <h1 className='mb-6 text-center text-sm font-semibold text-gray-300'>
-            Join to Our Community with all time access and free{' '}
-          </h1>
-          {/* <div className='mt-4 flex flex-col items-center justify-between lg:flex-row'>
+    <>
+      {isEmailSent ? (
+        <div className='flex min-h-screen items-center justify-center'>
+          <div className='mx-auto text-center'>
+            {/* Page title */}
+            <h3 className='text-2xl font-bold text-white'>Verify Your Email</h3>
+            <div className='mx-auto mt-4 flex w-fit gap-4 rounded-md border border-slate-800 bg-gray-400 p-6 transition-colors hover:border-slate-700/60'>
+              <FaRegCheckCircle className='size-8 shrink-0 items-start text-green-600' />
+              <div className='text-left font-semibold'>
+                Email has been sent to{' '}
+                <code className='rounded-sm px-2 py-1'>{emailSentTo}</code>
+                <span className='mt-1 block font-normal'>
+                  You can close this window now.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className='flex min-h-screen'>
+          <div className='hidden flex-1 items-center justify-center bg-transparent text-black lg:flex'>
+            <Image
+              alt='img'
+              src='/images/signup-page-illustration.svg'
+              width={50}
+              height={50}
+              className='md:h-96 md:w-96'
+            />
+          </div>
+          <div className='flex w-full items-center justify-center bg-[#26304e] lg:w-1/2'>
+            <div className='w-full max-w-md p-6'>
+              {isSignUpError ? (
+                <p style={{ color: 'red', textAlign: 'center' }}>
+                  {signUpError?.message}
+                </p>
+              ) : null}
+              {isSignUpSuccess ? (
+                <p style={{ color: 'green', textAlign: 'center' }}>
+                  Account created! Redirecting...
+                </p>
+              ) : null}
+              <h1 className='mb-6 text-center text-3xl font-semibold text-white'>
+                Sign Up
+              </h1>
+              <h1 className='mb-6 text-center text-sm font-semibold text-gray-300'>
+                Join to Our Community with all time access and free{' '}
+              </h1>
+              {/* <div className='mt-4 flex flex-col items-center justify-between lg:flex-row'>
             <div className='mb-2 w-full lg:mb-0 lg:w-1/2'>
               <button
                 type='button'
@@ -131,107 +154,109 @@ const SignUpForm = () => {
           <div className='mt-4 text-center text-sm text-gray-300'>
             <p>or with email</p>
           </div> */}
-          <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
-            <div>
-              <label
-                htmlFor='firstName'
-                className='block text-sm font-medium text-gray-300'>
-                First Name
-              </label>
-              <input
-                {...register('firstName')}
-                type='text'
-                id='firstName'
-                name='firstName'
-                placeholder='John'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
-              />
-              {errors?.firstName && (
-                <p className='p-2 text-sm text-red-500'>
-                  {errors.firstName.message}
+              <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+                <div>
+                  <label
+                    htmlFor='firstName'
+                    className='block text-sm font-medium text-gray-300'>
+                    First Name
+                  </label>
+                  <input
+                    {...register('firstName')}
+                    type='text'
+                    id='firstName'
+                    name='firstName'
+                    placeholder='John'
+                    className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                  />
+                  {errors?.firstName && (
+                    <p className='p-2 text-sm text-red-500'>
+                      {errors.firstName.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    htmlFor='lastName'
+                    className='block text-sm font-medium text-gray-300'>
+                    Last Name
+                  </label>
+                  <input
+                    {...register('lastName')}
+                    type='text'
+                    id='lastName'
+                    name='lastName'
+                    placeholder='Doe'
+                    className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                  />
+                  {errors?.lastName && (
+                    <p className='p-2 text-sm text-red-500'>
+                      {errors.lastName.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    htmlFor='email'
+                    className='block text-sm font-medium text-gray-300'>
+                    E-Mail
+                  </label>
+                  <input
+                    {...register('email')}
+                    type='text'
+                    id='email'
+                    name='email'
+                    placeholder='john.doe@example.com'
+                    className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                  />
+                  {errors?.email && (
+                    <p className='p-2 text-sm text-red-500'>
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    htmlFor='password'
+                    className='block text-sm font-medium text-gray-300'>
+                    Password
+                  </label>
+                  <input
+                    {...register('password')}
+                    type='password'
+                    id='password'
+                    name='password'
+                    placeholder='● ● ● ● ● ● ● ● ●'
+                    className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
+                  />
+                  {errors?.password && (
+                    <p className='p-2 text-sm text-red-500'>
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <button
+                    type='submit'
+                    className='w-full rounded-md border-[1px] border-indigo-600 bg-indigo-600 p-2 text-white transition-all duration-500 hover:bg-indigo-700 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:bg-opacity-50'
+                    disabled={isSignUpPending}>
+                    {isSignUpPending ? 'Creating account...' : 'Sign Up'}
+                  </button>
+                </div>
+              </form>
+              <div className='mt-4 text-center text-sm text-gray-300'>
+                <p>
+                  Already have an account?{' '}
+                  <a href='/sign-in' className='text-white hover:underline'>
+                    SignIn here
+                  </a>
                 </p>
-              )}
+              </div>
             </div>
-            <div>
-              <label
-                htmlFor='lastName'
-                className='block text-sm font-medium text-gray-300'>
-                Last Name
-              </label>
-              <input
-                {...register('lastName')}
-                type='text'
-                id='lastName'
-                name='lastName'
-                placeholder='Doe'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
-              />
-              {errors?.lastName && (
-                <p className='p-2 text-sm text-red-500'>
-                  {errors.lastName.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <label
-                htmlFor='email'
-                className='block text-sm font-medium text-gray-300'>
-                E-Mail
-              </label>
-              <input
-                {...register('email')}
-                type='text'
-                id='email'
-                name='email'
-                placeholder='john.doe@example.com'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
-              />
-              {errors?.email && (
-                <p className='p-2 text-sm text-red-500'>
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <label
-                htmlFor='password'
-                className='block text-sm font-medium text-gray-300'>
-                Password
-              </label>
-              <input
-                {...register('password')}
-                type='password'
-                id='password'
-                name='password'
-                placeholder='● ● ● ● ● ● ● ● ●'
-                className='mt-1 w-full rounded-md bg-gray-600 p-2 text-white transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-300 focus:ring-offset-1'
-              />
-              {errors?.password && (
-                <p className='p-2 text-sm text-red-500'>
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <button
-                type='submit'
-                className='w-full rounded-md border-[1px] border-indigo-600 bg-indigo-600 p-2 text-white transition-all duration-500 hover:bg-indigo-700 focus:outline-none focus:ring-1 focus:ring-gray-200 focus:ring-offset-1 disabled:cursor-not-allowed disabled:bg-opacity-50'
-                disabled={isSignUpPending}>
-                {isSignUpPending ? 'Creating account...' : 'Sign Up'}
-              </button>
-            </div>
-          </form>
-          <div className='mt-4 text-center text-sm text-gray-300'>
-            <p>
-              Already have an account?{' '}
-              <a href='/sign-in' className='text-white hover:underline'>
-                SignIn here
-              </a>
-            </p>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 

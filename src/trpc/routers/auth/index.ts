@@ -12,6 +12,7 @@ import {
   ResetPasswordSchema,
   SignInSchema,
   SignUpSchema,
+  VerifyEmailSchema,
 } from './validator'
 
 const payload = await getPayloadHMR({
@@ -60,12 +61,6 @@ export const authRouter = router({
           })
         }
 
-        //Check users count
-        const usersCount = await payload.count({
-          collection: 'users',
-        })
-        const userRole = usersCount?.totalDocs === 0 ? 'admin' : 'user'
-
         const result = await payload.create({
           collection: 'users',
           data: {
@@ -74,33 +69,33 @@ export const authRouter = router({
             email,
             password,
             image: imageUrl,
-            role: [userRole],
+            role: ['user'],
           },
           locale: undefined,
           fallbackLocale: undefined,
           overrideAccess: true,
-          disableVerificationEmail: true, // Set to false if you want to enable verification email
+          disableVerificationEmail: false, // Set to false if you want to enable verification email
         })
 
-        const loginResult = await payload.login({
-          collection: 'users',
-          data: {
-            email,
-            password,
-          },
-          depth: 2,
-          locale: undefined,
-          fallbackLocale: undefined,
-          overrideAccess: false,
-          showHiddenFields: true,
-        })
-        const cookieStore = cookies()
-        cookieStore.set('payload-token', loginResult.token || '', {
-          httpOnly: true,
-          secure: process.env.NODE_ENV !== 'development',
-          maxAge: 60 * 60 * 24 * 7,
-          path: '/',
-        })
+        // const loginResult = await payload.login({
+        //   collection: 'users',
+        //   data: {
+        //     email,
+        //     password,
+        //   },
+        //   depth: 2,
+        //   locale: undefined,
+        //   fallbackLocale: undefined,
+        //   overrideAccess: false,
+        //   showHiddenFields: true,
+        // })
+        // const cookieStore = cookies()
+        // cookieStore.set('payload-token', loginResult.token || '', {
+        //   httpOnly: true,
+        //   secure: process.env.NODE_ENV !== 'development',
+        //   maxAge: 60 * 60 * 24 * 7,
+        //   path: '/',
+        // })
 
         return result
       } catch (error: any) {
@@ -218,46 +213,29 @@ export const authRouter = router({
       }
     }),
 
-  //   unlock: publicProcedure.input(UnlockSchema).mutation(async ({ input }) => {
-  //     const { email } = input
-
-  //     try {
-  //       const result = await payload.unlock({
-  //         collection: 'users',
-  //         data: {
-  //           email,
-  //         },
-  //         overrideAccess: true,
-  //       })
-
-  //       return { success: result }
-  //     } catch (error: any) {
-  //       console.error('Error unlocking user:', error)
-  //       throw new TRPCError({
-  //         code: 'INTERNAL_SERVER_ERROR',
-  //         message: error.message,
-  //       })
-  //     }
-  //   }),
-
-  //   verifyEmail: publicProcedure
-  //     .input(VerifyEmailSchema)
-  //     .mutation(async ({ input }) => {
-  //       const { token } = input
-
-  //       try {
-  //         const result = await payload.verifyEmail({
-  //           collection: 'users',
-  //           token,
-  //         })
-
-  //         return { success: result }
-  //       } catch (error: any) {
-  //         console.error('Error verifying email:', error)
-  //         throw new TRPCError({
-  //           code: 'INTERNAL_SERVER_ERROR',
-  //           message: error.message,
-  //         })
-  //       }
-  //     }),
+  verifyEmail: publicProcedure
+    .input(VerifyEmailSchema)
+    .query(async ({ input }) => {
+      const { token, userId } = input
+      try {
+        const result = await payload.verifyEmail({
+          collection: 'users',
+          token,
+        })
+        await payload.update({
+          collection: 'users',
+          id: userId,
+          data: {
+            emailVerified: new Date().toDateString(),
+          },
+        })
+        return { success: result }
+      } catch (error: any) {
+        console.error('Error verifying email:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error.message,
+        })
+      }
+    }),
 })

@@ -42,4 +42,5 @@ export const UnlockSchema = z.object({
 
 export const VerifyEmailSchema = z.object({
   token: z.string(),
+  userId: z.string(),
 })
