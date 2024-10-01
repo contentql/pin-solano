@@ -43,7 +43,7 @@ export default function DeleteAccountSection() {
   }, [isSignUpPending])
 
   return (
-    <div className='hover:shodow-lg flex flex-col rounded-2xl bg-[#e779c11a] p-8 shadow-md'>
+    <div className='hover:shodow-lg mx-6 flex flex-col rounded-2xl bg-[#e779c11a] p-8 shadow-md'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center'>
           <svg
