@@ -13,12 +13,19 @@ export const HomeTagsConfig: Block = {
       label: 'Title',
       type: 'text',
       required: true,
+      admin: {
+        description: 'Enter the main title for the tags section.',
+      },
     },
     {
       name: 'subTitle',
       label: 'Sub Title',
       type: 'text',
       required: true,
+      admin: {
+        description:
+          'Enter a short subtitle that appears below the main title.',
+      },
     },
     {
       name: 'tags',
@@ -26,7 +33,11 @@ export const HomeTagsConfig: Block = {
       relationTo: ['tags'],
       label: 'Tags',
       hasMany: true,
+      admin: {
+        description: 'Select multiple tags to display in this section.',
+      },
     },
   ],
 }
+
 export default HomeTagsConfig

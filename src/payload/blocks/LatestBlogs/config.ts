@@ -13,6 +13,9 @@ export const LatestBlogsConfig: Block = {
       type: 'text',
       label: 'Title',
       required: true,
+      admin: {
+        description: 'Enter the main title for the latest blogs section.',
+      },
     },
     {
       name: 'latestBlogs',
@@ -23,7 +26,12 @@ export const LatestBlogsConfig: Block = {
       required: true,
       minRows: 5,
       maxRows: 7,
+      admin: {
+        description:
+          'Select between 5 to 7 blogs to display in the latest blogs section.',
+      },
     },
   ],
 }
+
 export default LatestBlogsConfig

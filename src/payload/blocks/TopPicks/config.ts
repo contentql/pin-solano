@@ -13,6 +13,9 @@ export const TopPicksConfig: Block = {
       type: 'text',
       label: 'Title',
       required: true,
+      admin: {
+        description: 'Enter the main title for the top picks section.',
+      },
     },
     {
       name: 'topPicks',
@@ -22,9 +25,11 @@ export const TopPicksConfig: Block = {
       hasMany: true,
       required: true,
       admin: {
-        description: 'select blogs to display in top pick blogs section',
+        description:
+          'Select blogs to display in the top picks section (multiple selections allowed).',
       },
     },
   ],
 }
+
 export default TopPicksConfig

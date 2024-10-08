@@ -2,11 +2,10 @@ import { Block } from 'payload'
 
 export const HeroConfig: Block = {
   slug: 'Hero',
-  // imageURL: '',
   interfaceName: 'HeroType',
   labels: {
     singular: 'Hero Block',
-    plural: ' Hero Blocks',
+    plural: 'Hero Blocks',
   },
   fields: [
     {
@@ -15,7 +14,7 @@ export const HeroConfig: Block = {
       label: 'Title',
       required: true,
       admin: {
-        description: 'Please enter title',
+        description: 'Please enter the title for the hero section.',
       },
     },
     {
@@ -23,6 +22,10 @@ export const HeroConfig: Block = {
       type: 'text',
       label: 'Description',
       required: true,
+      admin: {
+        description:
+          'Enter a brief description that summarizes the hero section.',
+      },
     },
     {
       name: 'image',
@@ -31,9 +34,10 @@ export const HeroConfig: Block = {
       relationTo: 'media',
       required: true,
       admin: {
-        description: 'upload image',
+        description: 'Upload an image to be displayed in the hero section.',
       },
     },
   ],
 }
+
 export default HeroConfig

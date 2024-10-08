@@ -13,12 +13,18 @@ export const PopularBlogsConfig: Block = {
       type: 'text',
       label: 'Title',
       required: true,
+      admin: {
+        description: 'Enter the main title for the popular blogs section.',
+      },
     },
     {
       name: 'subTitle',
       type: 'textarea',
       label: 'Sub Title',
       required: true,
+      admin: {
+        description: 'Enter a subtitle that appears below the main title.',
+      },
     },
     {
       name: 'popularBlogs',
@@ -29,7 +35,8 @@ export const PopularBlogsConfig: Block = {
       required: true,
       maxRows: 6,
       admin: {
-        description: 'select blogs to display in popular blogs section',
+        description:
+          'Select up to 6 blogs to display in the popular blogs section.',
       },
     },
   ],
