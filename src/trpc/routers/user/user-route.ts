@@ -1,6 +1,8 @@
 import configPromise from '@payload-config'
+import { Media } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { TRPCError } from '@trpc/server'
+import { produce } from 'immer'
 import { cookies } from 'next/headers'
 
 import { COLLECTION_SLUG_USER } from '@/payload/collections/constants'
@@ -20,24 +22,27 @@ export const userRouter = router({
   updateProfileImage: userProcedure
     .input(UpdateProfileImageSchema)
     .mutation(async ({ input, ctx }) => {
-      const { imageUrl } = input
-      const { user } = ctx
+      const { id } = input
 
       try {
-        await payload.update({
-          collection: COLLECTION_SLUG_USER,
-          id: user.id,
-          data: {
-            image: imageUrl,
-          },
+        const updatedData = produce(ctx.user, draft => {
+          draft.imageUrl = id
         })
-
-        return { success: true }
+        const user = await payload.update({
+          collection: 'users',
+          id: ctx.user.id,
+          data: updatedData,
+        })
+        await payload.delete({
+          collection: 'media',
+          id: (ctx.user.imageUrl as Media).id,
+        })
+        return { data: user }
       } catch (error: any) {
-        console.error('Error updating imageUrl:', error)
+        console.error('Error updating user image:', error)
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: error.message,
+          message: error?.message || 'Internal server error occurred.',
         })
       }
     }),

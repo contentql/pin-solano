@@ -48,6 +48,7 @@
     "figures": "^6.1.0",
     "framer-motion": "12.0.0-alpha.0",
     "graphql": "^16.8.2",
+    "immer": "^10.1.1",
     "isomorphic-dompurify": "^2.15.0",
     "kbar": "0.1.0-beta.45",
     "mongodb": "^6.8.0",
