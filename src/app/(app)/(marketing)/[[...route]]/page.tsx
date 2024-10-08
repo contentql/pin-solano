@@ -11,12 +11,13 @@ export const dynamic = 'force-dynamic'
 export async function generateMetadata({
   params,
 }: {
-  params: { route: string[] }
+  params: Promise<{ route: string[] }>
 }): Promise<Metadata | {}> {
+  const param = await params
   try {
     // calling the site-settings to get all the data
     const pageData = await serverClient.page.getPageData({
-      path: params?.route,
+      path: param?.route,
     })
 
     const metadata = pageData.meta
@@ -58,14 +59,15 @@ export async function generateMetadata({
   }
 }
 
-const Page = async ({ params }: { params: { route: string[] } }) => {
+const Page = async ({ params }: { params: Promise<{ route: string[] }> }) => {
+  const param = await params
   try {
     const pageData = await serverClient.page.getPageData({
-      path: params?.route,
+      path: param?.route,
     })
 
     return (
-      <RenderBlocks pageInitialData={pageData as PageType} params={params} />
+      <RenderBlocks pageInitialData={pageData as PageType} params={param} />
     )
   } catch (error: any) {
     if (error?.message === 'Pages not found') {
