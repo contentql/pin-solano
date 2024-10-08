@@ -80,7 +80,7 @@ export const userRouter = router({
         collection: COLLECTION_SLUG_USER,
         id: user.id,
       })
-      const cookieStore = cookies()
+      const cookieStore = await cookies()
       cookieStore.delete('payload-token')
 
       return { success: true }

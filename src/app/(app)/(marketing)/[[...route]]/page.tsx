@@ -15,15 +15,15 @@ interface PageProps {
   params: Promise<{ route: string[] }>
 }
 const Page: NextPage<PageProps> = async ({ params }) => {
-  const parsedParams = await params
+  const syncParams = await params
   try {
     const pageData = await serverClient.page.getPageData({
-      path: parsedParams?.route,
+      path: syncParams?.route,
     })
     return (
       <RenderBlocks
         pageInitialData={pageData as PageType}
-        params={parsedParams}
+        params={syncParams}
       />
     )
   } catch (error: any) {

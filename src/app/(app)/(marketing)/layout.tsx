@@ -8,7 +8,7 @@ import { getCurrentUser } from '@/utils/getCurrentUser'
 const MarketingLayout = async ({ children }: { children: React.ReactNode }) => {
   const siteSettingsData = await serverClient.siteSettings.getSiteSettings()
 
-  const headersList = headers()
+  const headersList = await headers()
   const user = await getCurrentUser(headersList)
 
   return (

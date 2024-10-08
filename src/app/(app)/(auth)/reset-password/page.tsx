@@ -6,11 +6,12 @@ import { ResetPasswordView } from '@/components/auth/reset-password'
 import withNoAuth from '@/utils/withNoAuth'
 
 interface PageProps {
-  searchParams: Record<string, string>
+  searchParams: Promise<Record<string, string>>
 }
 
-const ResetPasswordPage: NextPage<PageProps> = ({ searchParams }) => {
-  const token = searchParams?.token || null
+const ResetPasswordPage: NextPage<PageProps> = async ({ searchParams }) => {
+  const syncSearchParams = await searchParams
+  const token = syncSearchParams?.token || null
 
   if (!token) {
     toast.error('Reset password token is missing. Please try again.')

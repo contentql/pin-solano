@@ -18,8 +18,8 @@ const AccountLayout: React.FC<LayoutProps> = async ({ children }) => {
     draft: false,
   })
 
-  const headersList = headers()
-  const user = await getCurrentUser(await headersList)
+  const headersList = await headers()
+  const user = await getCurrentUser(headersList)
 
   return (
     <div className='flex min-h-screen flex-col'>

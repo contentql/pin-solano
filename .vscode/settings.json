@@ -25,7 +25,11 @@
     "tanstack",
     "trivago",
     "trpc",
-    "yalc"
+    "yalc",
+    "immer",
+    "pinterest",
+    "quora",
+    "tiktok"
   ],
   "npm.packageManager": "pnpm",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
