@@ -1,14 +1,13 @@
 import { router } from '@/trpc'
+import { authRouter } from '@/trpc/routers/auth'
 import { authorRouter } from '@/trpc/routers/author'
 import { blogRouter } from '@/trpc/routers/blog'
 import { pageRouter } from '@/trpc/routers/page'
+import { searchRouter } from '@/trpc/routers/search'
+import { seedRouter } from '@/trpc/routers/seed'
 import { siteSettingsRouter } from '@/trpc/routers/site-settings'
 import { tagRouter } from '@/trpc/routers/tag'
-
-import { authRouter } from './auth'
-import { searchRouter } from './search'
-import { seedRouter } from './seed'
-import { userRouter } from './user/user-route'
+import { userRouter } from '@/trpc/routers/user'
 
 export const appRouter = router({
   auth: authRouter,
