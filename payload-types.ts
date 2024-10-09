@@ -69,6 +69,7 @@ export interface Page {
         | HomeTagsType
         | BlogsHeroType
         | HeroType
+        | DisqusCommentsType
       )[]
     | null;
   meta?: {
@@ -397,6 +398,17 @@ export interface HeroType {
   id?: string | null;
   blockName?: string | null;
   blockType: 'Hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DisqusCommentsType".
+ */
+export interface DisqusCommentsType {
+  title?: string | null;
+  shortName: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'DisqusComments';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
