@@ -1,5 +1,6 @@
 import { headers } from 'next/headers'
 
+import Branding from '@/components/Branding'
 import Footer from '@/payload/blocks/Footer/Footer'
 import Navbar from '@/payload/blocks/Header'
 import { serverClient } from '@/trpc/serverClient'
@@ -16,6 +17,7 @@ const MarketingLayout = async ({ children }: { children: React.ReactNode }) => {
       <Navbar initData={siteSettingsData} />
       <div className='flex-grow'>{children}</div>
       <Footer initData={siteSettingsData} />
+      <Branding />
     </div>
   )
 }
