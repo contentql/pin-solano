@@ -3,11 +3,9 @@ import { Skeleton } from './Skelton'
 const TagCardSkelton = () => {
   return (
     <div className='container'>
-      <div className='mx-auto grid grid-cols-1 gap-x-8 rounded-2xl p-2 md:grid-cols-2 md:p-20 lg:grid-cols-3 xl:grid-cols-4'>
+      <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 py-20'>
         {[0, 1, 2, 3].map((_, idx) => (
-          <Skeleton
-            key={idx}
-            className='h-[18rem] w-[16rem] rounded-2xl'></Skeleton>
+          <Skeleton key={idx} className='h-80 w-64 rounded-2xl'></Skeleton>
         ))}
       </div>
     </div>
