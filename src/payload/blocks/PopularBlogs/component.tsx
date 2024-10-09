@@ -35,7 +35,10 @@ const PopularBlogs: React.FC<PopularBlogsTypes> = ({ ...block }) => {
                     ((blog?.value as Blog)?.blogImage as Media)?.url || ''
                   }>
                   <p className='text-md font-semibold'>
-                    {readingTime(slateHtml((blog?.value as Blog)?.content))}
+                    {
+                      readingTime(slateHtml((blog?.value as Blog)?.content))
+                        .text
+                    }
                   </p>
                   <p className='pt-2 text-sm font-semibold'>
                     Date: {formatDate((blog?.value as Blog)?.createdAt)}
