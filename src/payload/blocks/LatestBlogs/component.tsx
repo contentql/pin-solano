@@ -13,7 +13,7 @@ import Slider from 'react-slick'
 
 // import 'slick-carousel/slick/slick.css'
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 const LatestBlogs: React.FC<LatestBlogsTypes> = ({ ...block }) => {
   const readingTime = require('reading-time')
@@ -45,9 +45,8 @@ const LatestBlogs: React.FC<LatestBlogsTypes> = ({ ...block }) => {
                         }>
                         <p className='text-md font-semibold'>
                           {
-                            readingTime(
-                              slateHtml((blog?.value as Blog)?.content),
-                            )?.text
+                            readingTime(getHTML((blog?.value as Blog)?.content))
+                              ?.text
                           }
                         </p>
                         <p className='pt-2 text-sm font-semibold'>
@@ -77,7 +76,7 @@ const LatestBlogs: React.FC<LatestBlogsTypes> = ({ ...block }) => {
                       }>
                       <p className='text-md font-semibold'>
                         {
-                          readingTime(slateHtml((blog?.value as Blog)?.content))
+                          readingTime(getHTML((blog?.value as Blog)?.content))
                             ?.text
                         }
                       </p>

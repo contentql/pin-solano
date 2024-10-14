@@ -4,7 +4,7 @@ import { useResponsive } from '../common/hooks/useResponsive'
 import { Blog, Media, PopularBlogsTypes } from '@payload-types'
 
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 import BlogPostCard, { DirectionAwareHover } from './components/BlogPostCard'
 import PopularBlogCard from './components/PopularBlogCard'
@@ -35,10 +35,7 @@ const PopularBlogs: React.FC<PopularBlogsTypes> = ({ ...block }) => {
                     ((blog?.value as Blog)?.blogImage as Media)?.url || ''
                   }>
                   <p className='text-md font-semibold'>
-                    {
-                      readingTime(slateHtml((blog?.value as Blog)?.content))
-                        .text
-                    }
+                    {readingTime(getHTML((blog?.value as Blog)?.content)).text}
                   </p>
                   <p className='pt-2 text-sm font-semibold'>
                     Date: {formatDate((blog?.value as Blog)?.createdAt)}

@@ -8,7 +8,7 @@ import { LuAlarmCheck } from 'react-icons/lu'
 
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 interface AnimatedBlogCardProp {
   blogData: Blog
@@ -54,7 +54,7 @@ const AnimatedBlogCard: React.FC<AnimatedBlogCardProp> = ({
 
             <div className='flex items-center gap-x-2'>
               <LuAlarmCheck size={24} />
-              {readingTime(slateHtml(blogData?.content))?.text}
+              {readingTime(getHTML(blogData?.content))?.text}
             </div>
           </div>
           <div

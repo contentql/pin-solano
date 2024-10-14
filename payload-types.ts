@@ -512,7 +512,10 @@ export interface PayloadMigration {
  * via the `definition` "site-settings".
  */
 export interface SiteSetting {
-  monetization: any;
+   monetization?: {
+    adSenseId?: string | null;
+    measurementId?: string | null;
+  };
   id: string;
   general: {
     title: string;

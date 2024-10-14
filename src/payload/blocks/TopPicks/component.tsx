@@ -10,7 +10,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 const TopPicks: React.FC<TopPicksTypes> = ({ ...block }) => {
   const { isMobile } = useResponsive()
@@ -32,10 +32,7 @@ const TopPicks: React.FC<TopPicksTypes> = ({ ...block }) => {
                     ((blog?.value as Blog)?.blogImage as Media)?.url || ''
                   }>
                   <p className='text-md font-semibold'>
-                    {
-                      readingTime(slateHtml((blog?.value as Blog)?.content))
-                        ?.text
-                    }
+                    {readingTime(getHTML((blog?.value as Blog)?.content))?.text}
                   </p>
                   <p className='pt-2 text-sm font-semibold'>
                     Date: {formatDate((blog?.value as Blog)?.createdAt)}

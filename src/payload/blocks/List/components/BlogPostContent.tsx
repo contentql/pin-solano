@@ -5,13 +5,12 @@ import TagsCard from '../../common/components/tagsCard'
 import { env } from '@env'
 import { Blog, Media, Tag } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
-import { payloadSlateToHtmlConfig, slateToHtml } from '@slate-serializers/html'
 import { motion } from 'framer-motion'
-import DOMPurify from 'isomorphic-dompurify'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 
 import { trpc } from '@/trpc/client'
+import { getHTML } from '@/utils/slateToHTML'
 
 interface Tags extends Tag {
   count: number
@@ -36,11 +35,10 @@ export const BlogPostContent = ({ blog }: { blog: Blog }) => {
     date.getMonth() + 1
   }/${date.getFullYear()}`
 
-  const html = slateToHtml(dataToUse?.content, payloadSlateToHtmlConfig)
-  const sanitizeHtml = DOMPurify.sanitize(html)
+  const html = getHTML(dataToUse?.content)
 
   const readingTime = require('reading-time')
-  const blogReadTime = readingTime(sanitizeHtml || '')
+  const blogReadTime = readingTime(html || '')
 
   function formatDate(isoDateString: string) {
     const date = new Date(isoDateString)
@@ -131,7 +129,7 @@ export const BlogPostContent = ({ blog }: { blog: Blog }) => {
                 <div className='mt-14 w-full text-xl leading-7 '>
                   <div
                     className='prose !max-w-none text-justify text-[#d1d5db] md:prose-xl'
-                    dangerouslySetInnerHTML={{ __html: sanitizeHtml }}
+                    dangerouslySetInnerHTML={{ __html: html }}
                   />
                 </div>
                 <div className='ml-6 w-full md:w-[20%]'>

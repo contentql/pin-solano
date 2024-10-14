@@ -9,7 +9,7 @@ import { AnimatedTooltip } from '@/components/common/AnimatedTooltip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 const BlogListItems: React.FC<{ blogsData: Blog[] }> = ({ blogsData }) => {
   const readingTime = require('reading-time')
@@ -26,7 +26,7 @@ const BlogListItems: React.FC<{ blogsData: Blog[] }> = ({ blogsData }) => {
                 <DirectionAwareHover
                   imageUrl={(blog?.blogImage as Media)?.url || ''}>
                   <p className='text-md font-semibold'>
-                    {readingTime(slateHtml(blog?.content))?.text}
+                    {readingTime(getHTML(blog?.content))?.text}
                   </p>
                   <p className='pt-2 text-sm font-semibold'>
                     Date: {formatDate(blog?.createdAt)}

@@ -16,7 +16,7 @@ import BlogPostCard, {
 } from '@/payload/blocks/PopularBlogs/components/BlogPostCard'
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 export default function AuthorBlogs({
   blogsData,
@@ -258,7 +258,7 @@ const Blogs = ({ blogsData }: { blogsData: Blog[] }) => {
                 <DirectionAwareHover
                   imageUrl={(blog?.blogImage as Media)?.url || ''}>
                   <p className='text-md font-semibold'>
-                    {readingTime(slateHtml(blog?.content))?.text}
+                    {readingTime(getHTML(blog?.content))?.text}
                   </p>
                   <p className='pt-2 text-sm font-semibold'>
                     Date: {formatDate(blog?.createdAt)}

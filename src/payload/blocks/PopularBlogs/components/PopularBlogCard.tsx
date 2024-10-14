@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 const PopularBlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
   const readingTime = require('reading-time')
@@ -50,7 +50,7 @@ const PopularBlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
           'absolute -bottom-2 flex w-full translate-y-10 transform-gpu flex-row items-center justify-between p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100',
         )}>
         <div className='font-bold text-white'>
-          {readingTime(slateHtml(blog?.content))?.text}
+          {readingTime(getHTML(blog?.content))?.text}
         </div>
         <button className='rounded-lg p-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
           View More

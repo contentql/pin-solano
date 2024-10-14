@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 import { formatDate } from '@/utils/dateFormatter'
-import { slateHtml } from '@/utils/slateToHtml'
+import { getHTML } from '@/utils/slateToHTML'
 
 interface RecentPostCardProps {
   blog: Blog
@@ -17,7 +17,7 @@ const RecentPostCard: React.FC<RecentPostCardProps> = ({ blog }) => {
       href={`/blog/${blog?.slug}`}
       className='flex flex-col space-y-4 rounded-3xl border-none bg-[#1e2846] p-4 text-white'>
       <div className='flex gap-x-4 text-gray-400'>
-        <p>{readingTime(slateHtml(blog?.content))?.text}</p>
+        <p>{readingTime(getHTML(blog?.content))?.text}</p>
         <span>-</span>
         <p>{formatDate(blog?.createdAt)}</p>
       </div>
