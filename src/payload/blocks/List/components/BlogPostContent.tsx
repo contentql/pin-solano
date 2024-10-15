@@ -128,7 +128,7 @@ export const BlogPostContent = ({ blog }: { blog: Blog }) => {
               <div className='mx-auto flex w-11/12 flex-col justify-between md:flex-row'>
                 <div className='mt-14 w-full text-xl leading-7 '>
                   <div
-                    className='prose !max-w-none text-justify text-[#d1d5db] md:prose-xl'
+                    className='prose !max-w-none text-justify text-[#d1d5db] md:prose-xl  [&_iframe]:aspect-video [&_iframe]:w-full [&_iframe]:rounded'
                     dangerouslySetInnerHTML={{ __html: html }}
                   />
                 </div>
