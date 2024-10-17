@@ -49,9 +49,14 @@ const SignInForm = () => {
     error: signInError,
     isSuccess: isSignInSuccess,
   } = trpc.auth.signIn.useMutation({
-    onSuccess: () => {
+    onSuccess: result => {
       toast.success('logged in successfully')
-      router.push('/')
+      const isAdmin = result?.user?.role?.includes('admin')
+      if (isAdmin) {
+        router.push('/admin')
+      } else {
+        router.push('/')
+      }
     },
     onError: () => {
       toast.error('Unable to login, try again!')
