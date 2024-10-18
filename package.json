@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "@contentql/core": "^0.3.0",
+    "@contentql/core": "^0.3.2",
     "@hookform/resolvers": "^3.4.0",
     "@payloadcms/live-preview-react": "3.0.0-beta.111",
     "@payloadcms/next": "3.0.0-beta.111",
@@ -54,7 +54,7 @@
     "mongodb": "^6.8.0",
     "next": "15.0.0-canary.173",
     "node-schedule": "^2.1.1",
-    "nprogress": "^0.2.0",
+    "next-nprogress-bar": "^2.3.14",
     "ora": "^8.0.1",
     "payload": "3.0.0-beta.111",
     "prettier": "^3.3.2",

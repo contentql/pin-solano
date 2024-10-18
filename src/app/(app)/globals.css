@@ -134,4 +134,9 @@ input:-moz-autofill {
   @apply text-[#d4d4d4];
 }
 
+img {
+  object-fit: cover;
+  object-position: top;
+}
+
 @import '../../../node_modules/slick-carousel/slick/slick.css';
