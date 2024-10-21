@@ -126,16 +126,18 @@ const Form = ({
           })}
       </div>
 
-      <button
-        type='submit'
-        disabled={isFormSubmissionPending}
-        className='mt-4 h-10 max-h-10 min-h-[40px] w-full rounded-md bg-primary text-[14px] font-medium text-white'>
-        {isFormSubmissionPending
-          ? 'Submitting...'
-          : submitButtonLabel
-            ? submitButtonLabel
-            : 'Submit'}
-      </button>
+      <div className='flex justify-end'>
+        <button
+          type='submit'
+          disabled={isFormSubmissionPending}
+          className='mt-4 h-10 max-h-10 min-h-[40px] rounded-md bg-primary px-4 text-[14px] font-medium text-white'>
+          {isFormSubmissionPending
+            ? 'Submitting...'
+            : submitButtonLabel
+              ? submitButtonLabel
+              : 'Submit'}
+        </button>
+      </div>
     </form>
   )
 }

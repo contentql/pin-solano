@@ -16,7 +16,7 @@ const FormBlock: React.FC<FormProps> = ({ params, ...block }) => {
       : undefined
 
   return (
-    <div className='mx-auto max-w-7xl space-y-8 pb-14 pt-40 text-base-content'>
+    <div className='mx-auto max-w-5xl space-y-8 pb-14 pt-40 text-base-content'>
       <h4 className='mb-8 text-2xl font-semibold text-base-content'>
         {block?.title}
       </h4>
