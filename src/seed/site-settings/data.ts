@@ -53,6 +53,17 @@ export const siteSettingsData: siteSettingsDataType = {
           },
         },
       },
+      {
+        group: false,
+        menuLink: {
+          type: 'reference',
+          label: '',
+          page: {
+            relationTo: 'pages',
+            value: '',
+          },
+        },
+      },
     ],
   },
   footer: {

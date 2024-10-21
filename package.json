@@ -29,6 +29,8 @@
     "@payloadcms/ui": "3.0.0-beta.111",
     "@payloadcms/translations": "beta",
     "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-checkbox": "^1.1.2",
+    "@radix-ui/react-select": "^2.1.2",
     "@react-email/components": "^0.0.22",
     "@slate-serializers/html": "^2.2.1",
     "@t3-oss/env-nextjs": "^0.10.1",

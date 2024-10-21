@@ -1,6 +1,7 @@
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { TRPCError } from '@trpc/server'
+import ora from 'ora'
 
 import { seedAuthorDetailsPage } from '@/seed/author-details-page'
 import { seedAuthors } from '@/seed/authors'
@@ -8,6 +9,8 @@ import { seedAuthorsPage } from '@/seed/authors-page'
 import { seedBlogDetailsPage } from '@/seed/blog-details-page'
 import { seedBlogs } from '@/seed/blogs'
 import { seedBlogsPage } from '@/seed/blogs-page'
+import { seedContactPage } from '@/seed/contact-page'
+import { seedForm } from '@/seed/forms'
 import { seedHomePage } from '@/seed/home-page'
 import { seedSiteSetting } from '@/seed/site-settings'
 import { seedTagDetailsPage } from '@/seed/tag-details-page'
@@ -21,10 +24,14 @@ const payload = await getPayloadHMR({ config: configPromise })
 export const seedRouter = router({
   runSeed: publicProcedure.mutation(async () => {
     try {
-      // Ensure that the seeding functions are called in the correct order.
-      // The blogs seeding depends on tags and authors being seeded first.
-      // Therefore, make sure to seed tags and authors before seeding blogs.
+      const spinner = ora({
+        text: 'Starting the seeding process...',
+        color: 'cyan',
+        spinner: 'dots',
+      }).start()
+      const forms = await seedForm(spinner)
       console.log('starting seed process...')
+      const contactPage = await seedContactPage({ spinner, forms })
       await seedAuthors() // Then seed authors
       console.log('completed authors seed')
       await seedTagsPage()
@@ -41,6 +48,7 @@ export const seedRouter = router({
       console.log('completed blogs seed')
       await seedHomePage()
       console.log('completed home page')
+
       await seedSiteSetting()
       console.log('completed site-settings seed')
       console.log('completed seeding process')

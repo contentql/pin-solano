@@ -5,10 +5,10 @@ import { Page } from '@payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import React from 'react'
 
-import { blocksJSX } from '@/payload/blocks'
 import { trpc } from '@/trpc/client'
 import { cn } from '@/utils/cn'
 
+import { blocksJSX } from './BlocksJSX'
 import { Params } from './types'
 
 interface RenderBlocksProps {

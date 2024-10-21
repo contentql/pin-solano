@@ -22,7 +22,7 @@ const seed = async (): Promise<SiteSetting> => {
       collection: 'pages',
       where: {
         slug: {
-          in: ['blogs', 'authors', 'tags'],
+          in: ['blogs', 'authors', 'contact', 'tags'],
         },
       },
     })
