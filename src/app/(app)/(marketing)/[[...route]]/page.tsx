@@ -1,3 +1,4 @@
+import { env } from '@env'
 import configPromise from '@payload-config'
 import { Page as PageType } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
@@ -11,15 +12,19 @@ import { serverClient } from '@/trpc/serverClient'
 const payload = await getPayloadHMR({
   config: configPromise,
 })
+
 interface PageProps {
   params: Promise<{ route: string[] }>
 }
+
 const Page: NextPage<PageProps> = async ({ params }) => {
   const syncParams = await params
+
   try {
     const pageData = await serverClient.page.getPageData({
       path: syncParams?.route,
     })
+
     return (
       <RenderBlocks
         pageInitialData={pageData as PageType}
@@ -40,65 +45,49 @@ export async function generateMetadata({
 }: {
   params: Promise<{ route: string[] }>
 }): Promise<Metadata | {}> {
-  const parsedParams = await params
+  const { route } = await params
+
   try {
     // calling the site-settings to get all the data
     const pageData = await serverClient.page.getPageData({
-      path: parsedParams?.route,
+      path: route,
     })
+
+    let metadata = pageData.meta
 
     const block = pageData.layout
       ?.filter(block => block.blockType === 'Details')
       ?.at(0)
-    if (pageData?.isDynamic && block?.collectionSlug) {
+
+    // checking for dynamic page
+    if (
+      pageData?.isDynamic &&
+      block?.collectionSlug &&
+      block?.collectionSlug !== 'users'
+    ) {
       const { docs } = await payload.find({
         collection: block?.collectionSlug,
         where: {
           slug: {
-            equals: parsedParams?.route.at(-1),
+            equals: route.at(-1),
           },
         },
+        depth: 5,
       })
-      const doc = docs?.at(0)
-      const metadata = doc?.meta
-      if (metadata) {
-        let ogImage = []
-        const title = metadata.title
-        const description = metadata.description
-        if (metadata.image && typeof metadata.image !== 'string') {
-          ogImage.push({
-            url: metadata.image.sizes?.blogImageSize2?.url!,
-            height: 630,
-            width: 1200,
-            alt: `og image`,
-          })
-        }
-        return {
-          title,
-          description,
-          openGraph: {
-            title,
-            description,
-            images: ogImage,
-          },
-          twitter: {
-            title,
-            description,
-            images: ogImage,
-          },
-        }
-      }
-    }
-    const metadata = pageData?.meta
 
-    if (metadata) {
+      const doc = docs?.at(0)
+
+      metadata = doc?.meta || {}
+    }
+
+    if (metadata && Object.keys(metadata).length) {
       let ogImage = []
       const title = metadata.title
       const description = metadata.description
 
       if (metadata.image && typeof metadata.image !== 'string') {
         ogImage.push({
-          url: metadata.image.sizes?.blogImageSize2?.url!,
+          url: metadata.image?.url!,
           height: 630,
           width: 1200,
           alt: `og image`,
@@ -108,6 +97,8 @@ export async function generateMetadata({
       return {
         title,
         description,
+        // we're appending the http|https int the env variable
+        metadataBase: env.PAYLOAD_URL as unknown as URL,
         openGraph: {
           title,
           description,
@@ -122,8 +113,8 @@ export async function generateMetadata({
     }
 
     return {}
-  } catch (error) {
-    // in error case returning empty object
+  } catch (error: any) {
+    console.log('error', error?.message)
     return {}
   }
 }
