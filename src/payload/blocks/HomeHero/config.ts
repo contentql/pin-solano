@@ -3,6 +3,7 @@ import { Block } from 'payload'
 const HomeHeroConfig: Block = {
   slug: 'HomeHero',
   interfaceName: 'HomeHeroType',
+  imageURL: '/images//block/home-page.png',
   labels: {
     singular: 'Home Hero Block',
     plural: 'Home Hero Blocks',

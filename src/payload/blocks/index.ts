@@ -5,7 +5,6 @@ import { BlogHeroConfig } from './BlogHero'
 import { DetailsConfig } from './Details'
 import { FormConfig } from './Form'
 import { HeroConfig } from './Hero'
-import { HomeConfig } from './Home'
 import { HomeHeroConfig } from './HomeHero'
 import { HomeTagsConfig } from './HomeTags'
 import { LatestBlogsConfig } from './LatestBlogs'
@@ -16,7 +15,6 @@ import { TopPicksConfig } from './TopPicks'
 // Exporting an array that consolidates all block configurations
 // This array is useful for registering or iterating over all blocks and their configurations in one place
 export const blocks = [
-  HomeConfig,
   DetailsConfig,
   ListConfig,
   HomeHeroConfig,

@@ -3,6 +3,7 @@ import { Block } from 'payload'
 export const BlogHeroConfig: Block = {
   slug: 'BlogHero',
   interfaceName: 'BlogsHeroType',
+  imageURL: '/images/block/blog-hero.png',
   labels: {
     singular: 'Blog Hero Block',
     plural: 'Blogs Hero Blocks',

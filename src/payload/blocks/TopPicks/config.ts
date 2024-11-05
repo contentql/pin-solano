@@ -3,6 +3,7 @@ import { Block } from 'payload'
 export const TopPicksConfig: Block = {
   slug: 'TopPicks',
   interfaceName: 'TopPicksTypes',
+  imageURL: '/images//block/top-picks.png',
   labels: {
     singular: 'Top Picks Block',
     plural: 'Top Picks Blocks',

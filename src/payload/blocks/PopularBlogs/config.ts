@@ -3,6 +3,7 @@ import { Block } from 'payload'
 export const PopularBlogsConfig: Block = {
   slug: 'PopularBlogs',
   interfaceName: 'PopularBlogsTypes',
+  imageURL: '/images//block/popular-blogs.png',
   labels: {
     singular: 'Popular Blogs Block',
     plural: 'Popular Blog Blocks',

@@ -3,6 +3,7 @@ import { Block } from 'payload'
 export const LatestBlogsConfig: Block = {
   slug: 'LatestBlogs',
   interfaceName: 'LatestBlogsTypes',
+  imageURL: '/images//block/latest-blogs.png',
   labels: {
     singular: 'Latest Blog Block',
     plural: 'Latest Blogs Blocks',

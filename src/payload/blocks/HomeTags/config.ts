@@ -3,6 +3,7 @@ import { Block } from 'payload'
 export const HomeTagsConfig: Block = {
   slug: 'HomeTags',
   interfaceName: 'HomeTagsType',
+  imageURL: '/images//block/tags.png',
   labels: {
     singular: 'Tags Block',
     plural: 'Tags Blocks',

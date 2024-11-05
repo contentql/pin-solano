@@ -1,1 +1,55 @@
-@import '../../payload/style/themes/cql/index.scss';
+@use '@payloadcms/next/css';
+@use '@contentql/core/styles';
+.thumbnail-card__thumbnail {
+  height: 260px;
+  & img {
+    height: 100%;
+    object-fit: contain;
+  }
+}
+.thumbnail-card {
+  height: 300px;
+  width: 300px;
+}
+.drawer__content {
+  width: 80% !important;
+}
+.blocks-drawer__blocks {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media screen and (max-width: 1460px) {
+  .thumbnail-card {
+    height: 325px;
+    width: 325px;
+  }
+  .blocks-drawer__blocks {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .blocks-drawer__block {
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1120px) {
+  .thumbnail-card {
+    height: 345px;
+    width: 345px;
+  }
+  .blocks-drawer__blocks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .blocks-drawer__block {
+    margin: auto;
+  }
+}
+@media screen and (max-width: 620px) {
+  .thumbnail-card {
+    height: 350px;
+    width: 350px;
+  }
+  .blocks-drawer__blocks {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .blocks-drawer__block {
+    margin: auto;
+  }
+}

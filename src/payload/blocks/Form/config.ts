@@ -2,7 +2,7 @@ import { Block } from 'payload'
 
 const FormConfig: Block = {
   slug: 'FormBlock',
-  // imageURL: '',
+  imageURL: '/images/block/form.png',
   interfaceName: 'FormType',
   labels: {
     singular: 'Form Block',
