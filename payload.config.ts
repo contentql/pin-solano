@@ -131,11 +131,6 @@ export default cqlConfig({
           label: 'Bio',
           type: 'text',
         },
-        {
-          name: 'image',
-          label: 'Image',
-          type: 'text',
-        },
       ],
       auth: {
         verify: {

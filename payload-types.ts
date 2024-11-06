@@ -295,7 +295,6 @@ export interface User {
       }[]
     | null;
   bio?: string | null;
-  image?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;

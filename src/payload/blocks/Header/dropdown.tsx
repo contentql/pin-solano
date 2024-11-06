@@ -75,7 +75,9 @@ const ProfileDropdown = ({ user }: { user: User }) => {
         <Avatar className='h-10 w-10 cursor-pointer '>
           <AvatarImage
             alt='Profile'
-            src={(user?.imageUrl as Media)?.url || user?.image!}
+            src={
+              (user?.imageUrl as Media)?.url || '/images/default-profile.png'
+            }
           />
           <AvatarFallback />
         </Avatar>

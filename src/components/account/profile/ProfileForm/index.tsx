@@ -93,7 +93,7 @@ const ProfileForm = ({ user }: { user: User }) => {
             </div>
           </div> */}
           <div className='flex flex-col items-center justify-center space-y-5 sm:flex-row sm:space-y-0'>
-            <Profile initialUser={user} />
+            <Profile />
           </div>
 
           <form

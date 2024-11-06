@@ -111,6 +111,9 @@ importers:
       graphql:
         specifier: ^16.8.2
         version: 16.9.0
+      immer:
+        specifier: ^10.1.1
+        version: 10.1.1
       isomorphic-dompurify:
         specifier: ^2.15.0
         version: 2.16.0
