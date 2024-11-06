@@ -2,18 +2,45 @@ import configPromise from '@payload-config'
 import { User } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 
+import { getRandomInt } from '@/utils/getRandomInt'
+
 import { authorImageData, authorsData } from './data'
 
 const payload = await getPayloadHMR({ config: configPromise })
 
 const seed = async (): Promise<(string | User)[]> => {
   try {
-    const formattedAuthorsData = authorsData.map((author, idx) => {
+    const imagesResult = await Promise.allSettled(
+      authorImageData.map(authorImage =>
+        payload.create({
+          collection: 'media',
+          data: {
+            alt: authorImage.alt,
+          },
+          filePath: authorImage.filePath,
+        }),
+      ),
+    )
+
+    const formattedImagesResult = imagesResult
+      .map(result =>
+        result.status === 'fulfilled'
+          ? result.value
+          : `Failed to seed: ${result.reason}`,
+      )
+      .filter(result => typeof result !== 'string')
+
+    const formattedAuthorsData = authorsData.map(authorData => {
+      const authorImageId = formattedImagesResult.at(
+        getRandomInt(0, formattedImagesResult.length - 1),
+      )?.id
+
       return {
-        ...author,
-        image: authorImageData?.at(idx)?.filePath,
+        ...authorData,
+        imageUrl: authorImageId!,
       }
     })
+
     // console.log('author', formattedAuthorsData)
     const results = await Promise.allSettled(
       formattedAuthorsData.map(authorData =>

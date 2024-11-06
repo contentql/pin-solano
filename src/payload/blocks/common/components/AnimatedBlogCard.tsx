@@ -63,10 +63,7 @@ const AnimatedBlogCard: React.FC<AnimatedBlogCardProp> = ({
               <div key={index} className='flex items-center gap-x-2'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={
-                    ((author?.value as User)?.imageUrl as Media)?.url ||
-                    (author?.value as User)?.image!
-                  }
+                  src={((author?.value as User)?.imageUrl as Media)?.url!}
                   alt='author'
                   className='h-8 w-8 rounded-full'
                   // width={8}

@@ -22,7 +22,7 @@ const AuthorsList: React.FC<{ authors: AuthorsListProps[] }> = ({
             <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
               <Avatar className='mb-16 h-24 w-24'>
                 <AvatarImage
-                  src={(author?.imageUrl as Media)?.url || author?.image!}
+                  src={(author?.imageUrl as Media)?.url!}
                   alt='tag'
                 />
                 <AvatarFallback />

@@ -1,3 +1,4 @@
+import path from 'path'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
 export type AuthorDataType = RequiredDataFromCollectionSlug<'users'>
@@ -14,7 +15,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.1@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    image: '',
+    imageUrl: '',
   },
   {
     username: 'Author-2',
@@ -22,7 +23,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.2@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    image: '',
+    imageUrl: '',
   },
   {
     username: 'Author-3',
@@ -30,7 +31,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.3@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    image: '',
+    imageUrl: '',
   },
   {
     username: 'Author-4',
@@ -38,7 +39,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.4@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    image: '',
+    imageUrl: '',
   },
   {
     username: 'Author-5',
@@ -46,7 +47,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.5@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    image: '',
+    imageUrl: '',
   },
   {
     username: 'Author-6',
@@ -54,33 +55,33 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.6@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    image: '',
+    imageUrl: '',
   },
 ]
 
 export const authorImageData: AuthorImageType[] = [
   {
     alt: 'Authors Image',
-    filePath: '/images/seed/blogAuthor-1.jpg',
+    filePath: path.join(process.cwd(), '/public/images/seed/blogAuthor-1.jpg'),
   },
   {
     alt: 'Authors Image',
-    filePath: '/images/seed/blogAuthor-2.jpg',
+    filePath: path.join(process.cwd(), '/public/images/seed/blogAuthor-2.jpg'),
   },
   {
     alt: 'Authors Image',
-    filePath: '/images/seed/blogAuthor-3.jpg',
+    filePath: path.join(process.cwd(), '/public/images/seed/blogAuthor-3.jpg'),
   },
   {
     alt: 'Authors Image',
-    filePath: '/images/seed/blogAuthor-4.jpg',
+    filePath: path.join(process.cwd(), '/public/images/seed/blogAuthor-4.jpg'),
   },
   {
     alt: 'Authors Image',
-    filePath: '/images/seed/blogAuthor-5.jpg',
+    filePath: path.join(process.cwd(), '/public/images/seed/blogAuthor-5.jpg'),
   },
   {
     alt: 'Authors Image',
-    filePath: '/images/seed/blogAuthor-6.jpg',
+    filePath: path.join(process.cwd(), '/public/images/seed/blogAuthor-6.jpg'),
   },
 ]

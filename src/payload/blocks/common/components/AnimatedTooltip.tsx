@@ -74,10 +74,7 @@ export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({ items }) => {
             onMouseMove={handleMouseMove}
             height={100}
             width={100}
-            src={
-              (item?.value?.imageUrl as Media)?.url ||
-              (item?.value?.image as string)
-            }
+            src={(item?.value?.imageUrl as Media)?.url!}
             alt={item?.value?.displayName!}
             className='relative !m-0 h-10 w-10 rounded-full object-cover object-top !p-0 transition  duration-500 group-hover:z-30 group-hover:scale-105'
           />

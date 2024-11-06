@@ -37,10 +37,7 @@ const RecentPostCard: React.FC<RecentPostCardProps> = ({ blog }) => {
           <div className='group flex items-center space-x-2' key={index}>
             <Avatar className='h-5 w-5'>
               <AvatarImage
-                src={
-                  ((author?.value as User)?.imageUrl as Media)?.url ||
-                  (author?.value as User)?.image!
-                }
+                src={((author?.value as User)?.imageUrl as Media)?.url!}
                 alt='user'
               />
               <AvatarFallback />
