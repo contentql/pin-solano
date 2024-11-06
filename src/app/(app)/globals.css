@@ -140,3 +140,20 @@ img {
 }
 
 @import '../../../node_modules/slick-carousel/slick/slick.css';
+
+#disqus-container {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  #disqus-container {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+  }
+}
