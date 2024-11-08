@@ -57,7 +57,7 @@ const WelcomePage = () => {
               <strong>Click below to load demo posts, tags, and users.</strong>
             </p>
             <button
-              className='mt-6 rounded-md bg-[#4f46e5] px-4 py-2 text-orange-50 duration-150 hover:scale-105'
+              className='mt-6 rounded-md bg-indigo-600 px-4 py-2 text-orange-50 duration-150 hover:scale-105 hover:bg-indigo-700'
               disabled={isSeedLoading}
               onClick={handleLoadDemoClick}>
               {isSeedLoading ? 'Loading data...' : 'Load Demo Content'}
@@ -78,7 +78,7 @@ const WelcomePage = () => {
             <div className='flex gap-4'>
               <button
                 onClick={handleConfirmLoad}
-                className='rounded-md bg-primary px-4 py-2 text-white'>
+                className='rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700'>
                 Yes, Load Data
               </button>
               <button
@@ -108,7 +108,7 @@ const WelcomePage = () => {
 
       <style jsx>{`
         .loader {
-          border-top-color: #7248e6;
+          border-top-color: #4f46e5;
           animation: spinner 1s ease-in-out infinite;
         }
         @keyframes spinner {
