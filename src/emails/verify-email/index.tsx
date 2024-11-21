@@ -111,7 +111,7 @@ const infoText = {
 }
 const button = {
   fontSize: '16px',
-  backgroundColor: '#8b5cf6',
+  backgroundColor: '#4f46e5',
   color: '#f1f5f9',
   lineHeight: 1.5,
   borderRadius: '8px',
