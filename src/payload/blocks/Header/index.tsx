@@ -98,7 +98,7 @@ function NavbarMenu({
         }}
         className='fixed z-50 flex w-full items-center justify-between border-gray-200 bg-black px-2 dark:bg-gray-900 md:px-16'>
         <div>
-          <Link href={'/'}>
+          <Link href={'/'} prefetch>
             <Avatar
               className={`h-${data?.navbar?.logo?.height! / 4 || 12} w-${data?.navbar?.logo?.width! / 4 || 12}`}>
               <AvatarImage
@@ -178,16 +178,16 @@ function NavbarMenu({
             <ProfileDropdown user={user} />
           ) : (
             <>
-              <a
+              <Link
                 className='hidden cursor-pointer items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold capitalize text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-150 hover:bg-gray-50 sm:inline-flex'
                 href='/sign-in'>
                 Sign-In
-              </a>
-              <a
+              </Link>
+              <Link
                 className='inline-flex cursor-pointer items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold capitalize text-white shadow-sm transition-all duration-300 hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                 href='/sign-up'>
                 Sign-Up
-              </a>
+              </Link>
             </>
           )}
 
