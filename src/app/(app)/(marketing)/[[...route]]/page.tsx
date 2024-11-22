@@ -1,13 +1,14 @@
 import { env } from '@env'
 import configPromise from '@payload-config'
-import { Page as PageType } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import type { Metadata, NextPage } from 'next'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
 import WelcomePage from '@/components/WelcomePage'
-import RenderBlocks from '@/payload/blocks/RenderBlocks'
+import { blocksJSX } from '@/payload/blocks/BlocksJSX'
 import { serverClient } from '@/trpc/serverClient'
+import { cn } from '@/utils/cn'
 
 const payload = await getPayloadHMR({
   config: configPromise,
@@ -26,10 +27,28 @@ const Page: NextPage<PageProps> = async ({ params }) => {
     })
 
     return (
-      <RenderBlocks
-        pageInitialData={pageData as PageType}
-        params={syncParams}
-      />
+      <Suspense fallback={null}>
+        <div>
+          {pageData?.layout?.map((block, index) => {
+            // Casting to 'React.FC<any>' to bypass TypeScript error related to 'Params' type incompatibility.
+            const Block = blocksJSX[block.blockType] as React.FC<any>
+
+            if (Block) {
+              return (
+                <div
+                  key={index}
+                  className={cn(
+                    index % 2 === 0 ? 'bg-transparent' : 'bg-[#26304e]',
+                  )}>
+                  <Block {...block} params={params} />
+                </div>
+              )
+            }
+
+            return <h3 key={block.id}>Block does not exist </h3>
+          })}
+        </div>
+      </Suspense>
     )
   } catch (error: any) {
     if (error?.message === 'Pages not found') {
