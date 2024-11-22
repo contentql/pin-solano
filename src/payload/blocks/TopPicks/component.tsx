@@ -49,7 +49,7 @@ const TopPicks: React.FC<TopPicksTypes> = ({ ...block }) => {
             <div
               key={index}
               className={`${(blog?.value as Blog)?.selectBlogSize === '2' ? 'col-span-2' : 'col-span-1'}`}>
-              <Link href={`/blog/${(blog?.value as Blog)?.slug}`}>
+              <Link prefetch href={`/blog/${(blog?.value as Blog)?.slug}`}>
                 <AnimatedBlogCard
                   blogData={blog?.value as Blog}
                   index={index}

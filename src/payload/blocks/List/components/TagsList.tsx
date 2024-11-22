@@ -12,7 +12,7 @@ const TagsList: React.FC<{ tags: TagsListProps[] }> = ({ tags }) => {
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 bg-base-100 py-20'>
       {tags?.map((tag, index) => (
-        <Link href={`/tag/${tag?.slug}`} key={index}>
+        <Link prefetch href={`/tag/${tag?.slug}`} key={index}>
           <AnimatedTagCard title={tag?.title} href={tag?.slug!}>
             <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
               <Avatar className='mb-16 h-24 w-24'>

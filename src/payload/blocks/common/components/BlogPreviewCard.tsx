@@ -10,7 +10,10 @@ interface BlogPreviewCardProps {
 
 const BlogPreviewCard: React.FC<BlogPreviewCardProps> = ({ blog }) => {
   return (
-    <Link href={`/blog/${blog?.slug}`} className='col-span-1 row-span-1 '>
+    <Link
+      prefetch
+      href={`/blog/${blog?.slug}`}
+      className='col-span-1 row-span-1 '>
       <div className='group relative h-full w-full text-white  transition-all duration-500 hover:scale-105 '>
         <Avatar className='h-[100%] w-[100%] rounded-3xl object-cover  brightness-50 group-hover:brightness-100'>
           <AvatarImage src={(blog?.blogImage as Media)?.url || ''} alt='blog' />

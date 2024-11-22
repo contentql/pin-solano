@@ -15,7 +15,7 @@ const AuthorsList: React.FC<{ authors: AuthorsListProps[] }> = ({
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 bg-base-100 py-20'>
       {authors?.map((author, index) => (
-        <Link href={`/author/${author?.username}`} key={index}>
+        <Link prefetch href={`/author/${author?.username}`} key={index}>
           <AnimatedTagCard
             title={author?.displayName!}
             href={author?.displayName!}>

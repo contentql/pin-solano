@@ -19,11 +19,11 @@ interface PageProps {
 }
 
 const Page: NextPage<PageProps> = async ({ params }) => {
-  const syncParams = await params
+  const syncParams = (await params).route
 
   try {
     const pageData = await serverClient.page.getPageData({
-      path: syncParams?.route,
+      path: syncParams,
     })
 
     return (
@@ -40,7 +40,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                   className={cn(
                     index % 2 === 0 ? 'bg-transparent' : 'bg-[#26304e]',
                   )}>
-                  <Block {...block} params={params} />
+                  <Block {...block} params={{ route: syncParams }} />
                 </div>
               )
             }
