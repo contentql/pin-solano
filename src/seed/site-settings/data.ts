@@ -1,5 +1,5 @@
 import path from 'path'
-import { SiteSetting } from 'payload-types'
+import { Media, Page, SiteSetting } from 'payload-types'
 
 export type siteSettingsDataType = Omit<SiteSetting, 'id'>
 
@@ -12,12 +12,12 @@ export const siteSettingsData: siteSettingsDataType = {
   general: {
     title: 'Solano',
     description: 'Theme created by contentQL team.',
-    faviconUrl: '',
-    ogImageUrl: '',
+    faviconUrl: '' as unknown as number | Media,
+    ogImageUrl: '' as unknown as number | Media,
   },
   navbar: {
     logo: {
-      imageUrl: '',
+      imageUrl: '' as unknown as number | Media,
     },
     menuLinks: [
       {
@@ -27,7 +27,7 @@ export const siteSettingsData: siteSettingsDataType = {
           label: '',
           page: {
             relationTo: 'pages',
-            value: '',
+            value: '' as unknown as number | Page,
           },
         },
       },
@@ -38,7 +38,7 @@ export const siteSettingsData: siteSettingsDataType = {
           label: '',
           page: {
             relationTo: 'pages',
-            value: '',
+            value: '' as unknown as number | Page,
           },
         },
       },
@@ -49,7 +49,7 @@ export const siteSettingsData: siteSettingsDataType = {
           label: '',
           page: {
             relationTo: 'pages',
-            value: '',
+            value: '' as unknown as number | Page,
           },
         },
       },
@@ -60,7 +60,7 @@ export const siteSettingsData: siteSettingsDataType = {
           label: '',
           page: {
             relationTo: 'pages',
-            value: '',
+            value: '' as unknown as number | Page,
           },
         },
       },
@@ -68,7 +68,7 @@ export const siteSettingsData: siteSettingsDataType = {
   },
   footer: {
     logo: {
-      imageUrl: '',
+      imageUrl: '' as unknown as number | Media,
     },
     footerLinks: [
       {
@@ -78,7 +78,7 @@ export const siteSettingsData: siteSettingsDataType = {
           label: '',
           page: {
             relationTo: 'pages',
-            value: '',
+            value: '' as unknown as number | Page,
           },
         },
       },
@@ -89,7 +89,7 @@ export const siteSettingsData: siteSettingsDataType = {
           label: '',
           page: {
             relationTo: 'pages',
-            value: '',
+            value: '' as unknown as number | Page,
           },
         },
       },
@@ -100,7 +100,7 @@ export const siteSettingsData: siteSettingsDataType = {
           label: '',
           page: {
             relationTo: 'pages',
-            value: '',
+            value: '' as unknown as number | Page,
           },
         },
       },

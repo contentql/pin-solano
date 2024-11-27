@@ -17,7 +17,7 @@ interface AnimatedTooltipProps {
 }
 
 export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({ items }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<string | null>(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const springConfig = { stiffness: 100, damping: 5 }
   const x = useMotionValue(0) // going to set this value on mouse move
   // rotate the tooltip
@@ -41,7 +41,7 @@ export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({ items }) => {
         <div
           className='group  relative -mr-4'
           key={item?.value?.displayName}
-          onMouseEnter={() => setHoveredIndex(item?.value?.id!)}
+          onMouseEnter={() => setHoveredIndex((item?.value as User)?.id)!}
           onMouseLeave={() => setHoveredIndex(null)}>
           {hoveredIndex === item?.value?.id && (
             <motion.div

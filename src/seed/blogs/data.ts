@@ -1,3 +1,4 @@
+import { Media, Tag, User } from '@payload-types'
 import path from 'path'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
@@ -14,7 +15,7 @@ export const blogsData: BlogDataType[] = [
     slug: 'will-ai-enabled-processors-spark-a-pc-supercycle-this-year',
     description:
       'AI-enabled processors could drive a PC supercycle this year by significantly boosting performance and enabling advanced applications. This innovation is expected to stimulate demand in both consumer and enterprise markets',
-    blogImage: '',
+    blogImage: '' as unknown as number | Media,
 
     content: [
       {
@@ -155,13 +156,13 @@ export const blogsData: BlogDataType[] = [
     author: [
       {
         relationTo: 'users',
-        value: '',
+        value: '' as unknown as number | User,
       },
     ],
     tags: [
       {
         relationTo: 'tags',
-        value: '',
+        value: '' as unknown as number | Tag,
       },
     ],
   },
@@ -172,7 +173,7 @@ export const blogsData: BlogDataType[] = [
     slug: 'i-created-a-viral-tech-blog-from-scratch-and-sold-it-for-six-figures-my-journey',
     description:
       'Creating a viral tech blog from scratch and selling it for six figures involved identifying trending tech topics, producing engaging content, and leveraging SEO and social media strategies to grow the audience.',
-    blogImage: '',
+    blogImage: '' as unknown as number | Media,
 
     content: [
       {
@@ -313,13 +314,13 @@ export const blogsData: BlogDataType[] = [
     author: [
       {
         relationTo: 'users',
-        value: '',
+        value: '' as unknown as number | User,
       },
     ],
     tags: [
       {
         relationTo: 'tags',
-        value: '',
+        value: '' as unknown as number | Tag,
       },
     ],
   },
@@ -329,7 +330,7 @@ export const blogsData: BlogDataType[] = [
     slug: 'standout-tech-products-of-2023',
     description:
       'Standout tech products of 2023 include the Apple Vision Pro, a cutting-edge mixed reality headset; the Tesla Model S Plaid, featuring advanced autonomous driving capabilities; the Nvidia RTX 4090 GPU, delivering unprecedented graphics performance.',
-    blogImage: '',
+    blogImage: '' as unknown as number | Media,
 
     content: [
       {
@@ -470,13 +471,13 @@ export const blogsData: BlogDataType[] = [
     author: [
       {
         relationTo: 'users',
-        value: '',
+        value: '' as unknown as number | User,
       },
     ],
     tags: [
       {
         relationTo: 'tags',
-        value: '',
+        value: '' as unknown as number | Tag,
       },
     ],
   },
@@ -486,7 +487,7 @@ export const blogsData: BlogDataType[] = [
     slug: 'coordinatehq-takes-the-noise-out-of-project-management-systems',
     description:
       'CoordinateHQ streamlines project management by reducing clutter and enhancing focus through intuitive interfaces and intelligent task prioritization. By integrating seamlessly with existing tools and employing AI-driven insights, it simplifies collaboration and boosts team productivity',
-    blogImage: '',
+    blogImage: '' as unknown as number | Media,
 
     content: [
       {
@@ -627,13 +628,13 @@ export const blogsData: BlogDataType[] = [
     author: [
       {
         relationTo: 'users',
-        value: '',
+        value: '' as unknown as number | User,
       },
     ],
     tags: [
       {
         relationTo: 'tags',
-        value: '',
+        value: '' as unknown as number | Tag,
       },
     ],
   },

@@ -1,3 +1,4 @@
+import { Blog, Tag } from '@payload-types'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
 export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
@@ -18,10 +19,10 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
         },
       ],
       tags: [
-        { relationTo: 'tags', value: '' },
-        { relationTo: 'tags', value: '' },
-        { relationTo: 'tags', value: '' },
-        { relationTo: 'tags', value: '' },
+        { relationTo: 'tags', value: '' as unknown as number | Tag },
+        { relationTo: 'tags', value: '' as unknown as number | Tag },
+        { relationTo: 'tags', value: '' as unknown as number | Tag },
+        { relationTo: 'tags', value: '' as unknown as number | Tag },
       ],
       blockType: 'HomeHero',
     },
@@ -32,27 +33,27 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
       popularBlogs: [
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
       ],
       blockType: 'PopularBlogs',
@@ -62,23 +63,23 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
       latestBlogs: [
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
       ],
       blockType: 'LatestBlogs',
@@ -88,15 +89,15 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
       topPicks: [
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
         {
           relationTo: 'blogs',
-          value: '',
+          value: '' as unknown as number | Blog,
         },
       ],
       blockType: 'TopPicks',
@@ -108,19 +109,19 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
       tags: [
         {
           relationTo: 'tags',
-          value: '',
+          value: '' as unknown as number | Tag,
         },
         {
           relationTo: 'tags',
-          value: '',
+          value: '' as unknown as number | Tag,
         },
         {
           relationTo: 'tags',
-          value: '',
+          value: '' as unknown as number | Tag,
         },
         {
           relationTo: 'tags',
-          value: '',
+          value: '' as unknown as number | Tag,
         },
       ],
       blockType: 'HomeTags',

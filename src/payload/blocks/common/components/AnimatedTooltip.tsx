@@ -15,7 +15,7 @@ interface AnimatedTooltipProps {
 }
 
 export const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({ items }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<string | null>(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const springConfig = { stiffness: 100, damping: 5 }
   const x = useMotionValue(0) // going to set this value on mouse move
   // rotate the tooltip

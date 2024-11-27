@@ -10,7 +10,7 @@ export const individualTagPageData: RequiredDataFromCollectionSlug<'pages'> = {
   title: 'Tag Page',
   isDynamic: true,
   slug: 'tag/[name]',
-  parent: '',
+  parent: null,
   _status: 'published',
   layout: [
     {

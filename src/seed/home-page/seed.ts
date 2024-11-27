@@ -25,7 +25,7 @@ const seed = async (): Promise<Page> => {
             ...block,
             tags: block?.tags?.map((tag, idx) => ({
               relationTo: 'tags',
-              value: allTags?.at(idx)?.id || '',
+              value: allTags?.at(idx)?.id as number,
             })),
           }
         } else if (block?.blockType === 'PopularBlogs') {
@@ -33,7 +33,7 @@ const seed = async (): Promise<Page> => {
             ...block,
             popularBlogs: block?.popularBlogs?.map((popularBlog, idx) => ({
               relationTo: 'blogs',
-              value: allBlogs?.at(0)?.id || '',
+              value: allBlogs?.at(0)?.id as number,
             })),
           }
         } else if (block?.blockType === 'LatestBlogs') {
@@ -41,7 +41,7 @@ const seed = async (): Promise<Page> => {
             ...block,
             latestBlogs: block?.latestBlogs?.map((latestBlog, idx) => ({
               relationTo: 'blogs',
-              value: allBlogs?.at(0)?.id || '',
+              value: allBlogs?.at(0)?.id as number,
             })),
           }
         } else if (block?.blockType === 'TopPicks') {
@@ -49,7 +49,7 @@ const seed = async (): Promise<Page> => {
             ...block,
             topPicks: block?.topPicks?.map((topPick, idx) => ({
               relationTo: 'blogs',
-              value: allBlogs?.at(0)?.id || '',
+              value: allBlogs?.at(0)?.id as number,
             })),
           }
         } else if (block?.blockType === 'HomeTags') {
@@ -57,7 +57,7 @@ const seed = async (): Promise<Page> => {
             ...block,
             tags: block?.tags?.map((tag, idx) => ({
               relationTo: 'tags',
-              value: allTags?.at(0)?.id || '',
+              value: allTags?.at(0)?.id as number,
             })),
           }
         }
