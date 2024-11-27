@@ -14,6 +14,7 @@ export const env = createEnv({
   server: {
     DATABASE_URI: z.string().min(1),
     PAYLOAD_SECRET: z.string().min(1),
+    DATABASE_SECRET: z.string().min(1),
     PAYLOAD_URL: z.string().url(),
     S3_ENDPOINT: z.string().min(1),
     S3_ACCESS_KEY_ID: z.string().min(1),
@@ -30,6 +31,7 @@ export const env = createEnv({
   },
   runtimeEnv: {
     DATABASE_URI: process.env.DATABASE_URI,
+    DATABASE_SECRET: process.env.DATABASE_SECRET,
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
     NEXT_PUBLIC_PUBLIC_URL: changeBasedOnENV(
       process.env.NEXT_PUBLIC_PUBLIC_URL ||

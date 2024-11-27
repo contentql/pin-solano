@@ -43,7 +43,7 @@ const CommandBar = () => {
       if (data && data.length > 0) {
         const list = data.map(result => {
           return {
-            id: result.id,
+            id: result.id.toString(),
             name: result.parsedValues?.title || '',
             subtitle: result.parsedValues?.description || '',
             perform: () => alert(result?.parsedValues?.path),

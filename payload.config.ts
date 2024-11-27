@@ -1,5 +1,6 @@
 import { collectionSlug, cqlConfig } from '@contentql/core'
 import { env } from '@env'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
 import { RichTextAdapterProvider } from 'payload'
@@ -73,7 +74,13 @@ export default cqlConfig({
   baseURL: env.PAYLOAD_URL,
 
   secret: env.PAYLOAD_SECRET,
-  dbURL: env.DATABASE_URI,
+
+  db: sqliteAdapter({
+    client: {
+      url: env.DATABASE_URI,
+      authToken: env.DATABASE_SECRET,
+    },
+  }),
 
   s3: {
     accessKeyId: env.S3_ACCESS_KEY_ID,

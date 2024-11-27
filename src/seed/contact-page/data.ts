@@ -1,4 +1,4 @@
-import { Page } from 'payload-types'
+import { Form, Page } from 'payload-types'
 
 export type ContactPageDataType = Omit<Page, 'id' | 'createdAt' | 'updatedAt'>
 
@@ -13,7 +13,7 @@ export const ContactPageData: ContactPageDataType = {
       title: 'Have a Question🤔? Contact Us',
       form: {
         relationTo: 'forms',
-        value: '',
+        value: '' as unknown as number | Form,
       },
     },
   ],

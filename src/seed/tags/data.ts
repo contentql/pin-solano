@@ -1,3 +1,4 @@
+import { Media } from '@payload-types'
 import path from 'path'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
@@ -12,7 +13,7 @@ export const tagsData: TagDataType[] = [
     title: 'Welcome',
     color: 'blue',
     description: 'This is a welcome tag',
-    tagImage: '',
+    tagImage: '' as unknown as number | Media,
     _status: 'published',
   },
 
@@ -20,21 +21,21 @@ export const tagsData: TagDataType[] = [
     title: 'Management',
     color: 'purple',
     description: 'This is a Project Management tag',
-    tagImage: '',
+    tagImage: '' as unknown as number | Media,
     _status: 'published',
   },
   {
     title: 'AI Insights',
     color: 'indigo',
     description: 'This is a AI Insights tag',
-    tagImage: '',
+    tagImage: '' as unknown as number | Media,
     _status: 'published',
   },
   {
     title: 'Enterprise',
     color: 'green',
     description: 'This is a Enterprise tag',
-    tagImage: '',
+    tagImage: '' as unknown as number | Media,
     _status: 'published',
   },
 ]

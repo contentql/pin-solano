@@ -1,5 +1,6 @@
 import { env } from '@env'
 import configPromise from '@payload-config'
+import { Media } from '@payload-types'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import type { Metadata, NextPage } from 'next'
 import { notFound } from 'next/navigation'
@@ -25,7 +26,8 @@ const Page: NextPage<PageProps> = async ({ params }) => {
     const pageData = await serverClient.page.getPageData({
       path: syncParams,
     })
-
+    console.log(pageData.layout)
+    console.log({ syncParams })
     return (
       <Suspense fallback={null}>
         <div>
@@ -106,7 +108,7 @@ export async function generateMetadata({
 
       if (metadata.image && typeof metadata.image !== 'string') {
         ogImage.push({
-          url: metadata.image?.url!,
+          url: (metadata.image as Media)?.url!,
           height: 630,
           width: 1200,
           alt: `og image`,

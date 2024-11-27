@@ -28,7 +28,7 @@ export const formRouter = router({
   newFormSubmission: publicProcedure
     ?.input(
       z.object({
-        id: z.string(),
+        id: z.number(),
         data: z.array(
           z.object({
             field: z.string(),

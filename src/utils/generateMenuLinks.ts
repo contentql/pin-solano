@@ -1,4 +1,4 @@
-import { SiteSetting } from '@payload-types'
+import { Page, SiteSetting } from '@payload-types'
 
 type MenuLinksType = NonNullable<
   Pick<SiteSetting, 'navbar'>['navbar']['menuLinks']
@@ -62,7 +62,7 @@ export const generateMenuLinks = (
               let pageLink = ''
 
               if (typeof page?.value !== 'string') {
-                pageLink = page?.value.path!
+                pageLink = (page?.value as Page)?.path!
               }
 
               return {
@@ -79,7 +79,7 @@ export const generateMenuLinks = (
       let pageLink = ''
 
       if (typeof menuLink?.page?.value !== 'string') {
-        pageLink = menuLink.page?.value.path!
+        pageLink = (menuLink.page?.value as Page)?.path!
       }
 
       return {

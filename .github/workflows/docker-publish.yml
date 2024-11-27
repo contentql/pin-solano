@@ -22,6 +22,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DATABASE_SECRET: ${{ secrets.DATABASE_SECRET }}
 
 jobs:
   build:

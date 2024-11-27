@@ -15,7 +15,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.1@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    imageUrl: '',
+    imageUrl: null,
   },
   {
     username: 'Author-2',
@@ -23,7 +23,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.2@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    imageUrl: '',
+    imageUrl: null,
   },
   {
     username: 'Author-3',
@@ -31,7 +31,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.3@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    imageUrl: '',
+    imageUrl: null,
   },
   {
     username: 'Author-4',
@@ -39,7 +39,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.4@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    imageUrl: '',
+    imageUrl: null,
   },
   {
     username: 'Author-5',
@@ -47,7 +47,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.5@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    imageUrl: '',
+    imageUrl: null,
   },
   {
     username: 'Author-6',
@@ -55,7 +55,7 @@ export const authorsData: AuthorDataType[] = [
     email: 'author.6@gmail.com',
     password: 'Welcome@123',
     role: ['author'],
-    imageUrl: '',
+    imageUrl: null,
   },
 ]
 

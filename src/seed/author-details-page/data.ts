@@ -10,7 +10,7 @@ export const authorDetailsPageData: authorDetailsPageDataType = {
   isHome: false,
   _status: 'published',
   isDynamic: true,
-  parent: '',
+  parent: null,
   layout: [
     {
       blockType: 'Details',

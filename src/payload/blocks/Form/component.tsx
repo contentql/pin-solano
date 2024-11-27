@@ -1,7 +1,7 @@
 'use client'
 
 import { Params } from '../types'
-import { FormType } from '@payload-types'
+import { Form, FormType } from '@payload-types'
 import React from 'react'
 
 import FormComponent from './Components/Form'
@@ -20,7 +20,7 @@ const FormBlock: React.FC<FormProps> = ({ params, ...block }) => {
       <h4 className='mb-8 text-2xl font-semibold text-base-content'>
         {block?.title}
       </h4>
-      {form ? <FormComponent form={form} /> : null}
+      {form ? <FormComponent form={form as Form} /> : null}
     </div>
   )
 }

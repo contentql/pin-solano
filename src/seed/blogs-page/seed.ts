@@ -21,7 +21,7 @@ const seed = async (): Promise<Page> => {
             ...block,
             blogs: block?.blogs?.map((blog, idx) => ({
               relationTo: 'blogs',
-              value: allBlogs?.at(idx)?.id || '',
+              value: allBlogs?.at(idx)?.id as number,
             })),
           }
         }

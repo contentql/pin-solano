@@ -1,4 +1,5 @@
 import { env } from '@env'
+import { Media } from '@payload-types'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -21,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const ogImageUrl =
       typeof generalSettings.ogImageUrl === 'string'
         ? generalSettings.ogImageUrl
-        : generalSettings.ogImageUrl.sizes?.blogImageSize3?.url!
+        : (generalSettings.ogImageUrl as Media)?.sizes?.blogImageSize3?.url!
 
     const title = {
       default: generalSettings.title,
@@ -73,7 +74,7 @@ export default async function RootLayout({
   const faviconUrl =
     typeof generalSettings?.faviconUrl === 'string'
       ? generalSettings?.faviconUrl
-      : generalSettings?.faviconUrl?.url!
+      : (generalSettings?.faviconUrl as Media)?.url!
   return (
     <html lang='en' className='dark'>
       <head>
