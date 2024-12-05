@@ -3,8 +3,8 @@
 import { Blog, Media, Tag, User } from '@payload-types'
 import Image from 'next/image'
 import { useRef } from 'react'
+import { FaCheck } from 'react-icons/fa'
 import { IoCalendarOutline } from 'react-icons/io5'
-import { LuAlarmCheck } from 'react-icons/lu'
 
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
@@ -53,7 +53,7 @@ const AnimatedBlogCard: React.FC<AnimatedBlogCardProp> = ({
             </div>
 
             <div className='flex items-center gap-x-2'>
-              <LuAlarmCheck size={24} />
+              <FaCheck size={24} />
               {readingTime(getHTML(blogData?.content))?.text}
             </div>
           </div>
