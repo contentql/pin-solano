@@ -8,7 +8,7 @@ function AuthorPostsView({
   authorTags,
   totalBlogs,
   author,
-  isAuthorLoading,
+  // isAuthorLoading,
   isBlogsLoading,
   isAuthorTagsLoading,
 }: {
@@ -16,14 +16,14 @@ function AuthorPostsView({
   totalBlogs: number
   authorTags: any
   author: User
-  isAuthorLoading: boolean
+  // isAuthorLoading: boolean
   isBlogsLoading: boolean
   isAuthorTagsLoading: boolean
 }) {
   return (
     <>
       <AuthorDetails
-        isAuthorLoading={isAuthorLoading}
+        // isAuthorLoading={isAuthorLoading}
         author={author as User}
       />
       <AuthorBlogs

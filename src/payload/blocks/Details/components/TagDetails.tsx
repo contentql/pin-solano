@@ -3,18 +3,11 @@ import BlogListItems from '../../List/components/BlogListItem'
 import { Blog } from '@payload-types'
 import Image from 'next/image'
 
-import BlogCardSkelton from '@/components/skelton/BlogCardSkelton'
-
 interface TagDetailsProps {
   tagDetails: any
   blogs: Blog[]
-  isBlogsPending: boolean
 }
-const TagDetails: React.FC<TagDetailsProps> = ({
-  tagDetails,
-  blogs,
-  isBlogsPending,
-}) => {
+const TagDetails: React.FC<TagDetailsProps> = ({ tagDetails, blogs }) => {
   return (
     <>
       {' '}
@@ -24,8 +17,8 @@ const TagDetails: React.FC<TagDetailsProps> = ({
         description={tagDetails?.description}
         image={tagDetails?.tagImage}
       />
-      {isBlogsPending && <BlogCardSkelton />}
-      {blogs?.length > 0 || isBlogsPending ? (
+      {/* {isBlogsPending && <BlogCardSkelton />} */}
+      {blogs?.length > 0 ? (
         <div className='mx-auto min-h-screen max-w-7xl px-2'>
           <BlogListItems blogsData={blogs as Blog[]} />
         </div>

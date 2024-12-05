@@ -1,12 +1,10 @@
-'use client'
-
 import { Params } from '../types'
-import { Blog, DetailsType } from '@payload-types'
-import { useSearchParams } from 'next/navigation'
+import configPromise from '@payload-config'
+import { Blog, DetailsType, User } from '@payload-types'
+import { notFound } from 'next/navigation'
+import { getPayload } from 'payload'
 
 import NotFound from '@/app/(app)/not-found'
-import BlogDetailSkeleton from '@/components/skelton/BlogDetailSkeleton'
-import { trpc } from '@/trpc/client'
 
 import IndividualAuthorDetails from './components/AuthorDetails'
 import BlogPost from './components/BlogPost'
@@ -16,18 +14,33 @@ interface DetailsProps extends DetailsType {
   params: Params
 }
 
-const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
-  const searchParams = useSearchParams()
+const Details: React.FC<DetailsProps> = async ({ params, ...block }) => {
+  const payload = await getPayload({
+    config: configPromise,
+  })
+
   switch (block?.collectionSlug) {
     case 'blogs': {
-      const { data: blog, isPending: isBlogPending } =
-        trpc.blog.getBlogBySlug.useQuery({
-          slug: params?.route.at(-1) as string,
-        })
-      const { data: blogsData } = trpc.blog.getAllBlogs.useQuery()
-      return isBlogPending ? (
-        <BlogDetailSkeleton />
-      ) : !!blog ? (
+      const slug = params?.route?.at(-1) ?? ''
+
+      const { docs } = await payload.find({
+        collection: 'blogs',
+        draft: false,
+        where: {
+          slug: {
+            equals: slug,
+          },
+        },
+      })
+
+      const { docs: blogsData } = await payload.find({
+        collection: 'blogs',
+        draft: false,
+      })
+
+      const blog = docs.at(0)
+
+      return !!blog ? (
         <BlogPost blog={blog as Blog} blogsData={blogsData as Blog[]} />
       ) : (
         <NotFound />
@@ -35,33 +48,69 @@ const Details: React.FC<DetailsProps> = ({ params, ...block }) => {
     }
 
     case 'tags': {
-      const { data: blogs, isPending: isBlogsPending } =
-        trpc.tag.getBlogs.useQuery({
-          tagSlug: params?.route.at(-1)!,
-        })
-      return (
-        <TagDetails
-          blogs={blogs?.blogsData as Blog[]}
-          tagDetails={blogs?.tagData?.at(0)}
-          isBlogsPending={isBlogsPending}
-        />
-      )
+      const slug = params?.route?.at(-1) ?? ''
+
+      const { docs: tagData } = await payload.find({
+        collection: 'tags',
+        where: {
+          slug: {
+            equals: slug,
+          },
+        },
+      })
+
+      const { docs: blogsData } = await payload.find({
+        collection: 'blogs',
+        where: {
+          'tags.value': {
+            contains: tagData?.at(0)?.id,
+          },
+        },
+      })
+
+      const tagDetails = (tagData || [])?.at(0)
+
+      // if tag not found showing 404
+      if (!tagDetails) {
+        return notFound()
+      }
+
+      if (tagDetails) {
+        return <TagDetails blogs={blogsData} tagDetails={tagDetails} />
+      }
     }
 
     case 'users': {
-      const { data: author } = trpc.author.getAuthorByName.useQuery({
-        authorName: params?.route.at(-1)!,
-      })
-      const { data: authorBlogs } = trpc.author.getBlogsByAuthorName.useQuery({
-        authorName: params?.route.at(-1)!,
+      const authorName = params?.route?.at(-1) ?? ''
+      const { docs: blogs } = await payload.find({
+        collection: 'blogs',
+        draft: false, // Optionally set draft filter
       })
 
-      return (
-        <IndividualAuthorDetails
-          searchParams={{ tag: searchParams.get('tag') || '' }}
-          params={{ authorName: params?.route?.at(-1) || '' }}
-        />
-      )
+      const blogsRelatedWithAuthor = blogs.filter(blog => {
+        return blog.author?.find(
+          blogAuthor => (blogAuthor.value as User).username === authorName,
+        )
+      })
+
+      const author = Array.isArray(blogsRelatedWithAuthor?.[0]?.author)
+        ? blogsRelatedWithAuthor?.[0]?.author.filter(({ value }) => {
+            return (
+              typeof value === 'object' &&
+              value.username === params?.route?.at(-1)!
+            )
+          })[0]?.value
+        : undefined
+
+      if (typeof author === 'object') {
+        return (
+          <IndividualAuthorDetails
+            author={author}
+            blogsData={blogsRelatedWithAuthor}
+            params={{ authorName: params?.route?.at(-1) || '' }}
+          />
+        )
+      }
     }
   }
 }

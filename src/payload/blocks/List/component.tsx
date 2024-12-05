@@ -1,58 +1,66 @@
-'use client'
-
 import { Params } from '../types'
-import { Blog, DetailsType, Tag, User } from '@payload-types'
+import configPromise from '@payload-config'
+import { ListType, User } from '@payload-types'
+import { getPayload } from 'payload'
 import React from 'react'
-
-import BlogCardSkelton from '@/components/skelton/BlogCardSkelton'
-import TagCardSkelton from '@/components/skelton/TagCardSkelton'
-import { trpc } from '@/trpc/client'
 
 import AuthorsList from './components/AuthorsList'
 import BlogsList from './components/BlogsList'
 import TagsList from './components/TagsList'
 
-interface ListProps extends DetailsType {
+interface ListProps extends ListType {
   params: Params
-}
-
-interface TagsListProps extends Tag {
-  count: number
 }
 interface AuthorsListProps extends User {
   totalDocs: number
 }
 
-const List: React.FC<ListProps> = ({ params, ...block }) => {
+const List: React.FC<ListProps> = async ({ params, ...block }) => {
+  const payload = await getPayload({
+    config: configPromise,
+  })
+
   switch (block?.collectionSlug) {
     case 'blogs': {
-      const { data: blogs, isLoading: isBlogsPending } =
-        trpc.blog.getAllBlogs.useQuery()
-      return isBlogsPending ? (
-        <BlogCardSkelton />
-      ) : (
-        <BlogsList blogs={blogs as Blog[]} />
-      )
+      const { docs: blogs = [] } = await payload.find({
+        collection: 'blogs',
+        depth: 5,
+        draft: false,
+        limit: 1000,
+      })
+
+      return <BlogsList blogs={blogs} title={block['title']} />
     }
 
     case 'tags': {
-      const { data: tags, isLoading: isTagsLoading } =
-        trpc.tag.getAllTags.useQuery()
-      return isTagsLoading ? (
-        <TagCardSkelton />
-      ) : (
-        <TagsList tags={tags as TagsListProps[]} />
+      const { docs: tags = [] } = await payload.find({
+        collection: 'tags',
+        depth: 5,
+        draft: false,
+        limit: 1000,
+      })
+
+      return (
+        <TagsList
+          tags={tags.map(tag => ({ ...tag, count: 0 }))}
+          title={block?.title || ''}
+        />
       )
     }
 
     case 'users': {
-      const { data: authors, isLoading: isAuthorLoading } =
-        trpc.author.getAllAuthorsWithCount.useQuery()
+      const { docs: authors = [] } = await payload.find({
+        collection: 'users',
+        where: {
+          role: {
+            equals: 'author',
+          },
+        },
+        limit: 1000,
+      })
 
-      return isAuthorLoading ? (
-        <TagCardSkelton />
-      ) : (
-        <AuthorsList authors={authors as AuthorsListProps[]} />
+      return (
+        <AuthorsList authors={authors as AuthorsListProps[]} block={block} />
       )
     }
   }

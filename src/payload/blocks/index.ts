@@ -12,9 +12,12 @@ import { ListConfig } from './List'
 import { PopularBlogsConfig } from './PopularBlogs'
 import { TopPicksConfig } from './TopPicks'
 
+// Exporting an object that maps block names (as keys) to their corresponding JSX components (as values)
+// This object allows dynamic rendering of components based on the block names
+
 // Exporting an array that consolidates all block configurations
 // This array is useful for registering or iterating over all blocks and their configurations in one place
-export const blocks = [
+export const blocksConfig = [
   DetailsConfig,
   ListConfig,
   HomeHeroConfig,
