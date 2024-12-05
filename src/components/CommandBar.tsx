@@ -80,8 +80,8 @@ const CommandBar = () => {
 
       globalSearchMutate({ search: searchQuery })
     },
-    800,
     [searchQuery],
+    800,
   )
 
   // useEffect(() => {

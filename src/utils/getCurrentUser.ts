@@ -1,6 +1,6 @@
 import { env } from '@env'
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 
 /**
  * Retrieves the current user based on whether the function is called in a client or server context.
@@ -37,7 +37,7 @@ export const getCurrentUser = async (headers?: Headers): Promise<any> => {
     }
   } else {
     // Has token, so server component
-    const payload = await getPayloadHMR({
+    const payload = await getPayload({
       config: configPromise,
     })
     const { user } = await payload.auth({ headers })

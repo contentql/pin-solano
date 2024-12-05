@@ -14,11 +14,31 @@ type Args = {
     [key: string]: string | string[]
   }>
 }
-export const generateMetadata = ({
+
+export const generateMetadata = async ({
   params,
   searchParams,
-}: Args): Promise<Metadata> =>
-  generatePageMetadata({ config, params, searchParams })
+}: Args): Promise<Metadata> => {
+  const generatedMeta = await generatePageMetadata({
+    config,
+    params,
+    searchParams,
+  })
+
+  return {
+    ...generatedMeta,
+    icons: [
+      {
+        type: 'image/png',
+        rel: 'icon',
+        sizes: '32x32',
+        url: 'favicon.ico',
+      },
+    ],
+  }
+}
+
 const NotFound = ({ params, searchParams }: Args) =>
   NotFoundPage({ config, importMap, params, searchParams })
+
 export default NotFound

@@ -1,12 +1,12 @@
 import configPromise from '@payload-config'
 import { Form } from '@payload-types'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import { Ora } from 'ora'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
 import { ContactPageData } from './data'
 
-const payload = await getPayloadHMR({ config: configPromise })
+const payload = await getPayload({ config: configPromise })
 
 const seed = async ({ spinner, forms }: { spinner: Ora; forms: Form[] }) => {
   spinner.start(`Started created contact-page...`)

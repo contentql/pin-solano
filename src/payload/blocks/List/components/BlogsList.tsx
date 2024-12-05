@@ -1,14 +1,15 @@
 import BlogPostCard, {
   DirectionAwareHover,
 } from '../../PopularBlogs/components/BlogPostCard'
-import { Blog, Media } from '@payload-types'
+import { Blog, ListType, Media } from '@payload-types'
 
 import { formatDate } from '@/utils/dateFormatter'
 
 interface BlogsListProps {
   blogs: Blog[]
+  title?: ListType['title']
 }
-const BlogsList: React.FC<BlogsListProps> = ({ blogs }) => {
+const BlogsList: React.FC<BlogsListProps> = ({ blogs, title }) => {
   return (
     <div className='bg-base-100'>
       <section className='container overflow-hidden  px-2 py-20 md:px-10 lg:px-20'>

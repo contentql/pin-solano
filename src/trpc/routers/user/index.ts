@@ -1,5 +1,5 @@
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import { TRPCError } from '@trpc/server'
 import { produce } from 'immer'
 import { cookies } from 'next/headers'
@@ -9,7 +9,7 @@ import { router, userProcedure } from '@/trpc/'
 
 import { UpdateProfileImageSchema, UpdateUserSchema } from './validator'
 
-const payload = await getPayloadHMR({ config: configPromise })
+const payload = await getPayload({ config: configPromise })
 
 export const userRouter = router({
   // ! use this route only if you need a user when loading the page
