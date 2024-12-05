@@ -1,12 +1,12 @@
 import configPromise from '@payload-config'
 import { Tag } from '@payload-types'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 
 import { getRandomInt } from '@/utils/getRandomInt'
 
 import { TagDataType, tagsData, tagsImagesData } from './data'
 
-const payload = await getPayloadHMR({ config: configPromise })
+const payload = await getPayload({ config: configPromise })
 
 const seed = async (): Promise<(string | Tag)[]> => {
   try {

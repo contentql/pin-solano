@@ -1,11 +1,11 @@
 import configPromise from '@payload-config'
 import { Page } from '@payload-types'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
 import { homePageData } from './data'
 
-const payload = await getPayloadHMR({ config: configPromise })
+const payload = await getPayload({ config: configPromise })
 
 const seed = async (): Promise<Page> => {
   try {

@@ -1,5 +1,5 @@
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import { headers } from 'next/headers'
 
 import Footer from '@/payload/blocks/Footer/Footer'
@@ -11,7 +11,7 @@ interface LayoutProps {
 }
 
 const AccountLayout: React.FC<LayoutProps> = async ({ children }) => {
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
 
   const initData = await payload.findGlobal({
     slug: 'site-settings',

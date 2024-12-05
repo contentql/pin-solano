@@ -1,5 +1,5 @@
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import { TRPCError } from '@trpc/server'
 import ora from 'ora'
 
@@ -19,7 +19,7 @@ import { seedTags } from '@/seed/tags'
 import { seedTagsPage } from '@/seed/tags-page'
 import { publicProcedure, router } from '@/trpc'
 
-const payload = await getPayloadHMR({ config: configPromise })
+const payload = await getPayload({ config: configPromise })
 
 export const seedRouter = router({
   runSeed: publicProcedure.mutation(async () => {

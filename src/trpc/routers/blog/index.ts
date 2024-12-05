@@ -1,10 +1,10 @@
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import { z } from 'zod'
 
 import { publicProcedure, router } from '@/trpc'
 
-const payload = await getPayloadHMR({
+const payload = await getPayload({
   config: configPromise,
 })
 

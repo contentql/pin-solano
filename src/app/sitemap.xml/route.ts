@@ -1,11 +1,11 @@
 import { env } from '@env'
 import configPromise from '@payload-config'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 export async function GET() {
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
   const { docs: pages } = await payload.find({
     collection: 'pages',
     depth: 0,

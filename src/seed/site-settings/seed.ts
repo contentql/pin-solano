@@ -1,12 +1,12 @@
 import configPromise from '@payload-config'
 import { SiteSetting } from '@payload-types'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 
 import { siteSettingsData, siteSettingsImageData } from './data'
 
 type SiteSettingType = Omit<SiteSetting, 'id'>
 
-const payload = await getPayloadHMR({ config: configPromise })
+const payload = await getPayload({ config: configPromise })
 
 const seed = async (): Promise<SiteSetting> => {
   try {
