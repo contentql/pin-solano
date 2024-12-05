@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "@contentql/core": "^0.3.5",
+    "@contentql/core": "^0.3.7",
     "@hookform/resolvers": "^3.4.0",
     "@libsql/client": "^0.14.0",
     "@payloadcms/db-sqlite": "3.0.0-beta.111",

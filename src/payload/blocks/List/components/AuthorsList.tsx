@@ -9,9 +9,16 @@ interface AuthorsListProps extends User {
   totalDocs: number
 }
 
-const AuthorsList: React.FC<{ authors: AuthorsListProps[] }> = ({
-  authors,
-}) => {
+const AuthorsList: React.FC<{
+  authors: AuthorsListProps[]
+  block: {
+    title?: string | null
+    collectionSlug?: ('blogs' | 'tags' | 'users') | null
+    id?: string | null
+    blockName?: string | null
+    blockType: 'List'
+  }
+}> = ({ authors, block }) => {
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 bg-base-100 py-20'>
       {authors?.map((author, index) => (

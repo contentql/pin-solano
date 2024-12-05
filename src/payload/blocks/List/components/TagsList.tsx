@@ -1,5 +1,5 @@
 import { AnimatedTagCard } from '../../common/components/AnimatedTagCard'
-import { Media, Tag } from '@payload-types'
+import { ListType, Media, Tag } from '@payload-types'
 import Link from 'next/link'
 import React from 'react'
 
@@ -8,7 +8,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/common/Avatar'
 interface TagsListProps extends Tag {
   count: number
 }
-const TagsList: React.FC<{ tags: TagsListProps[] }> = ({ tags }) => {
+
+const TagsList: React.FC<{
+  tags: TagsListProps[]
+  title: ListType['title']
+}> = ({ tags, title }) => {
   return (
     <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4 bg-base-100 py-20'>
       {tags?.map((tag, index) => (

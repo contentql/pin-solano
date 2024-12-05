@@ -1,7 +1,7 @@
 import { withPayload } from '@payloadcms/next/withPayload'
+import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
@@ -16,16 +16,22 @@ const nextConfig = {
       },
     ]
   },
+  output: 'standalone',
   outputFileTracingIncludes: {
     '/public': ['./public/**/*'],
   },
   experimental: {
     reactCompiler: false,
   },
-  output: 'standalone',
   reactStrictMode: true,
+  // output: 'standalone',
   compiler: {
     // removeConsole: process.env.NODE_ENV !== 'development', // Remove console.log in production
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
   },
   images: {
     remotePatterns: [
