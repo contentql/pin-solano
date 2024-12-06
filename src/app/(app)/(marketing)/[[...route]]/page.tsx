@@ -83,7 +83,7 @@ const Page = async ({ params }: { params: Promise<{ route: string[] }> }) => {
   const layoutData = pageData.layout ?? []
 
   return (
-    <div className='relative space-y-20'>
+    <div>
       {layoutData?.map((block, index) => {
         // Casting to 'React.FC<any>' to bypass TypeScript error related to 'Params' type incompatibility.
         const Block = blocksJSX[block.blockType] as React.FC<any>

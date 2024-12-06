@@ -34,7 +34,7 @@ function AuthorDetails({
       <div className='flex flex-wrap gap-x-4'>
         {author?.socialLinks?.map((social, index) => (
           <a
-            key={social?.id}
+            key={index}
             href={social?.value}
             className='rounded-full p-2 text-white'>
             {social?.platform in listOfIcons

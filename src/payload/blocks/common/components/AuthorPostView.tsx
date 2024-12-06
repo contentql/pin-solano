@@ -1,37 +1,34 @@
 import AuthorBlogs from '../../Details/components/AuthorBlogs'
-import { Blog, User } from '@payload-types'
+import { Blog, Media, User } from '@payload-types'
 
 import AuthorDetails from './AuthorDetails'
 
-function AuthorPostsView({
+const AuthorPostsView = ({
   blogsData,
   authorTags,
   totalBlogs,
   author,
-  // isAuthorLoading,
-  isBlogsLoading,
-  isAuthorTagsLoading,
 }: {
   blogsData: Blog[]
   totalBlogs: number
-  authorTags: any
+  authorTags: (
+    | {
+        title: string
+        description: string
+        slug: string | null | undefined
+        tagImage: number | Media
+      }
+    | undefined
+  )[]
   author: User
-  // isAuthorLoading: boolean
-  isBlogsLoading: boolean
-  isAuthorTagsLoading: boolean
-}) {
+}) => {
   return (
     <>
-      <AuthorDetails
-        // isAuthorLoading={isAuthorLoading}
-        author={author as User}
-      />
+      <AuthorDetails author={author} />
       <AuthorBlogs
         blogsData={blogsData}
         totalBlogs={totalBlogs}
-        authorTags={authorTags as any}
-        isAuthorTagsLoading={isAuthorTagsLoading}
-        isBlogsLoading={isBlogsLoading}
+        authorTags={authorTags}
       />
     </>
   )

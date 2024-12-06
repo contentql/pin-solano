@@ -18,26 +18,30 @@ import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/dateFormatter'
 import { getHTML } from '@/utils/slateToHTML'
 
-export default function AuthorBlogs({
+const AuthorBlogs = ({
   blogsData,
   authorTags,
   totalBlogs,
-  isBlogsLoading,
-  isAuthorTagsLoading,
 }: {
   blogsData: Blog[]
   totalBlogs: number
-  authorTags: any
-  isBlogsLoading: boolean
-  isAuthorTagsLoading: boolean
-}) {
+  authorTags: (
+    | {
+        title: string
+        description: string
+        slug: string | null | undefined
+        tagImage: number | Media
+      }
+    | undefined
+  )[]
+}) => {
   const searchParams = useSearchParams()
   const pathName = usePathname()
   const router = useRouter()
   const [filter, setFilter] = useState({
     tag: searchParams.get('tag')
       ? searchParams?.get('tag')
-      : authorTags?.at(0).slug,
+      : authorTags?.at(0)?.slug,
     index: searchParams.get('index') ? searchParams.get('index') : 0,
   })
 
@@ -46,10 +50,13 @@ export default function AuthorBlogs({
 
     if (authorPathPattern.test(pathName) && !searchParams.has('tag')) {
       const search = new URLSearchParams(searchParams)
-      search.set('tag', authorTags?.at(0).slug)
+      search.set('tag', authorTags?.at(0)?.slug || '')
       router.push(`${pathName}?${search.toString()}`)
     }
   }, [authorTags, pathName, router, searchParams])
+
+  const isAuthorTagsLoading = false
+  const isBlogsLoading = false
 
   return (
     <section className='container px-2 py-20 md:px-20' id='blog'>
@@ -70,7 +77,8 @@ export default function AuthorBlogs({
             <Avatar className='h-20 w-20'>
               <AvatarImage
                 src={
-                  (authorTags?.at(filter?.index)?.tagImage as Media)?.url || ''
+                  (authorTags?.at(filter?.index as number)?.tagImage as Media)
+                    ?.url || ''
                 }
                 alt='tag'
               />
@@ -83,7 +91,7 @@ export default function AuthorBlogs({
               <Skeleton className='h-6 w-32' />
             ) : (
               <p className='text-2xl font-bold'>
-                {authorTags?.at(filter?.index)?.title}
+                {authorTags?.at(filter?.index as number)?.title}
               </p>
             )}
             {isAuthorTagsLoading ? (
@@ -100,7 +108,7 @@ export default function AuthorBlogs({
           {isAuthorTagsLoading ? (
             <Skeleton className='h-3 w-40' />
           ) : (
-            authorTags?.at(filter?.index)?.description
+            authorTags?.at(filter?.index as number)?.description
           )}
         </div>
       </div>
@@ -109,7 +117,7 @@ export default function AuthorBlogs({
           <Tags
             tags={authorTags as any}
             setFilter={setFilter}
-            filter={filter}
+            filter={filter as any}
           />
         </div>
         {isBlogsLoading ? (
@@ -158,6 +166,8 @@ export default function AuthorBlogs({
     </section>
   )
 }
+
+export default AuthorBlogs
 
 const Tags = ({
   tags,

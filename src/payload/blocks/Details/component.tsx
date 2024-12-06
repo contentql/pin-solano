@@ -1,6 +1,6 @@
 import { Params } from '../types'
 import configPromise from '@payload-config'
-import { Blog, DetailsType, User } from '@payload-types'
+import { Blog, DetailsType, Tag } from '@payload-types'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
@@ -82,32 +82,47 @@ const Details: React.FC<DetailsProps> = async ({ params, ...block }) => {
 
     case 'users': {
       const authorName = params?.route?.at(-1) ?? ''
-      const { docs: blogs } = await payload.find({
-        collection: 'blogs',
-        draft: false, // Optionally set draft filter
-      })
 
-      const blogsRelatedWithAuthor = blogs.filter(blog => {
-        return blog.author?.find(
-          blogAuthor => (blogAuthor.value as User).username === authorName,
-        )
+      const { docs: authors } = await payload.find({
+        collection: 'users',
+        where: {
+          username: {
+            equals: authorName,
+          },
+        },
       })
+      const author = authors.at(0)
 
-      const author = Array.isArray(blogsRelatedWithAuthor?.[0]?.author)
-        ? blogsRelatedWithAuthor?.[0]?.author.filter(({ value }) => {
-            return (
-              typeof value === 'object' &&
-              value.username === params?.route?.at(-1)!
-            )
-          })[0]?.value
-        : undefined
+      const { docs: blogsRelatedWithAuthor, totalDocs: totalBlogs } =
+        await payload.find({
+          collection: 'blogs',
+          where: {
+            'author.value': {
+              equals: author?.id,
+            },
+          },
+        })
+
+      const authorTags = blogsRelatedWithAuthor.flatMap(blog => {
+        return blog?.tags?.map(tagRelation => {
+          const tag = tagRelation.value as Tag
+
+          return {
+            title: tag?.title,
+            description: tag?.description,
+            slug: tag?.slug,
+            tagImage: tag?.tagImage,
+          }
+        })
+      })
 
       if (typeof author === 'object') {
         return (
           <IndividualAuthorDetails
             author={author}
             blogsData={blogsRelatedWithAuthor}
-            params={{ authorName: params?.route?.at(-1) || '' }}
+            authorTags={authorTags}
+            totalBlogs={totalBlogs}
           />
         )
       }
