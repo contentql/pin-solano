@@ -47,14 +47,6 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
           relationTo: 'blogs',
           value: '' as unknown as number | Blog,
         },
-        {
-          relationTo: 'blogs',
-          value: '' as unknown as number | Blog,
-        },
-        {
-          relationTo: 'blogs',
-          value: '' as unknown as number | Blog,
-        },
       ],
       blockType: 'PopularBlogs',
     },
@@ -77,16 +69,16 @@ export const homePageData: RequiredDataFromCollectionSlug<'pages'> = {
           relationTo: 'blogs',
           value: '' as unknown as number | Blog,
         },
-        {
-          relationTo: 'blogs',
-          value: '' as unknown as number | Blog,
-        },
       ],
       blockType: 'LatestBlogs',
     },
     {
       title: 'Top Picks',
       topPicks: [
+        {
+          relationTo: 'blogs',
+          value: '' as unknown as number | Blog,
+        },
         {
           relationTo: 'blogs',
           value: '' as unknown as number | Blog,
