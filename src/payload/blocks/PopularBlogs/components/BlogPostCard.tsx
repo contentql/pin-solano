@@ -51,13 +51,11 @@ const BlogPostCard = ({
         </div>
         <div className='duration-500 group-hover:translate-x-2'>
           <Link
-            prefetch
             href={`/blog/${blog?.slug}`}
             className='text-neutral-700 hover:text-neutral-900 dark:text-neutral-200 mb-2 mt-2 line-clamp-1 font-sans text-xl font-bold'>
             {title}
           </Link>
           <Link
-            prefetch
             href={`/blog/${blog?.slug}`}
             className='text-neutral-600 dark:text-neutral-300 line-clamp-3 font-sans text-sm font-normal'>
             {description}

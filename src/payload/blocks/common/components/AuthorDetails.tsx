@@ -19,7 +19,10 @@ function AuthorDetails({
         //   <Skeleton className='h-28 w-28 rounded-full' />
         // ) :
         <Avatar className='mb-4 h-24 w-24 flex-shrink-0 self-center bg-cover bg-center '>
-          <AvatarImage src={(author?.imageUrl as Media)?.url!} />
+          <AvatarImage
+            src={(author?.imageUrl as Media)?.url!}
+            alt={(author?.imageUrl as Media)?.alt || 'Author'}
+          />
           <AvatarFallback />
         </Avatar>
       }

@@ -65,10 +65,7 @@ const LatestBlogs: React.FC<LatestBlogsTypes> = ({ ...block }) => {
 
         {isMobile
           ? block?.latestBlogs?.slice(0, 4).map((blog, index) => (
-              <Link
-                prefetch
-                key={index}
-                href={`/blog/${(blog?.value as Blog)?.slug}`}>
+              <Link key={index} href={`/blog/${(blog?.value as Blog)?.slug}`}>
                 <BlogPostCard
                   key={index}
                   blog={blog?.value as Blog}

@@ -1,22 +1,41 @@
 import { env } from '@env'
+import configPromise from '@payload-config'
 import { Media } from '@payload-types'
 import type { Metadata } from 'next'
+import { unstable_cache } from 'next/cache'
 import { Inter } from 'next/font/google'
+import { getPayload } from 'payload'
 
 import '@/app/(app)/globals.css'
 import '@/app/(app)/theme.scss'
 import GoogleAdsense from '@/components/GoogleAdsense'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 import Provider from '@/trpc/Provider'
-import { serverClient } from '@/trpc/serverClient'
 import ToastProvider from '@/utils/Toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const getCachedSiteSettings = unstable_cache(
+  async () => {
+    const payload = await getPayload({
+      config: configPromise,
+    })
+
+    const data = await payload.findGlobal({
+      slug: 'site-settings',
+      draft: false,
+    })
+
+    return data
+  },
+  ['site-settings'],
+  { tags: ['site-settings'] },
+)
+
 export async function generateMetadata(): Promise<Metadata> {
   try {
     // calling the site-settings to get all the data
-    const metadata = await serverClient.siteSettings.getSiteSettings()
+    const metadata = await getCachedSiteSettings()
     const generalSettings = metadata.general
 
     const ogImageUrl =
@@ -69,7 +88,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const metadata = await serverClient.siteSettings.getSiteSettings()
+  const metadata = await getCachedSiteSettings()
   const generalSettings = metadata.general
   const faviconUrl =
     typeof generalSettings?.faviconUrl === 'string'

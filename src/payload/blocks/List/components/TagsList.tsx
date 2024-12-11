@@ -28,7 +28,7 @@ const TagsList: React.FC<{
           },
         })
         return (
-          <Link prefetch href={`/tag/${tag?.slug}`} key={index}>
+          <Link href={`/tag/${tag?.slug}`} key={index}>
             <AnimatedTagCard title={tag?.title} href={tag?.slug!}>
               <div className='flex h-[16rem] w-[14rem] basis-full flex-col items-center justify-center p-4 tracking-tight text-slate-100/50 sm:basis-1/2 '>
                 <Avatar className='mb-16 h-24 w-24'>

@@ -14,7 +14,6 @@ const RecentPostCard: React.FC<RecentPostCardProps> = ({ blog }) => {
 
   return (
     <Link
-      prefetch
       href={`/blog/${blog?.slug}`}
       className='flex flex-col space-y-4 rounded-3xl border-none bg-[#1e2846] p-4 text-white'>
       <div className='flex gap-x-4 text-gray-400'>

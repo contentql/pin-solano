@@ -1,6 +1,7 @@
 import { Params } from '../types'
 import configPromise from '@payload-config'
 import { Blog, DetailsType, Tag } from '@payload-types'
+import { unstable_cache } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
@@ -23,15 +24,20 @@ const Details: React.FC<DetailsProps> = async ({ params, ...block }) => {
     case 'blogs': {
       const slug = params?.route?.at(-1) ?? ''
 
-      const { docs } = await payload.find({
-        collection: 'blogs',
-        draft: false,
-        where: {
-          slug: {
-            equals: slug,
-          },
-        },
-      })
+      const { docs } = await unstable_cache(
+        async () =>
+          await payload.find({
+            collection: 'blogs',
+            draft: false,
+            where: {
+              slug: {
+                equals: slug,
+              },
+            },
+          }),
+        ['details', 'blogs', slug],
+        { tags: [`details-blogs-${slug}`] },
+      )()
 
       const { docs: blogsData } = await payload.find({
         collection: 'blogs',
@@ -50,60 +56,83 @@ const Details: React.FC<DetailsProps> = async ({ params, ...block }) => {
     case 'tags': {
       const slug = params?.route?.at(-1) ?? ''
 
-      const { docs: tagData } = await payload.find({
-        collection: 'tags',
-        where: {
-          slug: {
-            equals: slug,
-          },
-        },
-      })
+      const { docs: tagDocs } = await unstable_cache(
+        async () =>
+          await payload.find({
+            collection: 'tags',
+            where: {
+              slug: {
+                equals: slug,
+              },
+            },
+          }),
+        ['details', 'tags', slug],
+        { tags: [`details-tags-${slug}`] },
+      )()
 
-      const { docs: blogsData } = await payload.find({
-        collection: 'blogs',
-        where: {
-          'tags.value': {
-            contains: tagData?.at(0)?.id,
-          },
-        },
-      })
-
-      const tagDetails = (tagData || [])?.at(0)
+      const tag = tagDocs?.[0]
 
       // if tag not found showing 404
-      if (!tagDetails) {
+      if (!tag) {
         return notFound()
       }
 
-      if (tagDetails) {
-        return <TagDetails blogs={blogsData} tagDetails={tagDetails} />
-      }
+      const { docs: blogsData } = await unstable_cache(
+        async () =>
+          await payload.find({
+            collection: 'blogs',
+            where: {
+              'tags.value': {
+                contains: tag.id,
+              },
+            },
+          }),
+        ['details', 'blogs-by-tags', slug],
+        { tags: [`details-blogs-by-tags-${slug}`] },
+      )()
+
+      return <TagDetails blogs={blogsData} tagDetails={tag} />
     }
 
     case 'users': {
       const authorName = params?.route?.at(-1) ?? ''
 
-      const { docs: authors } = await payload.find({
-        collection: 'users',
-        where: {
-          username: {
-            equals: authorName,
-          },
-        },
-      })
-      const author = authors.at(0)
-
-      const { docs: blogsRelatedWithAuthor, totalDocs: totalBlogs } =
-        await payload.find({
-          collection: 'blogs',
-          where: {
-            'author.value': {
-              equals: author?.id,
+      const { docs: authorDocs } = await unstable_cache(
+        async () =>
+          await payload.find({
+            collection: 'users',
+            where: {
+              username: {
+                equals: authorName,
+              },
             },
-          },
-        })
+          }),
+        ['details', 'author', authorName],
+        { tags: [`details-author-${authorName}`] },
+      )()
 
-      const authorTags = blogsRelatedWithAuthor.flatMap(blog => {
+      const author = authorDocs?.[0]
+
+      if (!author) {
+        return notFound()
+      }
+
+      const { docs: blogs, totalDocs: totalBlogs } = await unstable_cache(
+        async () =>
+          await payload.find({
+            collection: 'blogs',
+            draft: false,
+            where: {
+              'author.value': {
+                equals: author.id,
+              },
+            },
+          }),
+        ['details', 'blogs-by-author', authorName],
+        { tags: [`details-blogs-by-author-${authorName}`] },
+      )()
+
+      const authorTags = blogs.flatMap(blog => {
         return blog?.tags?.map(tagRelation => {
           const tag = tagRelation.value as Tag
 
@@ -120,7 +149,7 @@ const Details: React.FC<DetailsProps> = async ({ params, ...block }) => {
         return (
           <IndividualAuthorDetails
             author={author}
-            blogsData={blogsRelatedWithAuthor}
+            blogsData={blogs}
             authorTags={authorTags}
             totalBlogs={totalBlogs}
           />

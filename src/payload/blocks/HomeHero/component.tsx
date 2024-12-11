@@ -38,7 +38,6 @@ const HomeHero: React.FC<HomeHeroType> = ({ ...block }) => {
       <div className='mx-2 my-2 flex h-auto w-auto flex-wrap items-center justify-center gap-5 rounded-3xl px-6 md:flex md:flex-row lg:mx-auto lg:my-10 lg:h-24 lg:gap-14 lg:bg-gray-600'>
         {block?.tags?.map((tag, idx) => (
           <Link
-            prefetch
             href={`/tag/${(tag?.value as Tag)?.slug}`}
             key={idx}
             className='flex h-auto w-auto items-center justify-center gap-4 text-sm font-bold text-white md:text-xl lg:text-2xl'>

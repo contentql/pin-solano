@@ -23,10 +23,7 @@ const HomeTags: React.FC<HomeTagsType> = ({ ...block }) => {
         </div>
         <div className='relative flex flex-wrap items-center justify-center gap-x-12 gap-y-4'>
           {block?.tags?.map((tag, index) => (
-            <Link
-              prefetch
-              href={`/tag/${(tag?.value as Tag)?.slug}`}
-              key={index}>
+            <Link href={`/tag/${(tag?.value as Tag)?.slug}`} key={index}>
               <AnimatedTagCard
                 title={(tag?.value as Tag)?.title}
                 href={(tag?.value as Tag)?.slug!}>

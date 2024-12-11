@@ -25,11 +25,14 @@ const ReviewCard: React.FC<ReviewCard> = ({ tag }) => {
         'border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]',
         'dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]',
       )}>
-      <Link prefetch href={`/tag/${tag?.slug}`}>
+      <Link href={`/tag/${tag?.slug}`}>
         <div className='flex flex-row items-center justify-between'>
           <div className='flex flex-row items-center gap-2 pb-2'>
             <Avatar className='h-8 w-8'>
-              <AvatarImage src={(tag?.tagImage as Media)?.url || ''} />
+              <AvatarImage
+                src={(tag?.tagImage as Media)?.url || ''}
+                alt={(tag?.tagImage as Media)?.alt || 'Tag'}
+              />
               <AvatarFallback />
             </Avatar>
             <figcaption className='text-md font-medium dark:text-white'>

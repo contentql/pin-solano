@@ -34,7 +34,7 @@ const AuthorsList: React.FC<{
           },
         })
         return (
-          <Link prefetch href={`/author/${author?.username}`} key={index}>
+          <Link href={`/author/${author?.username}`} key={index}>
             <AnimatedTagCard
               title={author?.displayName!}
               href={author?.displayName!}>

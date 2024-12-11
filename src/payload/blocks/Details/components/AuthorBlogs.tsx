@@ -282,7 +282,7 @@ const Blogs = ({ blogsData }: { blogsData: Blog[] }) => {
           <div
             key={index}
             className={`${blog?.selectBlogSize === '2' ? 'col-span-2' : 'col-span-1'}`}>
-            <Link prefetch href={`/blog/${blog?.slug}`}>
+            <Link href={`/blog/${blog?.slug}`}>
               <AnimatedBlogCard blogData={blog as Blog} index={index} />
             </Link>
           </div>

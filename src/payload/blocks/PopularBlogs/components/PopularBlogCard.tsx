@@ -9,7 +9,6 @@ const PopularBlogCard = ({ blog, index }: { blog: Blog; index: number }) => {
   const readingTime = require('reading-time')
   return (
     <Link
-      prefetch
       href={`/blog/${blog?.slug}`}
       key={blog?.id}
       className={cn(

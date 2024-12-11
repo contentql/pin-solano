@@ -9,7 +9,10 @@ const Hero: React.FC<HeroType> = ({ ...block }) => {
     <div className='w-full  text-white'>
       <div className='flex flex-col items-center justify-center space-y-8 bg-[#26304e] pb-14 pt-40'>
         <Avatar className='mb-4 h-24 w-24 flex-shrink-0 self-center bg-cover bg-center '>
-          <AvatarImage src={(block?.image as Media)?.url as string} />
+          <AvatarImage
+            src={(block?.image as Media)?.url as string}
+            alt={(block?.image as Media)?.url || ''}
+          />
           <AvatarFallback />
         </Avatar>
         <h1 className='text-center text-3xl font-bold leading-none sm:text-4xl'>

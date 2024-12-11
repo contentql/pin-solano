@@ -20,16 +20,15 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "@contentql/core": "^0.3.7",
+    "@contentql/core": "^0.4.0",
     "@hookform/resolvers": "^3.4.0",
     "@libsql/client": "^0.14.0",
-    "@payloadcms/db-sqlite": "^3.2.2",
-    "@payloadcms/live-preview-react": "^3.2.2",
-    "@payloadcms/next": "^3.2.2",
-    "@payloadcms/plugin-seo": "^3.2.2",
-    "@payloadcms/richtext-slate": "^3.2.2",
-    "@payloadcms/translations": "beta",
-    "@payloadcms/ui": "^3.2.2",
+    "@payloadcms/db-sqlite": "^3.5.0",
+    "@payloadcms/live-preview-react": "^3.5.0",
+    "@payloadcms/next": "^3.5.0",
+    "@payloadcms/plugin-seo": "^3.5.0",
+    "@payloadcms/richtext-slate": "^3.5.0",
+    "@payloadcms/ui": "^3.5.0",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-checkbox": "^1.1.2",
     "@radix-ui/react-select": "^2.1.2",
@@ -60,15 +59,15 @@
     "libsql": "0.5.0-pre.2",
     "lucide-react": "^0.446.0",
     "mongodb": "^6.8.0",
-    "next": "^15.0.2",
+    "next": "^15.0.4",
     "next-nprogress-bar": "^2.3.14",
     "node-schedule": "^2.1.1",
     "ora": "^8.0.1",
-    "payload": "^3.2.2",
+    "payload": "^3.5.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-hook-form": "^7.52.0",
     "react-icons": "^5.2.1",
     "react-json-tree": "^0.19.0",
@@ -104,13 +103,13 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "npm:types-react@19.0.0-rc.1",
-      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+      "@types/react": "19.0.1",
+      "@types/react-dom": "19.0.1"
     }
   },
   "overrides": {
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.1"
   },
   "optionalDependencies": {
     "@libsql/darwin-arm64": "0.5.0-pre.2",

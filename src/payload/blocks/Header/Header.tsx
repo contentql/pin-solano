@@ -150,7 +150,6 @@ export const HoveredLink = ({
 
   return (
     <Link
-      prefetch
       href={href}
       className='relative flex rounded-md p-1'
       onMouseEnter={() => setHoveredIndex(index)}
@@ -197,7 +196,6 @@ export const SingleLink = ({
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   return (
     <Link
-      prefetch
       target={`${target ? '_blank' : '_self'}`}
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}

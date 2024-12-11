@@ -98,7 +98,7 @@ function NavbarMenu({
         }}
         className='fixed z-50 flex w-full items-center justify-between border-gray-200 bg-black px-2 dark:bg-gray-900 md:px-16'>
         <div>
-          <Link href={'/'} prefetch>
+          <Link href={'/'}>
             <Avatar
               className={`h-${data?.navbar?.logo?.height! / 4 || 12} w-${data?.navbar?.logo?.width! / 4 || 12}`}>
               <AvatarImage

@@ -25,7 +25,6 @@ export const LatestBlogsConfig: Block = {
       label: 'Latest Blogs',
       hasMany: true,
       required: true,
-      minRows: 5,
       maxRows: 7,
       admin: {
         description:

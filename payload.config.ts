@@ -7,6 +7,11 @@ import { fileURLToPath } from 'url'
 
 import { UserAccountVerification } from '@/emails/verify-email'
 import { blocksConfig } from '@/payload/blocks'
+import { revalidateAuthors } from '@/payload/hooks/revalidateAuthors'
+import { revalidateBlogs } from '@/payload/hooks/revalidateBlogs'
+import { revalidatePages } from '@/payload/hooks/revalidatePages'
+import { revalidateSiteSettings } from '@/payload/hooks/revalidateSiteSettings'
+import { revalidateTags } from '@/payload/hooks/revalidateTags'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -104,6 +109,40 @@ export default cqlConfig({
             })
           },
         },
+      },
+      hooks: {
+        afterChange: [revalidateAuthors],
+      },
+    },
+    {
+      slug: collectionSlug.pages,
+      fields: [],
+      hooks: {
+        afterChange: [revalidatePages],
+      },
+    },
+    {
+      slug: collectionSlug.blogs,
+      fields: [],
+      hooks: {
+        afterChange: [revalidateBlogs],
+      },
+    },
+    {
+      slug: collectionSlug.tags,
+      fields: [],
+      hooks: {
+        afterChange: [revalidateTags],
+      },
+    },
+  ],
+
+  globals: [
+    {
+      slug: 'site-settings',
+      fields: [],
+      hooks: {
+        afterChange: [revalidateSiteSettings],
       },
     },
   ],
