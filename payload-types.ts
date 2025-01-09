@@ -98,11 +98,17 @@ export interface Page {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
   isHome?: boolean | null;
   isDynamic?: boolean | null;
   slugMode?: ('generate' | 'custom') | null;
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   slug?: string | null;
   pathMode?: ('generate' | 'custom') | null;
   path?: string | null;
@@ -145,14 +151,32 @@ export interface ListType {
  * via the `definition` "HomeHeroType".
  */
 export interface HomeHeroType {
+  /**
+   * Enter the main headline displayed prominently in the hero section.
+   */
   headline: string;
+  /**
+   * Enter the sub headline displayed prominently in the hero section.
+   */
   subHeadline: string;
+  /**
+   * Enter the sub title displayed prominently in the hero section.
+   */
   subTitle: string;
   buttons: {
+    /**
+     * Enter the text that will be displayed on the button in the hero section.
+     */
     button: string;
+    /**
+     * Enter the URL the button will navigate to when clicked.
+     */
     link: string;
     id?: string | null;
   }[];
+  /**
+   * Enter the title that will be displayed above the tag section.
+   */
   tagTitle?: string | null;
   tags?:
     | {
@@ -170,6 +194,9 @@ export interface HomeHeroType {
  */
 export interface Tag {
   id: number;
+  /**
+   * Upload tag image
+   */
   tagImage: number | Media;
   title: string;
   description: string;
@@ -177,8 +204,14 @@ export interface Tag {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -234,8 +267,17 @@ export interface Media {
  * via the `definition` "PopularBlogsTypes".
  */
 export interface PopularBlogsTypes {
+  /**
+   * Enter the main title for the popular blogs section.
+   */
   title: string;
+  /**
+   * Enter a subtitle that appears below the main title.
+   */
   subTitle: string;
+  /**
+   * Select up to 6 blogs to display in the popular blogs section.
+   */
   popularBlogs: {
     relationTo: 'blogs';
     value: number | Blog;
@@ -250,8 +292,14 @@ export interface PopularBlogsTypes {
  */
 export interface Blog {
   id: number;
+  /**
+   * Upload blog image
+   */
   blogImage: number | Media;
   title: string;
+  /**
+   * Add the summary of the blog post
+   */
   description: string;
   tags?:
     | {
@@ -265,16 +313,28 @@ export interface Blog {
         value: number | User;
       }[]
     | null;
+  /**
+   * Main content of the blog post. Use the rich text editor for formatting.
+   */
   content: {
     [k: string]: unknown;
   }[];
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (number | null) | Media;
   };
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   slug?: string | null;
   selectBlogSize?: ('1' | '2') | null;
+  /**
+   * Save it as draft to schedule.
+   */
   publishOn?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -287,6 +347,9 @@ export interface Blog {
 export interface User {
   id: number;
   displayName?: string | null;
+  /**
+   * Contains only lowercase letters, numbers, and dashes.
+   */
   username: string;
   imageUrl?: (number | null) | Media;
   role: ('admin' | 'author' | 'user')[];
@@ -334,7 +397,13 @@ export interface User {
  * via the `definition` "LatestBlogsTypes".
  */
 export interface LatestBlogsTypes {
+  /**
+   * Enter the main title for the latest blogs section.
+   */
   title: string;
+  /**
+   * Select between 5 to 7 blogs to display in the latest blogs section.
+   */
   latestBlogs: {
     relationTo: 'blogs';
     value: number | Blog;
@@ -348,7 +417,13 @@ export interface LatestBlogsTypes {
  * via the `definition` "TopPicksTypes".
  */
 export interface TopPicksTypes {
+  /**
+   * Enter the main title for the top picks section.
+   */
   title: string;
+  /**
+   * Select blogs to display in the top picks section (multiple selections allowed).
+   */
   topPicks: {
     relationTo: 'blogs';
     value: number | Blog;
@@ -362,8 +437,17 @@ export interface TopPicksTypes {
  * via the `definition` "HomeTagsType".
  */
 export interface HomeTagsType {
+  /**
+   * Enter the main title for the tags section.
+   */
   title: string;
+  /**
+   * Enter a short subtitle that appears below the main title.
+   */
   subTitle: string;
+  /**
+   * Select multiple tags to display in this section.
+   */
   tags?:
     | {
         relationTo: 'tags';
@@ -379,10 +463,25 @@ export interface HomeTagsType {
  * via the `definition` "BlogsHeroType".
  */
 export interface BlogsHeroType {
+  /**
+   * Please enter the title in lowercase letters.
+   */
   title: string;
+  /**
+   * Enter a brief description that summarizes the blog hero section.
+   */
   description: string;
+  /**
+   * Enter the text to be displayed on the button.
+   */
   button?: string | null;
+  /**
+   * Enter the URL the button will link to when clicked.
+   */
   link?: string | null;
+  /**
+   * Select blogs to feature in this section.
+   */
   blogs?:
     | {
         relationTo: 'blogs';
@@ -398,8 +497,17 @@ export interface BlogsHeroType {
  * via the `definition` "HeroType".
  */
 export interface HeroType {
+  /**
+   * Please enter the title for the hero section.
+   */
   title: string;
+  /**
+   * Enter a brief description that summarizes the hero section.
+   */
   description: string;
+  /**
+   * Upload an image to be displayed in the hero section.
+   */
   image: number | Media;
   id?: string | null;
   blockName?: string | null;
@@ -516,6 +624,9 @@ export interface Form {
       )[]
     | null;
   submitButtonLabel?: string | null;
+  /**
+   * Choose whether to display an on-page message or redirect to a different page after they submit the form.
+   */
   confirmationType?: ('message' | 'redirect') | null;
   confirmationMessage?:
     | {
@@ -525,6 +636,9 @@ export interface Form {
   redirect?: {
     url: string;
   };
+  /**
+   * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
+   */
   emails?:
     | {
         emailTo?: string | null;
@@ -533,6 +647,9 @@ export interface Form {
         replyTo?: string | null;
         emailFrom?: string | null;
         subject: string;
+        /**
+         * Enter the message that should be sent in this email.
+         */
         message?:
           | {
               [k: string]: unknown;
@@ -550,6 +667,9 @@ export interface Form {
  */
 export interface DisqusCommentsType {
   title?: string | null;
+  /**
+   * To find your Disqus shortname, log into Disqus, access the Admin panel, and check the URL or General Site Settings.
+   */
   shortName: string;
   id?: string | null;
   blockName?: string | null;
@@ -573,6 +693,8 @@ export interface FormSubmission {
   createdAt: string;
 }
 /**
+ * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "search".
  */
@@ -686,109 +808,17 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        Details?:
-          | T
-          | {
-              collectionSlug?: T;
-              id?: T;
-              blockName?: T;
-            };
-        List?:
-          | T
-          | {
-              title?: T;
-              collectionSlug?: T;
-              id?: T;
-              blockName?: T;
-            };
-        HomeHero?:
-          | T
-          | {
-              headline?: T;
-              subHeadline?: T;
-              subTitle?: T;
-              buttons?:
-                | T
-                | {
-                    button?: T;
-                    link?: T;
-                    id?: T;
-                  };
-              tagTitle?: T;
-              tags?: T;
-              id?: T;
-              blockName?: T;
-            };
-        PopularBlogs?:
-          | T
-          | {
-              title?: T;
-              subTitle?: T;
-              popularBlogs?: T;
-              id?: T;
-              blockName?: T;
-            };
-        LatestBlogs?:
-          | T
-          | {
-              title?: T;
-              latestBlogs?: T;
-              id?: T;
-              blockName?: T;
-            };
-        TopPicks?:
-          | T
-          | {
-              title?: T;
-              topPicks?: T;
-              id?: T;
-              blockName?: T;
-            };
-        HomeTags?:
-          | T
-          | {
-              title?: T;
-              subTitle?: T;
-              tags?: T;
-              id?: T;
-              blockName?: T;
-            };
-        BlogHero?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              button?: T;
-              link?: T;
-              blogs?: T;
-              id?: T;
-              blockName?: T;
-            };
-        Hero?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              image?: T;
-              id?: T;
-              blockName?: T;
-            };
-        FormBlock?:
-          | T
-          | {
-              title?: T;
-              form?: T;
-              id?: T;
-              blockName?: T;
-            };
-        DisqusComments?:
-          | T
-          | {
-              title?: T;
-              shortName?: T;
-              id?: T;
-              blockName?: T;
-            };
+        Details?: T | DetailsTypeSelect<T>;
+        List?: T | ListTypeSelect<T>;
+        HomeHero?: T | HomeHeroTypeSelect<T>;
+        PopularBlogs?: T | PopularBlogsTypesSelect<T>;
+        LatestBlogs?: T | LatestBlogsTypesSelect<T>;
+        TopPicks?: T | TopPicksTypesSelect<T>;
+        HomeTags?: T | HomeTagsTypeSelect<T>;
+        BlogHero?: T | BlogsHeroTypeSelect<T>;
+        Hero?: T | HeroTypeSelect<T>;
+        FormBlock?: T | FormTypeSelect<T>;
+        DisqusComments?: T | DisqusCommentsTypeSelect<T>;
       };
   meta?:
     | T
@@ -815,6 +845,131 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DetailsType_select".
+ */
+export interface DetailsTypeSelect<T extends boolean = true> {
+  collectionSlug?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListType_select".
+ */
+export interface ListTypeSelect<T extends boolean = true> {
+  title?: T;
+  collectionSlug?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeHeroType_select".
+ */
+export interface HomeHeroTypeSelect<T extends boolean = true> {
+  headline?: T;
+  subHeadline?: T;
+  subTitle?: T;
+  buttons?:
+    | T
+    | {
+        button?: T;
+        link?: T;
+        id?: T;
+      };
+  tagTitle?: T;
+  tags?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PopularBlogsTypes_select".
+ */
+export interface PopularBlogsTypesSelect<T extends boolean = true> {
+  title?: T;
+  subTitle?: T;
+  popularBlogs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LatestBlogsTypes_select".
+ */
+export interface LatestBlogsTypesSelect<T extends boolean = true> {
+  title?: T;
+  latestBlogs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TopPicksTypes_select".
+ */
+export interface TopPicksTypesSelect<T extends boolean = true> {
+  title?: T;
+  topPicks?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HomeTagsType_select".
+ */
+export interface HomeTagsTypeSelect<T extends boolean = true> {
+  title?: T;
+  subTitle?: T;
+  tags?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogsHeroType_select".
+ */
+export interface BlogsHeroTypeSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  button?: T;
+  link?: T;
+  blogs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroType_select".
+ */
+export interface HeroTypeSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormType_select".
+ */
+export interface FormTypeSelect<T extends boolean = true> {
+  title?: T;
+  form?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DisqusCommentsType_select".
+ */
+export interface DisqusCommentsTypeSelect<T extends boolean = true> {
+  title?: T;
+  shortName?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1134,18 +1289,55 @@ export interface SiteSetting {
   general: {
     title: string;
     description: string;
+    /**
+     * We recommend a maximum size of 256 * 256 pixels
+     */
     faviconUrl: number | Media;
+    /**
+     * We recommend a maximum size of 1200 * 630 pixels
+     */
     ogImageUrl: number | Media;
     keywords?: string[] | null;
+    /**
+     * This field is used to format currency values & used as default currency for ecommerce-theme
+     */
+    currency:
+      | 'usd'
+      | 'eur'
+      | 'inr'
+      | 'gbp'
+      | 'jpy'
+      | 'cad'
+      | 'aud'
+      | 'chf'
+      | 'cny'
+      | 'hkd'
+      | 'sgd'
+      | 'mxn'
+      | 'brl'
+      | 'rub'
+      | 'krw'
+      | 'zar'
+      | 'try'
+      | 'sar'
+      | 'aed'
+      | 'pln';
   };
   navbar: {
     logo: BrandLogo;
     menuLinks?:
       | {
+          /**
+           * Check to create group of links
+           */
           group?: boolean | null;
           menuLink?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
+            /**
+             * Upload an svg or logo to be displayed with link
+             */
+            icon?: (number | null) | Media;
             label: string;
             page?: {
               relationTo: 'pages';
@@ -1160,6 +1352,10 @@ export interface SiteSetting {
               | {
                   type?: ('reference' | 'custom') | null;
                   newTab?: boolean | null;
+                  /**
+                   * Upload an svg or logo to be displayed with link
+                   */
+                  icon?: (number | null) | Media;
                   label: string;
                   page?: {
                     relationTo: 'pages';
@@ -1178,10 +1374,17 @@ export interface SiteSetting {
     logo: BrandLogo;
     footerLinks?:
       | {
+          /**
+           * Check to create group of links
+           */
           group?: boolean | null;
           menuLink?: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
+            /**
+             * Upload an svg or logo to be displayed with link
+             */
+            icon?: (number | null) | Media;
             label: string;
             page?: {
               relationTo: 'pages';
@@ -1196,6 +1399,10 @@ export interface SiteSetting {
               | {
                   type?: ('reference' | 'custom') | null;
                   newTab?: boolean | null;
+                  /**
+                   * Upload an svg or logo to be displayed with link
+                   */
+                  icon?: (number | null) | Media;
                   label: string;
                   page?: {
                     relationTo: 'pages';
@@ -1236,22 +1443,77 @@ export interface SiteSetting {
     copyright?: string | null;
   };
   redirectionLinks?: {
+    /**
+     * This redirects to a blog details page
+     */
     blogLink?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
+    /**
+     * This redirect to a product details page
+     */
+    productLink?: {
+      relationTo: 'pages';
+      value: number | Page;
+    } | null;
+    /**
+     * This redirects to a author details page
+     */
     authorLink?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
+    /**
+     * This redirects to a tag details page
+     */
     tagLink?: {
       relationTo: 'pages';
       value: number | Page;
     } | null;
   };
   monetization?: {
+    /**
+     * Add the publisher-id from Google AdSense Console
+     */
     adSenseId?: string | null;
+    /**
+     * Add the measurement id from Google Analytics dashboard
+     */
     measurementId?: string | null;
+  };
+  themeSettings: {
+    lightMode: {
+      primary: string;
+      background: string;
+      text: string;
+      foreground: string;
+      popover: string;
+      border: string;
+    };
+    darkMode: {
+      primary: string;
+      background: string;
+      text: string;
+      foreground: string;
+      popover: string;
+      border: string;
+    };
+    fonts: {
+      display: {
+        type: 'customFont' | 'googleFont';
+        customFont?: (number | null) | Media;
+        remoteFont?: string | null;
+        fontName?: string | null;
+      };
+      body: {
+        type: 'customFont' | 'googleFont';
+        customFont?: (number | null) | Media;
+        remoteFont?: string | null;
+        fontName?: string | null;
+      };
+    };
+    radius: 'none' | 'small' | 'medium' | 'large' | 'full';
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1262,8 +1524,17 @@ export interface SiteSetting {
  */
 export interface BrandLogo {
   imageUrl: number | Media;
+  /**
+   * Adjust to the height of the logo
+   */
   height?: number | null;
+  /**
+   * Adjust to the width of the logo
+   */
   width?: number | null;
+  /**
+   * This text appears below the footer image
+   */
   description?: string | null;
 }
 /**
@@ -1279,17 +1550,12 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         faviconUrl?: T;
         ogImageUrl?: T;
         keywords?: T;
+        currency?: T;
       };
   navbar?:
     | T
     | {
-        logo?:
-          | T
-          | {
-              imageUrl?: T;
-              height?: T;
-              width?: T;
-            };
+        logo?: T | BrandLogoSelect<T>;
         menuLinks?:
           | T
           | {
@@ -1299,6 +1565,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                 | {
                     type?: T;
                     newTab?: T;
+                    icon?: T;
                     label?: T;
                     page?: T;
                     url?: T;
@@ -1313,6 +1580,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                       | {
                           type?: T;
                           newTab?: T;
+                          icon?: T;
                           label?: T;
                           page?: T;
                           url?: T;
@@ -1325,14 +1593,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   footer?:
     | T
     | {
-        logo?:
-          | T
-          | {
-              imageUrl?: T;
-              height?: T;
-              width?: T;
-              description?: T;
-            };
+        logo?: T | BrandLogoSelect<T>;
         footerLinks?:
           | T
           | {
@@ -1342,6 +1603,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                 | {
                     type?: T;
                     newTab?: T;
+                    icon?: T;
                     label?: T;
                     page?: T;
                     url?: T;
@@ -1356,6 +1618,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
                       | {
                           type?: T;
                           newTab?: T;
+                          icon?: T;
                           label?: T;
                           page?: T;
                           url?: T;
@@ -1377,6 +1640,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | T
     | {
         blogLink?: T;
+        productLink?: T;
         authorLink?: T;
         tagLink?: T;
       };
@@ -1386,9 +1650,64 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         adSenseId?: T;
         measurementId?: T;
       };
+  themeSettings?:
+    | T
+    | {
+        lightMode?:
+          | T
+          | {
+              primary?: T;
+              background?: T;
+              text?: T;
+              foreground?: T;
+              popover?: T;
+              border?: T;
+            };
+        darkMode?:
+          | T
+          | {
+              primary?: T;
+              background?: T;
+              text?: T;
+              foreground?: T;
+              popover?: T;
+              border?: T;
+            };
+        fonts?:
+          | T
+          | {
+              display?:
+                | T
+                | {
+                    type?: T;
+                    customFont?: T;
+                    remoteFont?: T;
+                    fontName?: T;
+                  };
+              body?:
+                | T
+                | {
+                    type?: T;
+                    customFont?: T;
+                    remoteFont?: T;
+                    fontName?: T;
+                  };
+            };
+        radius?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BrandLogo_select".
+ */
+export interface BrandLogoSelect<T extends boolean = true> {
+  imageUrl?: T;
+  height?: T;
+  width?: T;
+  description?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
