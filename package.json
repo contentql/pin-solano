@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "@contentql/core": "^0.4.9",
+    "@contentql/core": "^0.5.0",
     "@hookform/resolvers": "^3.4.0",
     "@libsql/client": "^0.14.0",
     "@payloadcms/db-sqlite": "^3.5.0",
