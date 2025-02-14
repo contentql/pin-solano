@@ -1,5 +1,6 @@
 'use client'
 
+import Link from '@node_modules/next/link'
 import { Blog, Media } from '@payload-types'
 import React, {
   createContext,
@@ -167,30 +168,32 @@ export const useMouseEnter = () => {
 
 const BlogThreeDCard: React.FC<BlogThreeDCardProp> = ({ item }) => {
   return (
-    <CardContainer className='inter-var'>
-      <CardBody className='group/card relative h-auto w-full min-w-[25rem]  rounded-xl border border-black/[0.1] bg-gray-50 p-6 dark:border-white/[0.2] dark:bg-transparent dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] '>
-        <CardItem translateZ='100' className='mb-6 w-full'>
-          <Avatar className='h-80 w-full rounded-xl object-cover group-hover/card:shadow-xl'>
-            <AvatarImage
-              alt='thumbnail'
-              src={(item?.blogImage as Media)?.url || ''}
-            />
-            <AvatarFallback />
-          </Avatar>
-        </CardItem>
-        <CardItem
-          translateZ='50'
-          className='line-clamp-1 text-xl font-bold text-white dark:text-white'>
-          {item?.title}
-        </CardItem>
-        <CardItem
-          as='p'
-          translateZ='60'
-          className='dark:text-neutral-300 mt-2 line-clamp-3 w-full text-sm text-[#d4d4d4]'>
-          {item?.description}
-        </CardItem>
-      </CardBody>
-    </CardContainer>
+    <Link href={`/blog/${item?.slug}`}>
+      <CardContainer className='inter-var'>
+        <CardBody className='group/card relative h-auto w-full min-w-[25rem]  rounded-xl border border-black/[0.1] bg-gray-50 p-6 dark:border-white/[0.2] dark:bg-transparent dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] '>
+          <CardItem translateZ='100' className='mb-6 w-full'>
+            <Avatar className='h-80 w-full rounded-xl object-cover group-hover/card:shadow-xl'>
+              <AvatarImage
+                alt='thumbnail'
+                src={(item?.blogImage as Media)?.url || ''}
+              />
+              <AvatarFallback />
+            </Avatar>
+          </CardItem>
+          <CardItem
+            translateZ='50'
+            className='line-clamp-1 text-xl font-bold text-white dark:text-white'>
+            {item?.title}
+          </CardItem>
+          <CardItem
+            as='p'
+            translateZ='60'
+            className='dark:text-neutral-300 mt-2 line-clamp-3 w-full text-sm text-[#d4d4d4]'>
+            {item?.description}
+          </CardItem>
+        </CardBody>
+      </CardContainer>
+    </Link>
   )
 }
 export default BlogThreeDCard
