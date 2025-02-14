@@ -25,7 +25,7 @@ const BlogPostCard = ({
   return (
     <div
       className={cn(
-        'group/bento relative row-span-1 flex cursor-pointer flex-col justify-between rounded-xl border border-slate-200  bg-transparent text-white transition duration-200 hover:shadow-md dark:border-white/[0.2]',
+        'group/bento relative row-span-1 flex flex-col justify-between rounded-xl border border-slate-200  bg-transparent text-white transition duration-200 hover:shadow-md dark:border-white/[0.2]',
         className,
       )}>
       {blogImg}
