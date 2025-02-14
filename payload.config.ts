@@ -7,11 +7,23 @@ import { fileURLToPath } from 'url'
 import { UserAccountVerification } from '@/emails/verify-email'
 import { migrations } from '@/migrations'
 import { blocksConfig } from '@/payload/blocks'
-import { revalidateAuthors } from '@/payload/hooks/revalidateAuthors'
-import { revalidateBlogs } from '@/payload/hooks/revalidateBlogs'
-import { revalidatePages } from '@/payload/hooks/revalidatePages'
+import {
+  revalidateAuthorsAfterChange,
+  revalidateAuthorsAfterDelete,
+} from '@/payload/hooks/revalidateAuthors'
+import {
+  revalidateBlogsAfterChange,
+  revalidateBlogsAfterDelete,
+} from '@/payload/hooks/revalidateBlogs'
+import {
+  revalidatePagesAfterChange,
+  revalidatePagesAfterDelete,
+} from '@/payload/hooks/revalidatePages'
 import { revalidateSiteSettings } from '@/payload/hooks/revalidateSiteSettings'
-import { revalidateTags } from '@/payload/hooks/revalidateTags'
+import {
+  revalidateTagsAfterChange,
+  revalidateTagsAfterDelete,
+} from '@/payload/hooks/revalidateTags'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -122,28 +134,32 @@ export default cqlConfig({
         },
       },
       hooks: {
-        afterChange: [revalidateAuthors],
+        afterChange: [revalidateAuthorsAfterChange],
+        afterDelete: [revalidateAuthorsAfterDelete],
       },
     },
     {
       slug: collectionSlug.pages,
       fields: [],
       hooks: {
-        afterChange: [revalidatePages],
+        afterChange: [revalidatePagesAfterChange],
+        afterDelete: [revalidatePagesAfterDelete],
       },
     },
     {
       slug: collectionSlug.blogs,
       fields: [],
       hooks: {
-        afterChange: [revalidateBlogs],
+        afterChange: [revalidateBlogsAfterChange],
+        afterDelete: [revalidateBlogsAfterDelete],
       },
     },
     {
       slug: collectionSlug.tags,
       fields: [],
       hooks: {
-        afterChange: [revalidateTags],
+        afterChange: [revalidateTagsAfterChange],
+        afterDelete: [revalidateTagsAfterDelete],
       },
     },
   ],
