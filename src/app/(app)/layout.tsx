@@ -61,7 +61,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       // we're appending the http|https int the env variable
-      metadataBase: env.NEXT_PUBLIC_PUBLIC_URL as unknown as URL,
+      metadataBase: env.NEXT_PUBLIC_WEBSITE_URL as unknown as URL,
       openGraph: {
         title,
         description,

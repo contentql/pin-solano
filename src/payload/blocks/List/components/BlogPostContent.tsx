@@ -19,7 +19,7 @@ export const BlogPostContent = ({ blog }: { blog: Blog }) => {
   // Fetch blog data for live preview
   const { data: livePreviewData } = useLivePreview<Blog | undefined>({
     initialData: undefined,
-    serverURL: env.NEXT_PUBLIC_PUBLIC_URL,
+    serverURL: env.NEXT_PUBLIC_WEBSITE_URL,
     depth: 2,
   })
 

@@ -9,7 +9,7 @@ specific comment.
 ### Example `.env` File:
 
 ```env
-NEXT_PUBLIC_PUBLIC_URL=***
+NEXT_PUBLIC_WEBSITE_URL=***
 PAYLOAD_URL=***
 
 DATABASE_URI=***
@@ -37,7 +37,7 @@ Copy the new variable(s) to the `.env.example` file, removing sensitive values.
 DATABASE_URI=
 PAYLOAD_SECRET=
 
-NEXT_PUBLIC_PUBLIC_URL=
+NEXT_PUBLIC_WEBSITE_URL=
 PAYLOAD_URL=
 
 # Storage
@@ -80,14 +80,14 @@ export const env = createEnv({
     NEW_SERVER_VARIABLE: z.string().min(1),
   },
   client: {
-    NEXT_PUBLIC_PUBLIC_URL: z.string().url(),
+    NEXT_PUBLIC_WEBSITE_URL: z.string().url(),
     // Add new variables here
     NEXT_PUBLIC_NEW_CLIENT_VARIABLE: z.string().min(1),
   },
   runtimeEnv: {
     DATABASE_URI: process.env.DATABASE_URI,
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
-    NEXT_PUBLIC_PUBLIC_URL: process.env.NEXT_PUBLIC_PUBLIC_URL,
+    NEXT_PUBLIC_WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
     PAYLOAD_URL: process.env.PAYLOAD_URL,
     S3_ENDPOINT: process.env.S3_ENDPOINT,
     S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
@@ -120,7 +120,7 @@ file located in GitHub workflows.
     build-args: |
       DATABASE_URI=${{ secrets.DATABASE_URI }}
       PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
-      NEXT_PUBLIC_PUBLIC_URL=${{ secrets.NEXT_PUBLIC_PUBLIC_URL }}
+      NEXT_PUBLIC_WEBSITE_URL=${{ secrets.NEXT_PUBLIC_WEBSITE_URL }}
       PAYLOAD_URL=${{ secrets.PAYLOAD_URL }}
       S3_ENDPOINT=${{ secrets.S3_ENDPOINT }}
       S3_ACCESS_KEY_ID=${{ secrets.S3_ACCESS_KEY_ID }}
@@ -143,7 +143,7 @@ for the runtime.
 ```Dockerfile
 ARG DATABASE_URI
 ARG PAYLOAD_SECRET
-ARG NEXT_PUBLIC_PUBLIC_URL
+ARG NEXT_PUBLIC_WEBSITE_URL
 ARG PAYLOAD_URL
 ARG S3_ENDPOINT
 ARG S3_ACCESS_KEY_ID
@@ -156,7 +156,7 @@ ARG NEXT_PUBLIC_NEW_CLIENT_VARIABLE
 
 ENV DATABASE_URI=$DATABASE_URI
 ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
-ENV NEXT_PUBLIC_PUBLIC_URL=$NEXT_PUBLIC_PUBLIC_URL
+ENV NEXT_PUBLIC_WEBSITE_URL=$NEXT_PUBLIC_WEBSITE_URL
 ENV PAYLOAD_URL=$PAYLOAD_URL
 ENV S3_ENDPOINT=$S3_ENDPOINT
 ENV S3_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID

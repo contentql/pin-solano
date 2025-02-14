@@ -32,4 +32,4 @@ Both the collections we create should have the idea of:
 
 # Exceptions
 
-`NEXT_PUBLIC_PUBLIC_URL` env variable should not have `/` at the ends
+`NEXT_PUBLIC_WEBSITE_URL` env variable should not have `/` at the ends

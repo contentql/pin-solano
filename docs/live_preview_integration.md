@@ -18,7 +18,7 @@
 ```tsx
 livePreview: {
       url: ({ data, collectionConfig, locale }) => {
-        const baseUrl = env.NEXT_PUBLIC_PUBLIC_URL
+        const baseUrl = env.NEXT_PUBLIC_WEBSITE_URL
 
         if (collectionConfig?.slug === 'blogs') {
           return `${baseUrl}/blog/${data.slug}`
@@ -66,7 +66,7 @@ import React from 'react'
 const LivePreviewComponent = () => {
   const { data: livePreviewData } = useLivePreview({
     initialData: null,
-    serverURL: env.NEXT_PUBLIC_PUBLIC_URL,
+    serverURL: env.NEXT_PUBLIC_WEBSITE_URL,
     depth: 2,
   })
 

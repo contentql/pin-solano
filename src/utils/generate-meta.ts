@@ -46,7 +46,7 @@ export const generateMeta = async (args: {
     'url' in doc?.meta?.image &&
     doc.meta.image.url
 
-  const url = `${env.NEXT_PUBLIC_PUBLIC_URL}/${collectionSlug}/${doc?.id}`
+  const url = `${env.NEXT_PUBLIC_WEBSITE_URL}/${collectionSlug}/${doc?.id}`
 
   return {
     title: doc?.meta?.title || 'ContentQL',
