@@ -27,8 +27,6 @@ const seed = async (): Promise<SiteSetting> => {
       },
     })
 
-    console.log('Pages: ', pages)
-
     const formattedSiteSettingsData: SiteSettingType = {
       ...siteSettingsData,
       general: {

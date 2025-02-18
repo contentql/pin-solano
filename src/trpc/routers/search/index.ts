@@ -31,8 +31,6 @@ export const searchRouter = router({
           for the user collection, it returns {"path":"author-name","title":"author-name","image":"Media of image", "category": "authors"}. */
 
         const formattedResult = searchResult?.map((result, idx) => {
-          console.log({ result })
-
           const parsedValues =
             typeof result.title === 'string' ? JSON.parse(result.title) : result
 
