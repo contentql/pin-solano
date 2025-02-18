@@ -1,7 +1,7 @@
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import { TRPCError } from '@trpc/server'
 import ora from 'ora'
+import { getPayload } from 'payload'
 
 import { seedAuthorDetailsPage } from '@/seed/author-details-page'
 import { seedAuthors } from '@/seed/authors'
@@ -17,6 +17,7 @@ import { seedTagDetailsPage } from '@/seed/tag-details-page'
 import { seedTagPage } from '@/seed/tag-tagName-page'
 import { seedTags } from '@/seed/tags'
 import { seedTagsPage } from '@/seed/tags-page'
+import { seedUsers } from '@/seed/users/seed'
 import { publicProcedure, router } from '@/trpc'
 
 const payload = await getPayload({ config: configPromise })
@@ -29,8 +30,9 @@ export const seedRouter = router({
         color: 'cyan',
         spinner: 'dots',
       }).start()
-      const forms = await seedForm(spinner)
       console.log('starting seed process...')
+      await seedUsers({ spinner })
+      const forms = await seedForm(spinner)
       const contactPage = await seedContactPage({ spinner, forms })
       await seedAuthors() // Then seed authors
       console.log('completed authors seed')

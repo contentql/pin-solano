@@ -25,6 +25,7 @@ import { seedTagDetailsPage } from '@/seed/tag-details-page'
 import { seedTagPage } from '@/seed/tag-tagName-page'
 import { seedTags } from '@/seed/tags'
 import { seedTagsPage } from '@/seed/tags-page'
+import { seedUsers } from '@/seed/users/seed'
 
 // Extract database name from the URI
 const extractDatabaseName = (uri: string): string | null => {
@@ -77,10 +78,9 @@ const executeSeeding = async (): Promise<void> => {
   }).start()
 
   try {
+    await seedUsers({ spinner })
     await seedAndLog('Seeding Authors', seedAuthors, spinner)
-
     await seedAndLog('Seeding Tags Page', seedTagsPage, spinner)
-
     await seedAndLog('Seeding Tag Details Page', seedTagDetailsPage, spinner)
     await seedAndLog('Seeding Tags', seedTags, spinner)
     await seedAndLog('seeding individual tag page', seedTagPage, spinner)
@@ -90,9 +90,7 @@ const executeSeeding = async (): Promise<void> => {
       seedAuthorDetailsPage,
       spinner,
     )
-
     await seedAndLog('Seeding Blogs', seedBlogs, spinner)
-
     await seedAndLog('Seeding Blogs Page', seedBlogsPage, spinner)
     await seedAndLog('Seeding Blog Details Page', seedBlogDetailsPage, spinner)
     await seedAndLog('Seeding Home Page', seedHomePage, spinner)
